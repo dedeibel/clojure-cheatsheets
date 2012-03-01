@@ -1,0 +1,77 @@
+----------------------------------------------------------------------
+2012 Feb 15
+
+Minor clojure-cheatsheet-generator.clj script updates so it would run
+without errors or warnings with Clojure 1.3.0.
+
+Removals:
+
+replicate, because DEPRECATED.
+throw-if since it is declared private in clojure.core.  It was in 1.2
+as well, but does it really belong in the cheatsheet?
+
+
+Additions of things new in Clojure 1.3.0:
+
+find-keyword to Other/Keywords
+realized? to Using a Seq/Check for forced evaluation
+every-pred and some-fn to Functions/Create
+with-redefs and with-redefs-fn to Macros/Scope
+clojure.repl/pst to Java Interoperation/Exceptions
+unchecked-{add,dec,divide,inc,multiply,negate,remainder,subtract}-int to Numbers/Unchecked.  Space is a bit tight in that column to also include the long versions.
+nthrest to Seq in, Seq out/Tail-items
+clojure.data/diff to Misc/Compare
+clojure.java.javadoc/javadoc to Documentation/clojure.repl (I know, it is not really in clojure.repl -- space is getting tight in that column)
+clojure.pprint/pprint and print-table to Printing/Print to *out*
+
+
+Additions of things that existed before Clojure 1.3.0:
+
+compare to several places that seem appropriate:
+    Seq in, Seq out/Rearrange, after sort-by
+    Numbers/Compare
+    Strings/Use
+    Misc/Compare
+flatten to Seq in, Seq out/'Change'
+fnil to Functions/Create
+instance? to Misc/Test
+
+
+Moved:
+
+doc and find-doc to Documentation/clojure.repl, since they moved from
+clojure.core in 1.2.x to clojure.repl in 1.3.0.
+
+----------------------------------------------------------------------
+2011 Sep 05
+
+Changes in cheatsheet version 2.0 from the cheatsheet version
+published at http://clojure.org/cheatsheet as of Sep 5, 2011:
+
+Additions:
+
+Collections/Sets: sorted-set-by
+Macros/Branch: case
+
+Removals:
+
+Removed contains? from Collections/Collections/Content tests, but
+remains in Collections/Maps.  Its appearance in the former category is
+potentially misleading as to its behavior.  Suggested by Stuart
+Sierra.
+
+Removed Transients/Change and Transients/Iteration categories, since
+those functions did not work on transients.  All of the functions that
+were there also appear elsewhere in more appropriate categories of the
+cheatsheet.  Renamed Transients/Use to Transients/Change.
+
+Removed nthrest and rfirst, which had no links to any documentation.
+I believe they existed in a version of Clojure before 1.2, but were
+removed by version 1.2 or earlier.
+
+Minor:
+
+HTML uses < > = ! instead of codes like %3C %3E etc.
+
+Some reordering of lists of functions referring to types like byte,
+short, int, long.
