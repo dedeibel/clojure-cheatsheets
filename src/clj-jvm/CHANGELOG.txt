@@ -1,5 +1,36 @@
 ----------------------------------------------------------------------
-2012 Feb 15
+2012 Feb 16 - Clojure 1.3.0, sheet v1.1
+
+Primitives/Strings: Restructured to remove split between functions in
+clojure.core vs. clojure.string, added Regex functions (moved from
+where they used to be, way at the end in Other/Regex).
+
+Collections: Added examples of abbreviations like (my-vec idx) -> (nth
+my-vec idx), for vectors, maps, and sets.  Combined subsections Sets
+and Sets (clojure.set).
+
+Removed StructMaps.
+
+Printing: Renamed IO, and significantly expanded its content.  Moved
+what was in Other/IO here.  I put in links to some Java 6 docs and a
+couple of binary I/O Clojure libraries on github.  That might be going
+overboard.
+
+Multimethods: Renamed Abstractions, like in Fogus's ClojureScript
+cheatsheet, and pretty much copied what he had there (adjusting for
+slight ClojureScript and Clojure/JVM differences I know about, like
+. instead of .-)
+
+Reader Macros: Removed obsolete ^form -> (meta form).  Changed #^ to ^
+
+Metadata: Added new section with some details on metadata.
+
+Special Forms: No content changes, simply moved earlier to try to make
+things pack a little better in PDF version, which is just barely over
+2 page now.
+
+----------------------------------------------------------------------
+2012 Feb 15 - Clojure 1.3.0, sheet v1.0
 
 Minor clojure-cheatsheet-generator.clj script updates so it would run
 without errors or warnings with Clojure 1.3.0.

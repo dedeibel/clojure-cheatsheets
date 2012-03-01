@@ -1,3 +1,11 @@
+Add java.io.DataOutputStream / java.io.DataInputStream links for
+binary I/O?
+
+distinct? doesn't really operate on collections.  It is more like max,
+min, and some others in taking an arbitrarily large but variable
+number of arguments.  Is there a better place it belongs than
+Collections/Content tests?
+
 Decide which if any of the following symbols should be included in the
 cheatsheet, and if so, where.
 
@@ -6,19 +14,13 @@ significant ones to know about:
 
 bases
 class
-clojure.pprint/cl-format
 clojure.repl/dir
 clojure.repl/root-cause
 definterface
-defprotocol
-defrecord
-deftype
 extend
 extend-protocol
-extend-type
 extenders
 extends?
-reify
 satisfies?
 supers
 trampoline
@@ -49,6 +51,7 @@ Now the complete list:
 -cache-protocol-fn
 -reset-methods
 EMPTY-NODE
+accessor
 add-classpath
 agent-errors
 alter-meta!
@@ -71,6 +74,21 @@ clojure.data/Diff
 clojure.data/EqualityPartition
 clojure.data/diff-similar
 clojure.data/equality-partition
+clojure.java.io/Coercions
+clojure.java.io/IOFactory
+clojure.java.io/as-file
+clojure.java.io/as-relative-path
+clojure.java.io/as-url
+clojure.java.io/copy
+clojure.java.io/default-streams-impl
+clojure.java.io/delete-file
+clojure.java.io/file
+clojure.java.io/make-input-stream
+clojure.java.io/make-output-stream
+clojure.java.io/make-parents
+clojure.java.io/make-reader
+clojure.java.io/make-writer
+clojure.java.io/resource
 clojure.java.javadoc/*core-java-api*
 clojure.java.javadoc/*feeling-lucky*
 clojure.java.javadoc/*feeling-lucky-url*
@@ -85,7 +103,6 @@ clojure.pprint/*print-pretty*
 clojure.pprint/*print-radix*
 clojure.pprint/*print-right-margin*
 clojure.pprint/*print-suppress-namespaces*
-clojure.pprint/cl-format
 clojure.pprint/code-dispatch
 clojure.pprint/formatter
 clojure.pprint/formatter-out
@@ -122,18 +139,16 @@ clojure.xml/emit
 clojure.xml/emit-element
 clojure.xml/startparse-sax
 clojure.xml/tag
+create-struct
 dec'
 decimal?
 definterface
-defprotocol
-defrecord
-deftype
+defstruct
 delay?
 denominator
 destructure
 extend
 extend-protocol
-extend-type
 extenders
 extends?
 find-protocol-impl
@@ -143,7 +158,6 @@ hash-combine
 inc'
 integer?
 letfn
-meta
 method-sig
 munge
 namespace-munge
@@ -159,11 +173,12 @@ proxy-name
 ratio?
 rational?
 refer-clojure
-reify
 replicate
 reset-meta!
 satisfies?
 special-symbol?
+struct
+struct-map
 supers
 the-ns
 trampoline

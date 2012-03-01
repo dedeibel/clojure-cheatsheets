@@ -17,6 +17,13 @@ LINK_TARGET=links-to-clojuredocs
 PRODUCE_PDF="yes"
 
 java -cp ${CLASSPATH} clojure.main clojure-cheatsheet-generator.clj ${LINK_TARGET}
+EXIT_STATUS=$?
+
+if [ ${EXIT_STATUS} != 0 ]
+then
+    echo "Exit status ${EXIT_STATUS} from java"
+    exit ${EXIT_STATUS}
+fi
 
 # The command above will produce some warnings in a file called
 # warnings.log about "No URL known for symbol with name: ''()'", etc.
