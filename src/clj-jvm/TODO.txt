@@ -1,3 +1,25 @@
+Add syntax of 5M -7N and some brief notes about how different types of
+arithmetic work: bigint contagion, operators that auto-convert to
+bigint if needed, unchecked operators intended only for primitive
+arith types.  How to format/printf bigints and ratios.  What else?
+
+
+Example in abstractions section of extend-protocol
+
+
+----------------------------------------------------------------------
+ns, require, use, import
+----------------------------------------------------------------------
+
+Give most common examples of ns use, with :import, :require, and :use
+
+Maybe also give the REPL equivalents of those expressions?
+
+.indexOf and .lastIndexOf for strings, and those are also implemented
+for Clojure vectors.  Why not exposed as Clojure functions?
+----------------------------------------------------------------------
+
+
 Add java.io.DataOutputStream / java.io.DataInputStream links for
 binary I/O?
 
@@ -30,17 +52,6 @@ type
 underive
 with-bindings
 
-----------------------------------------------------------------------
-ns, require, use, import
-----------------------------------------------------------------------
-
-Give most common examples of ns use, with :import, :require, and :use
-
-Maybe also give the REPL equivalents of those expressions?
-
-.indexOf and .lastIndexOf for strings, and those are also implemented
-for Clojure vectors.  Why not exposed as Clojure functions?
-----------------------------------------------------------------------
 
 
 Now the complete list:
@@ -68,10 +79,8 @@ EMPTY-NODE
 accessor
 add-classpath
 agent-errors
-alter-meta!
 await1
 bases
-biginteger
 bound?
 chunk
 chunk-append
@@ -93,10 +102,8 @@ clojure.java.io/IOFactory
 clojure.java.io/as-file
 clojure.java.io/as-relative-path
 clojure.java.io/as-url
-clojure.java.io/copy
 clojure.java.io/default-streams-impl
 clojure.java.io/delete-file
-clojure.java.io/file
 clojure.java.io/make-input-stream
 clojure.java.io/make-output-stream
 clojure.java.io/make-parents
@@ -188,8 +195,8 @@ ratio?
 rational?
 refer-clojure
 replicate
-reset-meta!
 satisfies?
+sequence
 special-symbol?
 struct
 struct-map
@@ -213,8 +220,6 @@ unchecked-subtract
 underive
 unquote
 unquote-splicing
-vary-meta
 with-bindings
 with-bindings*
 with-loading-context
-with-meta
