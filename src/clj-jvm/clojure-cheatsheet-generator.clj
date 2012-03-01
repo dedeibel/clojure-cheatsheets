@@ -115,14 +115,15 @@
 
 
 (def cheatsheet-structure
-     [:title "Clojure Cheat Sheet (Clojure 1.3.0, sheet v1.1)"
+     [:title "Clojure Cheat Sheet (Clojure 1.3.0, sheet v1.2)"
       :page [:column
              [:box "green"
               :section "Documentation"
-              :table [["clojure.repl"
+              :table [["clojure.repl/"
                        :cmds '[clojure.repl/doc clojure.repl/find-doc
                                clojure.repl/apropos clojure.repl/source
-                               clojure.repl/pst clojure.java.javadoc/javadoc]]]
+                               clojure.repl/pst clojure.java.javadoc/javadoc
+                               "(foo.bar/ is namespace for following symbols)"]]]
               ]
              [:box "blue"
               :section "Primitives"
@@ -146,10 +147,10 @@
               :subsection "Strings"
               :table [["Create" :cmds '[str format
                                         {:latex "\\textmd{\\textsf{See also IO/to string}}",
-                                         :html "See also Printing/to string"}]]
+                                         :html "See also IO/to string"}]]
                       ["Use" :cmds '[count get subs compare
-                                     {:latex "\\textmd{\\textsf{(clojure.string)}}",
-                                      :html "(clojure.string)"}
+                                     {:latex "\\textmd{\\textsf{(clojure.string/)}}",
+                                      :html "(clojure.string/)"}
                                      clojure.string/join clojure.string/escape
                                      clojure.string/split clojure.string/split-lines
                                      clojure.string/replace
@@ -159,21 +160,22 @@
                                         :html "#\"<var>pattern</var>\""}
                                        re-find re-seq re-matches
                                        re-pattern re-matcher re-groups
-;                                       {:latex "\\textmd{\\textsf{(clojure.string)}}",
-;                                        :html "(clojure.string)"}
-                                       replace replace-first]]
-                      ["Letters" :cmds '[{:latex "\\textmd{\\textsf{(clojure.string)}}",
-                                          :html "(clojure.string)"}
+;                                       {:latex "\\textmd{\\textsf{(clojure.string/)}}",
+;                                        :html "(clojure.string/)"}
+                                       clojure.string/replace
+                                       clojure.string/replace-first]]
+                      ["Letters" :cmds '[{:latex "\\textmd{\\textsf{(clojure.string/)}}",
+                                          :html "(clojure.string/)"}
                                          clojure.string/capitalize
                                          clojure.string/lower-case
                                          clojure.string/upper-case]]
-                      ["Trim" :cmds '[{:latex "\\textmd{\\textsf{(clojure.string)}}",
-                                       :html "(clojure.string)"}
+                      ["Trim" :cmds '[{:latex "\\textmd{\\textsf{(clojure.string/)}}",
+                                       :html "(clojure.string/)"}
                                       clojure.string/trim clojure.string/trim-newline
                                       clojure.string/triml clojure.string/trimr]]
                       ["Cast/Test" :cmds '[char char? string?
-                                           {:latex "\\textmd{\\textsf{(clojure.string)}}",
-                                            :html "(clojure.string)"}
+                                           {:latex "\\textmd{\\textsf{(clojure.string/)}}",
+                                            :html "(clojure.string/)"}
                                            clojure.string/blank?]]
                       ]
               :subsection "Other"
@@ -219,21 +221,21 @@
                                          contains?]]
                       [{:html "'Change'", :latex "`Change'"}
                        :cmds '[conj disj]]
-                      ["Rel. algebra"
+                      ["Rel algebra"
                        :cmds '[
-                               {:latex "\\textmd{\\textsf{(clojure.set)}}",
-                                :html "(clojure.set)"}
+                               {:latex "\\textmd{\\textsf{(clojure.set/)}}",
+                                :html "(clojure.set/)"}
                                clojure.set/join clojure.set/select
                                clojure.set/project clojure.set/union
                                clojure.set/difference clojure.set/intersection]]
                       ["Get map"
-                       :cmds '[{:latex "\\textmd{\\textsf{(clojure.set)}}",
-                                :html "(clojure.set)"}
+                       :cmds '[{:latex "\\textmd{\\textsf{(clojure.set/)}}",
+                                :html "(clojure.set/)"}
                                clojure.set/index clojure.set/rename-keys
                                clojure.set/rename clojure.set/map-invert]]
                       ["Test"
-                       :cmds '[{:latex "\\textmd{\\textsf{(clojure.set)}}",
-                                :html "(clojure.set)"}
+                       :cmds '[{:latex "\\textmd{\\textsf{(clojure.set/)}}",
+                                :html "(clojure.set/)"}
                                clojure.set/subset? clojure.set/superset?]]
                       ]
               :subsection "Maps"
@@ -293,8 +295,7 @@
                                replace shuffle]]
                       ["Rearrange" :cmds '[reverse sort sort-by compare]]
                       ["Process items" :cmds '[map pmap map-indexed
-                                              mapcat for replace seque]]
-                      ["Un-lazy Seq" :cmds '[sequence]]]
+                                              mapcat for replace seque]]]
               :subsection "Using a Seq"
               :table [["Extract item" :cmds '[first second last rest next
                                               ffirst nfirst fnext
@@ -308,7 +309,7 @@
                       ["Check for forced" :cmds '[realized?]]]
               ]
              [:box "green"
-              :subsection "Zippers (clojure.zip)"
+              :subsection "Zippers (clojure.zip/)"
               :table [["Create" :cmds '[clojure.zip/zipper]]
                       ["Get zipper" :cmds '[clojure.zip/seq-zip
                                             clojure.zip/vector-zip
@@ -338,11 +339,11 @@
                                          ]]
                       ["to *out*" :cmds '[pr prn print printf println
                                           newline
-                                           {:latex "\\textmd{\\textsf{(clojure.pprint)}}",
-                                            :html "(clojure.pprint)"}
+                                           {:latex "\\textmd{\\textsf{(clojure.pprint/)}}",
+                                            :html "(clojure.pprint/)"}
                                           clojure.pprint/print-table]]
-                      ["to writer" :cmds '[{:latex "\\textmd{\\textsf{(clojure.pprint)}}",
-                                            :html "(clojure.pprint)"}
+                      ["to writer" :cmds '[{:latex "\\textmd{\\textsf{(clojure.pprint/)}}",
+                                            :html "(clojure.pprint/)"}
                                            clojure.pprint/pprint
                                            clojure.pprint/cl-format
                                            {:latex "\\textmd{\\textsf{also:}}",
@@ -358,13 +359,13 @@
                                              {:latex "\\href{http://java.sun.com/javase/6/docs/api/java/io/Reader.html}{java.io.Reader}"
                                               :html "<a href=\"http://java.sun.com/javase/6/docs/api/java/io/Reader.html\">java.io.Reader</a>"}
                                              ]]
-                      ["from string" :cmds '[read-string with-in-string]]
+                      ["from string" :cmds '[read-string with-in-str]]
                       ["Open" :cmds '[with-open
 ;                                      {:latex "\\textmd{\\textsf{string:}}",
 ;                                       :html "string:"}
 ;                                      with-out-str with-in-str
-                                      {:latex "\\textmd{\\textsf{(clojure.java.io)}}",
-                                       :html "(clojure.java.io)"}
+                                      {:latex "\\textmd{\\textsf{(clojure.java.io/)}}",
+                                       :html "(clojure.java.io/)"}
                                       {:latex "\\textmd{\\textsf{text:}}",
                                        :html "text:"}
                                       clojure.java.io/reader clojure.java.io/writer
@@ -408,8 +409,9 @@
                       ["Test" :cmds '[fn? ifn?]]]
               ]
              [:box "orange"
-              :section "Abstractions (http://clojure.org/protocols)"
-              :subsection "Protocols"
+              :section "Abstractions"
+              :subsection {:latex "Protocols (\\href{http://clojure.org/protocols}{clojure.org/protocols})"
+                           :html "Protocols (<a href=\"http://clojure.org/protocols\">clojure.org/protocols</a>)"}
               :table [
                       ["Define" :cmds '[
                                         {:latex "\\cmd{(}"
@@ -440,7 +442,8 @@
                                         :html "<code>Slicey (slice [at] ...))</code>"}
                                        ]]
                       ]
-              :subsection "Records"
+              :subsection {:latex "Records (\\href{http://clojure.org/datatypes}{clojure.org/datatypes})"
+                           :html "Records (<a href=\"http://clojure.org/datatypes\">clojure.org/datatypes</a>)"}
               :table [
                       ["Define" :cmds '[
                                         {:latex "\\cmd{(}"
@@ -457,7 +460,8 @@
                                         Pair. ->Pair map->Pair
                                         ]]
                       ]
-              :subsection "Types"
+              :subsection {:latex "Types (\\href{http://clojure.org/datatypes}{clojure.org/datatypes})"
+                           :html "Types (<a href=\"http://clojure.org/datatypes\">clojure.org/datatypes</a>)"}
               :table [
                       ["Define" :cmds '[
                                         {:latex "\\cmd{(}"
@@ -472,14 +476,15 @@
                                         ]]
                       ["Create" :cmds '[Pair. ->Pair]]
                       ["With methods" :cmds '[
-                                              {:latex "\\cmd{(}"
+                                              {:latex "\\begin{tabular}[c]{@{}l@{}} \\cmd{(}"
                                                :html "<code>(</code>"}
                                               deftype
-                                              {:latex "\\cmd{Pair [h t] Object (toString [this] (str \"<\" h \",\" t \">\")))}"
-                                               :html "<code>Pair [h t] Object<br>&nbsp;(toString [this] (str \"<\" h \",\" t \">\")))</code>"}
+                                              {:latex "\\cmd{Pair [h t]} \\\\ \\ \\ \\cmd{Object} \\\\ \\ \\ \\cmd{(toString [this] (str \"<\" h \",\" t \">\")))}\\end{tabular}"
+                                               :html "<code>Pair [h t]<br>&nbsp;&nbsp;Object<br>&nbsp;&nbsp;(toString [this] (str \"<\" h \",\" t \">\")))</code>"}
                                               ]]
                       ]
-              :subsection "Multimethods"
+              :subsection {:latex "Multimethods (\\href{http://clojure.org/multimethods}{clojure.org/multimethods})"
+                           :html "Multimethods (<a href=\"http://clojure.org/multimethods\">clojure.org/multimethods</a>)"}
               :table [
                       ["Define" :cmds '[
                                         {:latex "\\cmd{(}"
@@ -534,6 +539,9 @@
                       [{:latex "\\cmd{;}",
                         :html "<code>;</code>"}
                        :str "Single line comment"]
+                      [{:latex "\\cmd{\\^{}}",
+                        :html "<code>^</code>"}
+                       :str "Metadata (see Metadata section)"]
                       [{:latex "\\cmd{@}",
                         :html "<code>@</code>"}
                        ;; TBD: This should point to same URL that 'deref' does
@@ -552,9 +560,6 @@
                         :html "<code>#\"<var>p</var>\"</code>"}
                        :str {:latex "Regex Pattern \\textit{p}",
                              :html "Regex Pattern <var>p</var>"}]
-                      [{:latex "\\cmd{\\^{}}",
-                        :html "<code>^</code>"}
-                       :str "Metadata (see Metadata section)"]
                       [{:latex "\\cmd{\\#$'$}",
                         :html "<code>#'</code>"}
                        ;; TBD: This should point to same URL that 'var' does
@@ -570,7 +575,8 @@
                        :str "Ignore next form"]]
               ]
              [:box "red"
-              :section "Metadata"
+              :section {:latex "Metadata (\\href{http://clojure.org/special\\_forms}{clojure.org/special\\_forms})"
+                        :html "Metadata (<a href=\"http://clojure.org/special_forms\">clojure.org/special_forms</a>)"}
               :table [
                       ["General" :cmds [{:latex "\\cmd{\\^{}\\{:key1 val1 :key2 val2 ...\\}}"
                                          :html "<code>^{:key1 val1 :key2 val2 ...}</code>"}
@@ -1254,12 +1260,12 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
       (case k
             :section
             (case (:fmt fmt)
-                  :latex (printf "\\section{%s}\n" v)
-                  :html (printf "          <h2>%s</h2>\n" v))
+                  :latex (printf "\\section{%s}\n" (cond-str fmt v))
+                  :html (printf "          <h2>%s</h2>\n" (cond-str fmt v)))
             :subsection
             (case (:fmt fmt)
-                  :latex (printf "\\subsection{%s}\n" v)
-                  :html (printf "          <h3>%s</h3>\n" v))
+                  :latex (printf "\\subsection{%s}\n" (cond-str fmt v))
+                  :html (printf "          <h3>%s</h3>\n" (cond-str fmt v)))
             :table
             (output-table fmt v)
             :cmds-one-line
