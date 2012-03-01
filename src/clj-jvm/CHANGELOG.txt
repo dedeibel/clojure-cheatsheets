@@ -1,4 +1,33 @@
 ----------------------------------------------------------------------
+2012 Feb 23 - Clojure 1.3.0, sheet v1.3
+
+Added new section Destructuring, with a link to a page containing
+examples on clojure.org, and a list of the most commonly-used macros
+that allow destructuring to be used within them.
+
+Added biginteger, clojure.java.io/file and copy, and link to fs
+project on GitHub for file manipulation functions.
+
+Removed "Others" part of Metadata section.  It contained too many
+rarely-used metadata keys that can better be described on the
+clojure.org/special_forms web page linked to.
+
+Added more links to clojure.org, mostly in section titles.
+
+Moved take-last from subcategory Head-items to Tail-items in Seq
+in/Seq out section.
+
+Moved Zippers/Get zipper functions to Zippers/Create.
+
+Fix link to ->> in LaTeX so it works in generated PDF files.
+
+Many small tweaks to try to get it to almost fit in 2 pages with both
+US letter and A4 page sizes, but I think I'm giving up on that.  It is
+2+ sheets on paper, with room to grow.  I used several more
+occurrences of common {pre, suf}fixes to try to get it down, and left
+those in.
+
+----------------------------------------------------------------------
 2012 Feb 17 - Clojure 1.3.0, sheet v1.2
 
 Added / after all namespace symbols, plus a brief note about this

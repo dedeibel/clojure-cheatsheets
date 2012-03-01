@@ -1,6 +1,8 @@
 Add java.io.DataOutputStream / java.io.DataInputStream links for
 binary I/O?
 
+java.util.Scanner might be nice to know about.
+
 distinct? doesn't really operate on collections.  It is more like max,
 min, and some others in taking an arbitrarily large but variable
 number of arguments.  Is there a better place it belongs than
@@ -27,6 +29,18 @@ trampoline
 type
 underive
 with-bindings
+
+----------------------------------------------------------------------
+ns, require, use, import
+----------------------------------------------------------------------
+
+Give most common examples of ns use, with :import, :require, and :use
+
+Maybe also give the REPL equivalents of those expressions?
+
+.indexOf and .lastIndexOf for strings, and those are also implemented
+for Clojure vectors.  Why not exposed as Clojure functions?
+----------------------------------------------------------------------
 
 
 Now the complete list:

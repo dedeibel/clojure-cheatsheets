@@ -115,7 +115,7 @@
 
 
 (def cheatsheet-structure
-     [:title "Clojure Cheat Sheet (Clojure 1.3.0, sheet v1.2)"
+     [:title "Clojure Cheat Sheet (Clojure 1.3.0, sheet v1.3)"
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -123,7 +123,7 @@
                        :cmds '[clojure.repl/doc clojure.repl/find-doc
                                clojure.repl/apropos clojure.repl/source
                                clojure.repl/pst clojure.java.javadoc/javadoc
-                               "(foo.bar/ is namespace for following symbols)"]]]
+                               "(foo.bar/ is namespace for later syms)"]]]
               ]
              [:box "blue"
               :section "Primitives"
@@ -135,7 +135,7 @@
                                           flip set shift-right shift-left
                                           and-not clear test]]]
                       ["Cast" :cmds '[byte short int long float double
-                                      bigdec bigint num rationalize]]
+                                      bigdec bigint num rationalize biginteger]]
                       ["Test" :cmds-with-frenchspacing '[nil? identical? zero?
                                                          pos? neg? even? odd?]]
                       ["Random" :cmds '[rand rand-int]]
@@ -173,10 +173,10 @@
                                        :html "(clojure.string/)"}
                                       clojure.string/trim clojure.string/trim-newline
                                       clojure.string/triml clojure.string/trimr]]
-                      ["Cast/Test" :cmds '[char char? string?
-                                           {:latex "\\textmd{\\textsf{(clojure.string/)}}",
-                                            :html "(clojure.string/)"}
-                                           clojure.string/blank?]]
+                      ["Test" :cmds '[char char? string?
+                                      {:latex "\\textmd{\\textsf{(clojure.string/)}}",
+                                       :html "(clojure.string/)"}
+                                      clojure.string/blank?]]
                       ]
               :subsection "Other"
               :table [["Characters" :cmds '[char char-name-string
@@ -255,15 +255,16 @@
                                merge-with select-keys update-in]]
                       ["Entry" :cmds '[key val]]
                       ["Sorted maps" :cmds '[rseq subseq rsubseq]]]
-              :subsection "Transients"
-              :table [["Create" :cmds '[transient persistent!]]
-                      ["Change" :cmds-with-frenchspacing
-                       '[conj! pop! assoc! dissoc! disj!
-                         {:latex "\\textmd{\\textsf{Remember to bind result to a symbol!}}",
-                          :html "Remember to bind result to a symbol!"}]]]
               ]
              :column
              [:box "yellow"
+              :subsection {:latex "Transients (\\href{http://clojure.org/transients}{clojure.org/transients})"
+                           :html "Transients (<a href=\"http://clojure.org/transients\">clojure.org/transients</a>)"}
+              :table [["Create" :cmds '[transient persistent!]]
+                      ["Change" :cmds-with-frenchspacing
+                       '[conj! pop! assoc! dissoc! disj!
+                         {:latex "\\textmd{\\textsf{Note: always use return value for later changes, never original!}}",
+                          :html "Note: always use return value for later changes, never original!"}]]]
               :subsection "Misc"
               :table [["Compare" :cmds '[= == identical? not= not compare
                                          clojure.data/diff]]
@@ -285,8 +286,8 @@
                       ["Get longer" :cmds '[cons conj concat lazy-cat mapcat
                                             cycle interleave interpose]]
                       ["Tail-items" :cmds '[rest nthrest fnext nnext
-                                            drop drop-while for]]
-                      ["Head-items" :cmds '[take take-nth take-while take-last
+                                            drop drop-while take-last for]]
+                      ["Head-items" :cmds '[take take-nth take-while
                                             butlast drop-last for]]
                       [{:html "'Change'", :latex "`Change'"}
                        :cmds '[conj concat distinct flatten group-by
@@ -310,15 +311,15 @@
               ]
              [:box "green"
               :subsection "Zippers (clojure.zip/)"
-              :table [["Create" :cmds '[clojure.zip/zipper]]
-                      ["Get zipper" :cmds '[clojure.zip/seq-zip
-                                            clojure.zip/vector-zip
-                                            clojure.zip/xml-zip]]
-                      ["Get location" :cmds '[clojure.zip/up
-                                              clojure.zip/down clojure.zip/left
-                                              clojure.zip/right
-                                              clojure.zip/leftmost
-                                              clojure.zip/rightmost]]
+              :table [["Create" :cmds '[clojure.zip/zipper
+                                        clojure.zip/seq-zip
+                                        clojure.zip/vector-zip
+                                        clojure.zip/xml-zip]]
+                      ["Get loc" :cmds '[clojure.zip/up
+                                         clojure.zip/down clojure.zip/left
+                                         clojure.zip/right
+                                         clojure.zip/leftmost
+                                         clojure.zip/rightmost]]
                       ["Get seq" :cmds '[clojure.zip/lefts clojure.zip/rights
                                          clojure.zip/path clojure.zip/children]]
                       [{:html "'Change'", :latex "`Change'"}
@@ -333,10 +334,13 @@
              [:box "magenta"
               :section "IO"
               :table [
-                      ["to/from ..." :cmds '[spit slurp
-                                         {:latex "\\textmd{\\textsf{(to writer/from reader, Socket, string with file name, URI, etc.)}}",
-                                          :html "(to writer/from reader, Socket, string with file name, URI, etc.)"}
-                                         ]]
+;                      ["to/from ..."
+                      [{:latex "\\begin{tabular}[t]{@{}l@{}} to/from \\\\ ... \\end{tabular}"
+                        :html "to/from ..."}
+                        :cmds '[spit slurp
+                                {:latex "\\textmd{\\textsf{(to writer/from reader, Socket, string with file name, URI, etc.)}}",
+                                 :html "(to writer/from reader, Socket, string with file name, URI, etc.)"}
+                                ]]
                       ["to *out*" :cmds '[pr prn print printf println
                                           newline
                                            {:latex "\\textmd{\\textsf{(clojure.pprint/)}}",
@@ -381,21 +385,25 @@
 ;                                        "java.io.InputStream"
                                         {:latex "\\href{http://java.sun.com/javase/6/docs/api/java/io/InputStream.html}{java.io.InputStream}"
                                          :html "<a href=\"http://java.sun.com/javase/6/docs/api/java/io/InputStream.html\">java.io.InputStream</a>"}
-                                        {:latex "\\textmd{\\textsf{github:}}",
-                                         :html "github:"}
+                                        {:latex "\\textmd{\\textsf{GitHub:}}",
+                                         :html "GitHub:"}
                                         {:latex "\\href{http://github.com/ztellman/gloss}{gloss}"
                                          :html "<a href=\"http://github.com/ztellman/gloss\">gloss</a>"}
                                         {:latex "\\href{http://github.com/rosejn/byte-spec}{byte-spec}"
                                          :html "<a href=\"http://github.com/rosejn/byte-spec\">byte-spec</a>"}
                                         ]]
                       ["Misc" :cmds '[flush "(.close s)" file-seq
-                                      *in* *out* *err*]]
+                                      *in* *out* *err*
+                                      {:latex "\\textmd{\\textsf{(clojure.java.io/)}}",
+                                       :html "(clojure.java.io/)"}
+                                      clojure.java.io/file
+                                      clojure.java.io/copy
+                                      {:latex "\\textmd{\\textsf{GitHub:}}",
+                                       :html "GitHub:"}
+                                      {:latex "\\href{http://github.com/Raynes/fs}{fs}"
+                                       :html "<a href=\"http://github.com/Raynes/fs\">fs</a>"}
+                                      ]]
                       ]
-              ]
-             [:box "red"
-              :section "Special Forms"
-              :cmds-one-line '[def if do let quote var fn loop
-                               recur throw try monitor-enter monitor-exit]
               ]
              ]
       :page [:column
@@ -516,12 +524,12 @@
                                         case]]
                       ["Loop" :cmds '[for doseq dotimes while]]
                       ["Arrange" :cmds '[.. doto ->]]
-                      ["Scope" :cmds '[binding locking time with-in-str
-                                       with-local-vars with-open with-out-str
-                                       with-precision with-redefs
-                                       with-redefs-fn]]
+                      ["Scope" :cmds '[binding locking time
+                                       [:common-prefix with-
+                                       in-str local-vars open out-str
+                                       precision redefs redefs-fn]]]
                       ["Lazy" :cmds '[lazy-cat lazy-seq delay]]
-                      ["Document" :cmds '[assert comment clojure.repl/doc]]]
+                      ["Doc." :cmds '[assert comment clojure.repl/doc]]]
               ]
              [:box "yellow"
               :section "Reader Macros"
@@ -590,15 +598,18 @@
                       ["Common" :cmds [{:latex (str
                                                 "\\cmd{\\^{}:dynamic} "
                                                 "\\cmd{\\^{}:private} "
-                                                "\\cmd{\\^{}:static}")
+                                                "\\cmd{\\^{}:static} "
+                                                "\\cmd{\\{:doc \"str\"\\}}"
+                                                )
                                         :html (str
                                                "<code>"
                                                "^:dynamic "
                                                "^:private "
                                                "^:static "
+                                               "{:doc \"str\"}"
                                                "</code>")}
                                         ]]
-                      ["Example" :cmds '[
+                      ["Examples" :cmds '[
                                          {:latex "\\cmd{(defn \\^{}:private \\^{}:static \\^{}String my-fn ...)}"
                                           :html "<code>(defn ^:private ^:static ^String my-fn ...)</code>"}
                                          {:latex " \\ \\ \\ " ; fragile hack to get 2nd example to start on next line
@@ -606,33 +617,32 @@
                                          {:latex "\\cmd{(def \\^{}:dynamic *dyn-var* val)}"
                                           :html "<code>(def ^:dynamic *dyn-var* val)</code>"}
                                          ]]
-                      ["Others" :cmds [
-                                       {:latex (str
-;                                                "\\cmd{\\^{}\\{:doc \"docstring\"\\}} "
-                                                "\\cmd{:added}"
-                                                " \\cmd{:author}"
-                                                " \\cmd{:arglists} "
-                                                " \\cmd{:doc} "
-                                                " \\cmd{:inline}"
-                                                " \\cmd{:inline-arities}"
-                                                " \\cmd{:macro}"
-;                                                " (examples in Clojure source)"
-;                                                " (see Clojure source for examples.  Can use arbitrary keys for your own purposes.)"
-                                                )
-                                        :html (str
-                                               "<code>"
-                                               ":added"
-                                               " :author"
-                                               " :arglists "
-                                               " :doc "
-                                               " :inline"
-                                               " :inline-arities"
-                                               " :macro"
-                                               "</code>"
-;                                               " (examples in Clojure source)"
-;                                               " (see Clojure source for examples.  Can use arbitrary keys for your own purposes.)"
-                                               )}
-                                       ]]
+;;                      ["Others" :cmds [
+;;                                       {:latex (str
+;;                                                "\\cmd{:added}"
+;;                                                " \\cmd{:author}"
+;;                                                " \\cmd{:doc} "
+;;                                                " \\cmd{:arglists} "
+;;                                                " \\cmd{:inline}"
+;;                                                " \\cmd{:inline-arities}"
+;;                                                " \\cmd{:macro}"
+;; ;                                                " (examples in Clojure source)"
+;; ;                                                " (see Clojure source for examples.  Can use arbitrary keys for your own purposes.)"
+;;                                                )
+;;                                        :html (str
+;;                                               "<code>"
+;;                                               ":added"
+;;                                               " :author"
+;;                                               " :arglists "
+;;                                               " :doc "
+;;                                               " :inline"
+;;                                               " :inline-arities"
+;;                                               " :macro"
+;;                                               "</code>"
+;; ;                                               " (examples in Clojure source)"
+;; ;                                               " (see Clojure source for examples.  Can use arbitrary keys for your own purposes.)"
+;;                                               )}
+;;                                       ]]
                       ["On Vars" :cmds '[meta with-meta vary-meta
                                          alter-meta! reset-meta!
                                          clojure.repl/doc
@@ -640,8 +650,21 @@
                       ]
               ]
              :column
+             [:box "red"
+              :section {:latex "Special Forms (\\href{http://clojure.org/special\\_forms}{clojure.org/special\\_forms})"
+                        :html "Special Forms (<a href=\"http://clojure.org/special_forms\">clojure.org/special_forms</a>)"}
+              :cmds-one-line '[def if do let quote var fn loop
+                               recur throw try monitor-enter monitor-exit]
+              :table [["Destructuring" :cmds '[
+                                               {:latex "(\\href{http://clojure.org/special\\_forms\\#let}{examples})"
+                                                :html "(<a href=\"http://clojure.org/special_forms#let\">examples</a>)"}
+                                               let fn defn defmacro
+                                               loop for doseq if-let when-let]]
+                      ]
+              ]
              [:box "blue2"
-              :section "Vars and global environment"
+              :section {:latex "Vars and global environment (\\href{http://clojure.org/vars}{clojure.org/vars})"
+                        :html "Vars and global environment (<a href=\"http://clojure.org/vars\">clojure.org/vars</a>)"}
               :table [["Def variants" :cmds '[def defn defn- definline defmacro
                                               defmethod defmulti defonce
                                               defrecord]]
@@ -650,8 +673,9 @@
                       ["Var objects" :cmds '[with-local-vars var-get var-set
                                              alter-var-root var?]]
                       ["Var validators" :cmds '[set-validator! get-validator]]
-;                      ["Var metadata" :cmds '[meta clojure.repl/doc
-;                                              clojure.repl/find-doc test]]
+                      ;; Now covered in Metadata section
+;;                      ["Var metadata" :cmds '[meta clojure.repl/doc
+;;                                              clojure.repl/find-doc test]]
                       ]
               ]
              [:box "yellow"
@@ -660,43 +684,50 @@
                       ["Create/Switch" :cmds '[in-ns ns create-ns]]
                       ["Add" :cmds '[alias def import intern refer]]
                       ["Find" :cmds '[all-ns find-ns]]
-                      ["Examine" :cmds '[ns-name ns-aliases ns-map
-                                         ns-interns ns-publics ns-refers
-                                         ns-imports]]
+;;                      ["Examine" :cmds '[ns-name ns-aliases ns-map
+;;                                         ns-interns ns-publics ns-refers
+;;                                         ns-imports]]
+                      ["Examine" :cmds '[[:common-prefix ns-
+                                          name aliases map interns publics
+                                          refers imports]]]
                       ["From symbol" :cmds '[resolve ns-resolve namespace]]
                       ["Remove" :cmds '[ns-unalias ns-unmap remove-ns]]]
               ]
              [:box "green"
               :section "Loading"
-              :table [["Loading libs" :cmds '[require use import refer]]
-                      ["Listing loaded libs" :cmds '[loaded-libs]]
-                      ["Loading misc" :cmds '[load load-file load-reader
-                                              load-string]]]
+              :table [["Load libs" :cmds '[require use import refer]]
+                      ["List loaded" :cmds '[loaded-libs]]
+                      ["Load misc" :cmds '[load load-file load-reader
+                                           load-string]]]
               ]
              [:box "magenta"
               :section "Concurrency"
               :table [["Atoms" :cmds '[atom swap! reset! compare-and-set!]]
-                      ["Futures" :cmds '[future future-call future-done?
-                                         future-cancel future-cancelled?
+                      ["Futures" :cmds '[future
+                                         [:common-prefix future-
+                                          call done? cancel cancelled?]
                                          future?]]
                       ["Threads" :cmds '[bound-fn bound-fn*
-                                         get-thread-bindings
-                                         push-thread-bindings
-                                         pop-thread-bindings thread-bound?]]
+                                         [:common-suffix -thread-bindings
+                                          get push pop]
+                                         thread-bound?]]
                       ["Misc" :cmds '[locking pcalls pvalues pmap seque
                                       promise deliver]]]
-              :subsection "Refs and Transactions"
+              :subsection {:latex "Refs and Transactions (\\href{http://clojure.org/refs}{clojure.org/refs})"
+                           :html "Refs and Transactions (<a href=\"http://clojure.org/refs\">clojure.org/refs</a>)"}
               :table [["Create" :cmds '[ref]]
                       ["Examine"
                        :cmds '[deref "@"
                                {:latex "\\textmd{\\textsf{(@form $\\to$ (deref form))}}",
                                 :html "(<code>@<var>form</var></code> &rarr; <code>(deref <var>form</var>)</code>)"}]]
-                      ["Transaction macros" :cmds '[sync dosync io!]]
+                      ["Transaction" :cmds '[sync dosync io!]]
                       ["In transaction" :cmds '[ensure ref-set alter commute]]
                       ["Validators" :cmds '[set-validator! get-validator]]
-                      ["History" :cmds '[ref-history-count ref-max-history
-                                         ref-min-history]]]
-              :subsection "Agents and Asynchronous Actions"
+                      ["History" :cmds '[ref-history-count
+                                         [:common-prefix-suffix
+                                          ref- -history min max]]]]
+              :subsection {:latex "Agents and Asynchronous Actions (\\href{http://clojure.org/agents}{clojure.org/agents})"
+                           :html "Agents and Asynchronous Actions (<a href=\"http://clojure.org/agents\">clojure.org/agents</a>)"}
               :table [["Create" :cmds '[agent]]
                       ["Examine" :cmds '[agent-error]]
                       ["Change state" :cmds '[send send-off restart-agent]]
@@ -709,12 +740,14 @@
                       ["Misc" :cmds '[*agent* release-pending-sends]]]
               ]
              [:box "orange"
-              :section "Java Interoperation"
+              :section {:latex "Java Interoperation (\\href{http://clojure.org/java\\_interop}{clojure.org/java\\_interop})"
+                        :html "Java Interoperation (<a href=\"http://clojure.org/java_interop\">clojure.org/java_interop</a>)"}
               :table [["General" :cmds '[.. doto "Classname/" "Classname."
                                          new bean comparator enumeration-seq
                                          import iterator-seq memfn set!]]
                       ["Cast" :cmds '[boolean byte short char int long
-                                      float double bigdec bigint num cast]]
+                                      float double bigdec bigint num cast
+                                      biginteger]]
                       ["Exceptions" :cmds '[throw try catch finally
                                             clojure.repl/pst]]]
               :subsection "Arrays"
@@ -731,19 +764,18 @@
                       ;; example like ^"[Ljava.lang.BigInteger", yes?
                       ;; Also the cast ^objects?  Is there a doc page
                       ;; for that?
-                      ["Cast" :cmds '[booleans bytes shorts chars ints longs
-                                      floats doubles]]]
+                      ["Cast" :cmds '[booleans bytes shorts chars
+                                      ints longs floats doubles]]
+                      ]
               :subsection "Proxy"
-              :table [["Create" :cmds '[proxy get-proxy-class construct-proxy
-                                        init-proxy]]
+              :table [["Create" :cmds '[proxy get-proxy-class
+                                        [:common-suffix -proxy
+                                         construct init]]]
                       ["Misc" :cmds '[proxy-mappings proxy-super update-proxy]]]
               ]
              [:box "green2"
               :section "Other"
-              :table [["XML" :cmds '[clojure.xml/parse
-                                     ;;{:latex "\\textmd{\\textsf{(clojure.xml)}}",
-                                     ;; :html "(clojure.xml)"}
-                                     xml-seq]]
+              :table [["XML" :cmds '[clojure.xml/parse xml-seq]]
                       ["REPL" :cmds '[*1 *2 *3 *e *print-dup* *print-length*
                                       *print-level* *print-meta*
                                       *print-readably*]]
@@ -1085,15 +1117,20 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
 
 
 (defn escape-latex-hyperref-url [url]
-  (let [url (str/replace url "#" "\\#")
-        url (str/replace url "%" "\\%")
-        ;; Without the two lines below, the links from <= and >= in
-        ;; the PDF file did not have working links.  I don't know why.
-        ;; This is just a workaround that seems to work.
-        url (str/replace url "<=" "\\%3C\\%3D")
-        url (str/replace url ">=" "\\%3E\\%3D")
-        ]
-    url))
+  (-> url
+      (str/replace "#" "\\#")
+      (str/replace "%" "\\%")
+      (str/replace "<" "\\%3C")
+      (str/replace "=" "\\%3D")
+      (str/replace ">" "\\%3E")))
+
+
+(defn escape-latex-hyperref-target [target]
+  (-> target
+      ;; -> doesn't seem to have a problem in LaTeX, but ->> looks
+      ;; -> like - followed by a special symbol that is two >'s
+      ;; -> combined, not two separate characters.
+      (str/replace "->>" "-{>}{>}")))
 
 
 (defn has-prefix? [s pre]
@@ -1126,7 +1163,7 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
     (if url-str
       (case (:fmt fmt)
             :latex (str "\\href{" (escape-latex-hyperref-url url-str)
-                        "}{" cmd-str-to-show "}")
+                        "}{" (escape-latex-hyperref-target cmd-str-to-show) "}")
             :html (str "<a href=\"" url-str "\">" cmd-str-to-show "</a>")
             :verify-only "")
       cmd-str-to-show)))
