@@ -115,7 +115,7 @@
 
 
 (def cheatsheet-structure
-     [:title "Clojure Cheat Sheet (Clojure 1.3.0, sheet v1.3)"
+     [:title "Clojure Cheat Sheet (Clojure 1.3, sheet v1.4a1)"
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -155,13 +155,24 @@
                                      clojure.string/split clojure.string/split-lines
                                      clojure.string/replace
                                      clojure.string/replace-first
-                                     clojure.string/reverse]]
-                      ["Regex" :cmds '[{:latex "\\#\"pattern\"",
+                                     clojure.string/reverse
+                                     {:latex "(\\href{http://docs.oracle.com/javase/6/docs/api/java/lang/String.html}{String})"
+                                      :html "(<a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/String.html\">String</a>)"}
+                                     {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/lang/String.html\\#indexOf\\%28java.lang.String\\%29}{.indexOf}"
+                                      :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/String.html#indexOf%28java.lang.String%29\">.indexOf</a>"}
+                                     {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/lang/String.html\\#lastIndexOf\\%28java.lang.String\\%29}{.lastIndexOf}"
+                                      :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/String.html#lastIndexOf%28java.lang.String%29\">.lastIndexOf</a>"}
+                                     ]]
+                      [
+                       "Regex"
+;;                       {:latex "\\begin{tabular}[t]{@{}l@{}} Regex/ \\\\ Replace \\end{tabular}"
+;;                        :html "Regex / Replace"}
+                               :cmds '[{:latex "\\#\"pattern\"",
                                         :html "#\"<var>pattern</var>\""}
                                        re-find re-seq re-matches
                                        re-pattern re-matcher re-groups
-;                                       {:latex "\\textmd{\\textsf{(clojure.string/)}}",
-;                                        :html "(clojure.string/)"}
+                                       {:latex "\\textmd{\\textsf{(clojure.string/)}}",
+                                        :html "(clojure.string/)"}
                                        clojure.string/replace
                                        clojure.string/replace-first]]
                       ["Letters" :cmds '[{:latex "\\textmd{\\textsf{(clojure.string/)}}",

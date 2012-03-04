@@ -4,6 +4,11 @@ bigint if needed, unchecked operators intended only for primitive
 arith types.  How to format/printf bigints and ratios.  What else?
 
 
+Give examples of syntax for type-hinting Java arrays of arbitrary Java
+classes, with the link below for details:
+
+    http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html#getName%28%29
+
 Example in abstractions section of extend-protocol
 
 
