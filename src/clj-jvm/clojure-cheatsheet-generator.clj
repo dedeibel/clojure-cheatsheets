@@ -157,18 +157,21 @@
                                      clojure.string/replace-first
                                      clojure.string/reverse
                                      {:latex "(\\href{http://docs.oracle.com/javase/6/docs/api/java/lang/String.html}{String})"
-                                      :html "(<a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/String.html\">String</a>)"}
+                                      :html "(<a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/String.html\">java.lang.String</a>)"}
                                      {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/lang/String.html\\#indexOf\\%28java.lang.String\\%29}{.indexOf}"
                                       :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/String.html#indexOf%28java.lang.String%29\">.indexOf</a>"}
                                      {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/lang/String.html\\#lastIndexOf\\%28java.lang.String\\%29}{.lastIndexOf}"
                                       :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/String.html#lastIndexOf%28java.lang.String%29\">.lastIndexOf</a>"}
                                      ]]
                       [
-                       "Regex"
-;;                       {:latex "\\begin{tabular}[t]{@{}l@{}} Regex/ \\\\ Replace \\end{tabular}"
-;;                        :html "Regex / Replace"}
-                               :cmds '[{:latex "\\#\"pattern\"",
-                                        :html "#\"<var>pattern</var>\""}
+;;                       "Regex"
+                       {:latex "\\href{http://www.regular-expressions.info}{Regex}"
+                        :html "<a href=\"http://www.regular-expressions.info\">Regex</a>"}
+                               :cmds '[
+;;                                       {:latex "\\#\"pattern\"",
+;;                                        :html "#\"<var>pattern</var>\""}
+                                       {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html}{\\#\"pattern\"}",
+                                        :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html\">#\"<var>pattern</var>\"</a>"}
                                        re-find re-seq re-matches
                                        re-pattern re-matcher re-groups
                                        {:latex "\\textmd{\\textsf{(clojure.string/)}}",
@@ -207,7 +210,12 @@
                                             seq?]]]
               :subsection "Lists"
               :table [["Create" :cmds '["'()" list list*]]
-                      ["Examine" :cmds-with-frenchspacing '[first nth peek]]
+                      ["Examine" :cmds-with-frenchspacing '[first nth peek
+                                                            {:latex "\\href{http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Vector.html\\#indexOf\\%28java.lang.Object\\%29}{.indexOf}"
+                                                             :html "<a href=\"http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Vector.html#indexOf%28java.lang.Object%29\">.indexOf</a>"}
+                                                            {:latex "\\href{http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Vector.html\\#lastIndexOf\\%28java.lang.Object\\%29}{.lastIndexOf}"
+                                                             :html "<a href=\"http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Vector.html#lastIndexOf%28java.lang.Object%29\">.lastIndexOf</a>"}
+                                                            ]]
                       [{:html "'Change'", :latex "`Change'"}
                        :cmds '[cons conj rest pop]]
                       ]
@@ -218,7 +226,12 @@
                                          nth
                                          {:latex " \\cmd{my-vec idx)}",
                                           :html " my-vec idx)</code>"}
-                                         get peek]]
+                                         get peek
+                                         {:latex "\\href{http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Vector.html\\#indexOf\\%28java.lang.Object\\%29}{.indexOf}"
+                                          :html "<a href=\"http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Vector.html#indexOf%28java.lang.Object%29\">.indexOf</a>"}
+                                         {:latex "\\href{http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Vector.html\\#lastIndexOf\\%28java.lang.Object\\%29}{.lastIndexOf}"
+                                          :html "<a href=\"http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Vector.html#lastIndexOf%28java.lang.Object%29\">.lastIndexOf</a>"}
+                                         ]]
                       [{:html "'Change'", :latex "`Change'"}
                        :cmds '[assoc pop subvec replace conj rseq]]]
               :subsection "Sets"
@@ -666,11 +679,13 @@
                         :html "Special Forms (<a href=\"http://clojure.org/special_forms\">clojure.org/special_forms</a>)"}
               :cmds-one-line '[def if do let quote var fn loop
                                recur throw try monitor-enter monitor-exit]
-              :table [["Destructuring" :cmds '[
-                                               {:latex "(\\href{http://clojure.org/special\\_forms\\#let}{examples})"
-                                                :html "(<a href=\"http://clojure.org/special_forms#let\">examples</a>)"}
-                                               let fn defn defmacro
-                                               loop for doseq if-let when-let]]
+              :table [[{:latex "\\begin{tabular}[t]{@{}l@{}} Binding Forms / \\\\ Destructuring \\end{tabular}"
+                        :html "Binding Forms / Destructuring"}
+                       :cmds '[
+                               {:latex "(\\href{http://clojure.org/special\\_forms\\#let}{examples})"
+                                :html "(<a href=\"http://clojure.org/special_forms#let\">examples</a>)"}
+                               let fn defn defmacro
+                               loop for doseq if-let when-let]]
                       ]
               ]
              [:box "blue2"
@@ -692,7 +707,9 @@
              [:box "yellow"
               :section "Namespace"
               :table [["Current" :cmds '[*ns*]]
-                      ["Create/Switch" :cmds '[in-ns ns create-ns]]
+                      ["Create/Switch" :cmds '[{:latex "(\\href{http://blog.8thlight.com/colin-jones/2010/12/05/clojure-libs-and-namespaces-require-use-import-and-ns.html}{tutorial})"
+                                                :html "(<a href=\"http://blog.8thlight.com/colin-jones/2010/12/05/clojure-libs-and-namespaces-require-use-import-and-ns.html\">tutorial</a>)"}
+                                               ns in-ns create-ns]]
                       ["Add" :cmds '[alias def import intern refer]]
                       ["Find" :cmds '[all-ns find-ns]]
 ;;                      ["Examine" :cmds '[ns-name ns-aliases ns-map
@@ -706,7 +723,9 @@
               ]
              [:box "green"
               :section "Loading"
-              :table [["Load libs" :cmds '[require use import refer]]
+              :table [["Load libs" :cmds '[{:latex "(\\href{http://blog.8thlight.com/colin-jones/2010/12/05/clojure-libs-and-namespaces-require-use-import-and-ns.html}{tutorial})"
+                                            :html "(<a href=\"http://blog.8thlight.com/colin-jones/2010/12/05/clojure-libs-and-namespaces-require-use-import-and-ns.html\">tutorial</a>)"}
+                                           require use import refer]]
                       ["List loaded" :cmds '[loaded-libs]]
                       ["Load misc" :cmds '[load load-file load-reader
                                            load-string]]]

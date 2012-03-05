@@ -1,9 +1,26 @@
 ----------------------------------------------------------------------
 <date TBD on release of 1.4> - Clojure 1.3.0, sheet v1.4
 
-Added to Strings section: java.lang.String (abbreviated String to fit
-better on PDF) .indexOf .lastIndexOf, with links to java.lang.String
-doc page.
+Added (tutorial) entries in Namespace/Create and Loading/Load Libs
+sections that link to this nice article:
+    http://blog.8thlight.com/colin-jones/2010/12/05/clojure-libs-and-namespaces-require-use-import-and-ns.html
+
+Added links to more details on regular expressions in the
+Strings/Regex section:
+    http://www.regular-expressions.info
+    http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
+
+Added to Strings section: java.lang.String (abbreviated String in PDF
+version to fit better) .indexOf .lastIndexOf, with links to
+java.lang.String doc page.
+
+Added to Collections/Lists and Vectors sections: .indexOf and
+.lastIndexOf, with links to similar methods documented for
+java.util.Vector.
+
+Changed heading Destructuring in Special Forms section to "Binding
+Forms / Destructuring", for people who might know it by one name but
+not the other.
 
 ----------------------------------------------------------------------
 2012 Feb 23 - Clojure 1.3.0, sheet v1.3

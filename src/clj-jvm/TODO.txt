@@ -4,6 +4,10 @@ bigint if needed, unchecked operators intended only for primitive
 arith types.  How to format/printf bigints and ratios.  What else?
 
 
+Find good places to link to for macro things like the special syntax `
+~ ~@, and perhaps also link to there from the Macros section header.
+
+
 Give examples of syntax for type-hinting Java arrays of arbitrary Java
 classes, with the link below for details:
 
@@ -20,8 +24,10 @@ Give most common examples of ns use, with :import, :require, and :use
 
 Maybe also give the REPL equivalents of those expressions?
 
-.indexOf and .lastIndexOf for strings, and those are also implemented
-for Clojure vectors.  Why not exposed as Clojure functions?
+See this article for ideas of things that could be adapted to put
+right into the cheatsheet:
+
+    http://blog.8thlight.com/colin-jones/2010/12/05/clojure-libs-and-namespaces-require-use-import-and-ns.html
 ----------------------------------------------------------------------
 
 
