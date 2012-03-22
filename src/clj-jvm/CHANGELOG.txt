@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------
-<date TBD on release of 1.4> - Clojure 1.3.0, sheet v1.4
+March 22, 2012 - Clojure 1.3.0, sheet v1.4
 
 Added (tutorial) entries in Namespace/Create and Loading/Load Libs
 sections that link to this nice article:
@@ -24,6 +24,13 @@ not the other.
 
 Added to Maps/Create: group-by
 Added to IO/from reader: read
+
+Added Numbers/Literals section with examples of literal syntax for
+BigInt, Ratio, and BigDecimal.
+
+Removed :doc from Metadata/Common section and added :const instead.
+Doc strings are more commonly handled with the normal way to put them
+in def or defn forms.
 
 ----------------------------------------------------------------------
 2012 Feb 23 - Clojure 1.3.0, sheet v1.3

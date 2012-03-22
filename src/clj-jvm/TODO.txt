@@ -1,7 +1,7 @@
-Add syntax of 5M -7N and some brief notes about how different types of
-arithmetic work: bigint contagion, operators that auto-convert to
-bigint if needed, unchecked operators intended only for primitive
-arith types.  How to format/printf bigints and ratios.  What else?
+Add some brief notes about how different types of arithmetic work:
+bigint contagion, operators that auto-convert to bigint if needed,
+unchecked operators intended only for primitive arith types.  How to
+format/printf bigints and ratios.  What else?
 
 
 Find good places to link to for macro things like the special syntax `
@@ -14,6 +14,13 @@ classes, with the link below for details:
     http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html#getName%28%29
 
 Example in abstractions section of extend-protocol
+
+Consider adding (def f ns/g) and (def f #'ns/g) distinction, and what
+it will do differently.  Any good article or docs to link to for that?
+
+Tutorial for zippers somewhere that could be linked to?
+
+Tutorial for parsing/generating XML?
 
 
 ----------------------------------------------------------------------

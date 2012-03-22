@@ -115,7 +115,7 @@
 
 
 (def cheatsheet-structure
-     [:title "Clojure Cheat Sheet (Clojure 1.3, sheet v1.4a1)"
+     [:title "Clojure Cheat Sheet (Clojure 1.3, sheet v1.4)"
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -128,7 +128,21 @@
              [:box "blue"
               :section "Primitives"
               :subsection "Numbers"
-              :table [["Arithmetic" :cmds '[+ - * / quot rem mod inc dec
+              :table [["Literals" :cmds '[{:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/lang/Long.html}{Long}:"
+                                           :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/Long.html\">Long</a>:"}
+                                          "7"
+                                          "BigInt:"
+                                          "7N"
+                                          "Ratio:"
+                                          "-22/7"
+                                          {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/lang/Double.html}{Double}:"
+                                           :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/Double.html\">Double</a>:"}
+                                          "2.78"
+                                          {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/math/BigDecimal.html}{BigDecimal}:"
+                                           :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/math/BigDecimal.html\">BigDecimal</a>:"}
+                                          "4.2M"
+                                          ]]
+                      ["Arithmetic" :cmds '[+ - * / quot rem mod inc dec
                                             max min]]
                       ["Compare" :cmds '[= == not= < > <= >= compare]]
                       ["Bitwise" :cmds '[[:common-prefix bit- and or xor not
@@ -623,14 +637,14 @@
                                                 "\\cmd{\\^{}:dynamic} "
                                                 "\\cmd{\\^{}:private} "
                                                 "\\cmd{\\^{}:static} "
-                                                "\\cmd{\\{:doc \"str\"\\}}"
+                                                "\\cmd{\\^{}:const}"
                                                 )
                                         :html (str
                                                "<code>"
                                                "^:dynamic "
                                                "^:private "
                                                "^:static "
-                                               "{:doc \"str\"}"
+                                               "^:const"
                                                "</code>")}
                                         ]]
                       ["Examples" :cmds '[

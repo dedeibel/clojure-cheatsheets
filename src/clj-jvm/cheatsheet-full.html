@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
-  <title>Clojure Cheat Sheet (Clojure 1.3, sheet v1.4a1)</title>
+  <title>Clojure Cheat Sheet (Clojure 1.3, sheet v1.4)</title>
   <link rel="stylesheet" href="cheatsheet_files/26467729A.css" type="text/css" />
 
   <style type="text/css">
@@ -33,34 +33,38 @@
           <table>
             <tbody>
               <tr class="odd">
+                <td>Literals</td>
+                <td><code><a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Long.html">Long</a>: 7 BigInt: 7N Ratio: -22/7 <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Double.html">Double</a>: 2.78 <a href="http://docs.oracle.com/javase/6/docs/api/java/math/BigDecimal.html">BigDecimal</a>: 4.2M</code></td>
+              </tr>
+              <tr class="even">
                 <td>Arithmetic</td>
                 <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/+">+</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/-">-</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/*">*</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/_">/</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/quot">quot</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/rem">rem</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/mod">mod</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/inc">inc</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/dec">dec</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/max">max</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/min">min</a></code></td>
               </tr>
-              <tr class="even">
+              <tr class="odd">
                 <td>Compare</td>
                 <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/=">=</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/==">==</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/not=">not=</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/<">&lt;</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/>">&gt;</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/<=">&lt;=</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/>=">&gt;=</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/compare">compare</a></code></td>
               </tr>
-              <tr class="odd">
+              <tr class="even">
                 <td>Bitwise</td>
                 <td><code>bit-{<a href="http://clojuredocs.org/clojure_core/clojure.core/bit-and">and</a>, <a href="http://clojuredocs.org/clojure_core/clojure.core/bit-or">or</a>, <a href="http://clojuredocs.org/clojure_core/clojure.core/bit-xor">xor</a>, <a href="http://clojuredocs.org/clojure_core/clojure.core/bit-not">not</a>, <a href="http://clojuredocs.org/clojure_core/clojure.core/bit-flip">flip</a>, <a href="http://clojuredocs.org/clojure_core/clojure.core/bit-set">set</a>, <a href="http://clojuredocs.org/clojure_core/clojure.core/bit-shift-right">shift-right</a>, <a href="http://clojuredocs.org/clojure_core/clojure.core/bit-shift-left">shift-left</a>, <a href="http://clojuredocs.org/clojure_core/clojure.core/bit-and-not">and-not</a>, <a href="http://clojuredocs.org/clojure_core/clojure.core/bit-clear">clear</a>, <a href="http://clojuredocs.org/clojure_core/clojure.core/bit-test">test</a>}</code></td>
               </tr>
-              <tr class="even">
+              <tr class="odd">
                 <td>Cast</td>
                 <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/byte">byte</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/short">short</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/int">int</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/long">long</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/float">float</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/double">double</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/bigdec">bigdec</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/bigint">bigint</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/num">num</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/rationalize">rationalize</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/biginteger">biginteger</a></code></td>
               </tr>
-              <tr class="odd">
+              <tr class="even">
                 <td>Test</td>
                 <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/nil_q">nil?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/identical_q">identical?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/zero_q">zero?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/pos_q">pos?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/neg_q">neg?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/even_q">even?</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/odd_q">odd?</a></code></td>
               </tr>
-              <tr class="even">
+              <tr class="odd">
                 <td>Random</td>
                 <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/rand">rand</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/rand-int">rand-int</a></code></td>
               </tr>
-              <tr class="odd">
+              <tr class="even">
                 <td>BigInt</td>
                 <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/with-precision">with-precision</a></code></td>
               </tr>
-              <tr class="even">
+              <tr class="odd">
                 <td>Unchecked</td>
                 <td><code>unchecked-{<a href="http://clojuredocs.org/clojure_core/clojure.core/unchecked-add-int">add</a>, <a href="http://clojuredocs.org/clojure_core/clojure.core/unchecked-dec-int">dec</a>, <a href="http://clojuredocs.org/clojure_core/clojure.core/unchecked-divide-int">divide</a>, <a href="http://clojuredocs.org/clojure_core/clojure.core/unchecked-inc-int">inc</a>, <a href="http://clojuredocs.org/clojure_core/clojure.core/unchecked-multiply-int">multiply</a>, <a href="http://clojuredocs.org/clojure_core/clojure.core/unchecked-negate-int">negate</a>, <a href="http://clojuredocs.org/clojure_core/clojure.core/unchecked-remainder-int">remainder</a>, <a href="http://clojuredocs.org/clojure_core/clojure.core/unchecked-subtract-int">subtract</a>}-int</code></td>
               </tr>
@@ -642,7 +646,7 @@
               </tr>
               <tr class="odd">
                 <td>Common</td>
-                <td><code><code>^:dynamic ^:private ^:static {:doc "str"}</code></code></td>
+                <td><code><code>^:dynamic ^:private ^:static ^:const</code></code></td>
               </tr>
               <tr class="even">
                 <td>Examples</td>
