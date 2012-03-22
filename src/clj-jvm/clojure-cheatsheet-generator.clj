@@ -380,7 +380,7 @@
                       ["to string" :cmds '[format with-out-str pr-str
                                            prn-str print-str println-str]]
                       ["from *in*" :cmds '[read-line read]]
-                      ["from reader" :cmds '[line-seq
+                      ["from reader" :cmds '[line-seq read
                                              {:latex "\\textmd{\\textsf{also:}}",
                                               :html "also:"}
                                              "(binding [*in* reader] ...)"
