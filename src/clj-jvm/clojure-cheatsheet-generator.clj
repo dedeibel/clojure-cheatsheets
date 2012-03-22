@@ -266,7 +266,7 @@
               :table [["Create" :cmds '[{:latex "\\{\\}", :html "{}"}
                                         hash-map array-map zipmap
                                         sorted-map sorted-map-by bean
-                                        frequencies]]
+                                        frequencies group-by]]
                       ["Examine" :cmds '[
                                          {:latex "\\cmd{(:key my-map)} $\\to$ \\cmd{(}",
                                           :html "<code>(:key my-map)</code> &rarr; <code>("}

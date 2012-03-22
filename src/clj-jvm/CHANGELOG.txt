@@ -22,6 +22,8 @@ Changed heading Destructuring in Special Forms section to "Binding
 Forms / Destructuring", for people who might know it by one name but
 not the other.
 
+Added to Maps/Create: group-by.
+
 ----------------------------------------------------------------------
 2012 Feb 23 - Clojure 1.3.0, sheet v1.3
 
