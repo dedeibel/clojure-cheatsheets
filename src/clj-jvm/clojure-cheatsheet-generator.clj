@@ -2,7 +2,7 @@
   (:require [clojure.string :as str])
   (:require [clojure.set :as set])
   (:require [clojure.java.javadoc])
-  (:require [clojure.java.io])
+  (:require [clojure.java.io :as io])
   (:require [clojure data pprint repl set string xml zip]))
 
 ;; Andy Fingerhut
@@ -837,6 +837,27 @@
       ])
 
 
+
+(def ^:dynamic *auto-flush* true)
+
+
+(defn printf-to-writer [w fmt-str & args]
+  (binding [*out* w]
+    (apply clojure.core/printf fmt-str args)
+    (when *auto-flush* (flush))))
+
+
+(defn iprintf [fmt-str-or-writer & args]
+  (if (instance? CharSequence fmt-str-or-writer)
+    (apply printf-to-writer *out* fmt-str-or-writer args)
+    (apply printf-to-writer fmt-str-or-writer args)))
+
+
+(defn die [fmt-str & args]
+  (apply iprintf *err* fmt-str args)
+  (System/exit 1))
+
+
 (defn clojuredocs-url-fixup [s]
   (let [s (str/replace s "?" "_q")
         s (str/replace s "/" "_")
@@ -1108,15 +1129,15 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
 
 (defmacro verify [cond]
   `(when (not ~cond)
-     (println "verify of this condition failed: " '~cond)
+     (iprintf "%s\n" (str "verify of this condition failed: " '~cond))
      (throw (Exception.))))
 
 
 (defn output-title [fmt t]
-  (print (case (:fmt fmt)
-               :latex (format "{\\Large{\\textbf{%s}}}\n\n" t)
-               :html (format "  <title>%s</title>\n" t)
-               :verify-only "")))
+  (iprintf "%s" (case (:fmt fmt)
+                  :latex (format "{\\Large{\\textbf{%s}}}\n\n" t)
+                  :html (format "  <title>%s</title>\n" t)
+                  :verify-only "")))
 
 
 (defn htmlize-str [str]
@@ -1137,7 +1158,7 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
                       (verify (contains? cstr (:fmt fmt)))
                       (cstr (:fmt fmt)))
         :else (do
-                (println "cond-str: cstr=" cstr " is not a string, symbol, or map")
+                (iprintf "%s\n" (str "cond-str: cstr=" cstr " is not a string, symbol, or map"))
                 (verify (or (string? cstr) (symbol? cstr) (map? cstr))))))
 
 
@@ -1155,8 +1176,7 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
     url-str
     (do
       (when *warn-about-unknown-symbols*
-        (.println *err* (format "No URL known for symbol with name: '%s'"
-                                cmd-str)))
+        (iprintf *err* "No URL known for symbol with name: '%s'\n" cmd-str))
       nil)))
 
 
@@ -1253,74 +1273,74 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
 
 (defn output-table-cmd-list [fmt k cmds]
   (if (= k :str)
-    (print (cond-str fmt cmds))
+    (iprintf "%s" (cond-str fmt cmds))
     (do
-      (print (case (:fmt fmt)
-                   :latex
-                   (case k
-                         :cmds "\\cmd{"
-                         :cmds-with-frenchspacing "\\cmd{\\frenchspacing "
-                         :cmds-one-line "\\cmdline{")
-                   :html "<code>"
-                   :verify-only ""))
-      (print (str/join " " (map #(table-cmds-to-str fmt %) cmds)))
-      (print (case (:fmt fmt)
-                   :latex "}"
-                   :html "</code>"
-                   :verify-only "")))))
+      (iprintf "%s" (case (:fmt fmt)
+                      :latex
+                      (case k
+                        :cmds "\\cmd{"
+                        :cmds-with-frenchspacing "\\cmd{\\frenchspacing "
+                        :cmds-one-line "\\cmdline{")
+                      :html "<code>"
+                      :verify-only ""))
+      (iprintf "%s" (str/join " " (map #(table-cmds-to-str fmt %) cmds)))
+      (iprintf "%s" (case (:fmt fmt)
+                      :latex "}"
+                      :html "</code>"
+                      :verify-only "")))))
 
 
 (defn output-table-row [fmt row row-num nrows]
   (verify (not= nil (#{:cmds :cmds-with-frenchspacing :str} (second row))))
 
   (let [[row-title k cmd-desc] row]
-    (print (case (:fmt fmt)
-                 :latex (str (cond-str fmt row-title fmt) " & ")
-                 :html (format "              <tr class=\"%s\">
+    (iprintf "%s" (case (:fmt fmt)
+                    :latex (str (cond-str fmt row-title fmt) " & ")
+                    :html (format "              <tr class=\"%s\">
                 <td>%s</td>
                 <td>"
-                               (if (even? row-num) "even" "odd")
-                               (cond-str fmt row-title fmt))
-                 :verify-only ""))
+                                  (if (even? row-num) "even" "odd")
+                                  (cond-str fmt row-title fmt))
+                    :verify-only ""))
     (output-table-cmd-list fmt k cmd-desc)
-    (print (case (:fmt fmt)
-                 :latex (if (= row-num nrows) "\n" " \\\\\n")
-                 :html "</td>
+    (iprintf "%s" (case (:fmt fmt)
+                    :latex (if (= row-num nrows) "\n" " \\\\\n")
+                    :html "</td>
               </tr>\n"
-                 :verify-only ""))))
+                    :verify-only ""))))
 
 
 (defn output-table [fmt tbl]
-  (print (case (:fmt fmt)
-               :latex "\\begin{tabularx}{\\hsize}{lX}\n"
-               :html "          <table>
+  (iprintf "%s" (case (:fmt fmt)
+                  :latex "\\begin{tabularx}{\\hsize}{lX}\n"
+                  :html "          <table>
             <tbody>
 "
-               :verify-only ""))
+                  :verify-only ""))
   (let [nrows (count tbl)]
     (doseq [[row row-num] (map (fn [& args] (vec args))
                                tbl (iterate inc 1))]
       (output-table-row fmt row row-num nrows)))
-  (print (case (:fmt fmt)
-               :latex "\\end{tabularx}\n"
-               :html "            </tbody>
+  (iprintf "%s" (case (:fmt fmt)
+                  :latex "\\end{tabularx}\n"
+                  :html "            </tbody>
           </table>
 "
-               :verify-only "")))
+                  :verify-only "")))
 
 
 (defn output-cmds-one-line [fmt tbl]
-  (print (case (:fmt fmt)
-               :latex ""
-               :html "          <div class=\"single_row\">
+  (iprintf "%s" (case (:fmt fmt)
+                  :latex ""
+                  :html "          <div class=\"single_row\">
             "
-               :verify-only ""))
+                  :verify-only ""))
   (output-table-cmd-list fmt :cmds-one-line tbl)
-  (print (case (:fmt fmt)
-               :latex "\n"
-               :html "
+  (iprintf "%s" (case (:fmt fmt)
+                  :latex "\n"
+                  :html "
           </div>\n"
-               :verify-only "")))
+                  :verify-only "")))
 
 
 (defn output-box [fmt box]
@@ -1333,71 +1353,71 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
                           :bw "white")
                     nil)
         key-val-pairs (partition 2 (nnext box))]
-    (print (case (:fmt fmt)
-                 :latex (format "\\colouredbox{%s}{\n" box-color)
-                 :html "        <div class=\"section\">\n"
-                 :verify-only ""))
+    (iprintf "%s" (case (:fmt fmt)
+                    :latex (format "\\colouredbox{%s}{\n" box-color)
+                    :html "        <div class=\"section\">\n"
+                    :verify-only ""))
     (doseq [[k v] key-val-pairs]
       (case k
             :section
             (case (:fmt fmt)
-                  :latex (printf "\\section{%s}\n" (cond-str fmt v))
-                  :html (printf "          <h2>%s</h2>\n" (cond-str fmt v)))
+                  :latex (iprintf "\\section{%s}\n" (cond-str fmt v))
+                  :html (iprintf "          <h2>%s</h2>\n" (cond-str fmt v)))
             :subsection
             (case (:fmt fmt)
-                  :latex (printf "\\subsection{%s}\n" (cond-str fmt v))
-                  :html (printf "          <h3>%s</h3>\n" (cond-str fmt v)))
+                  :latex (iprintf "\\subsection{%s}\n" (cond-str fmt v))
+                  :html (iprintf "          <h3>%s</h3>\n" (cond-str fmt v)))
             :table
             (output-table fmt v)
             :cmds-one-line
             (output-cmds-one-line fmt v)))
-    (print (case (:fmt fmt)
-                 :latex "}\n\n"
-                 :html "        </div><!-- /section -->\n"
-                 :verify-only ""))))
+    (iprintf "%s" (case (:fmt fmt)
+                    :latex "}\n\n"
+                    :html "        </div><!-- /section -->\n"
+                    :verify-only ""))))
 
 
 (defn output-col [fmt col]
-  (print (case (:fmt fmt)
-               :latex ""
-               :html "      <div class=\"column\">\n"
-               :verify-only ""))
+  (iprintf "%s" (case (:fmt fmt)
+                  :latex ""
+                  :html "      <div class=\"column\">\n"
+                  :verify-only ""))
   (doseq [box col]
     (output-box fmt box))
-  (print (case (:fmt fmt)
-               ;;:latex "\\columnbreak\n\n"
-               :latex "\n\n"
-               :html "      </div><!-- /column -->\n"
-               :verify-only "")))
+  (iprintf "%s" (case (:fmt fmt)
+                  ;;:latex "\\columnbreak\n\n"
+                  :latex "\n\n"
+                  :html "      </div><!-- /column -->\n"
+                  :verify-only "")))
 
 
 (defn output-page [fmt pg]
   (verify (= (first pg) :column))
   (verify (== 2 (count (filter #(= % :column) pg))))
-  (print (case (:fmt fmt)
-               :latex ""
-               :html "    <div class=\"page\">\n"
-               :verify-only ""))
+  (iprintf "%s" (case (:fmt fmt)
+                  :latex ""
+                  :html "    <div class=\"page\">\n"
+                  :verify-only ""))
   (let [tmp (rest pg)
         [col1 col2] (split-with #(not= % :column) tmp)
         col2 (rest col2)]
     (output-col fmt col1)
     (output-col fmt col2))
-  (print (case (:fmt fmt)
-               :latex ""
-               :html "    </div><!-- /page -->\n"
-               :verify-only "")))
+  (iprintf "%s" (case (:fmt fmt)
+                  :latex ""
+                  :html "    </div><!-- /page -->\n"
+                  :verify-only "")))
 
 
 (defn output-cheatsheet [fmt cs]
   (verify (even? (count cs)))
-  (print (case (:fmt fmt)
-               :latex (case (:paper fmt)
-                            :a4 latex-a4-header-before-title
-                            :usletter latex-usletter-header-before-title)
-               :html html-header-before-title
-               :embeddable-html embeddable-html-fragment-header-before-title
-               :verify-only ""))
+  (iprintf "%s" (case (:fmt fmt)
+                  :latex (case (:paper fmt)
+                           :a4 latex-a4-header-before-title
+                           :usletter latex-usletter-header-before-title)
+                  :html html-header-before-title
+                  :embeddable-html embeddable-html-fragment-header-before-title
+                  :verify-only ""))
   (let [[k title & pages] cs]
     (verify (= k :title))
     (let [[show-title fmt-passed-down]
@@ -1406,19 +1426,19 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
             [true fmt])]
       (when show-title
         (output-title fmt-passed-down title))
-      (print (case (:fmt fmt)
-                   :latex latex-header-after-title
-                   :html html-header-after-title
-                   :embeddable-html embeddable-html-fragment-header-after-title
-                   :verify-only ""))
+      (iprintf "%s" (case (:fmt fmt)
+                      :latex latex-header-after-title
+                      :html html-header-after-title
+                      :embeddable-html embeddable-html-fragment-header-after-title
+                      :verify-only ""))
       (doseq [[k pg] (partition 2 pages)]
         (verify (= k :page))
         (output-page fmt-passed-down pg))))
-  (print (case (:fmt fmt)
-               :latex latex-footer
-               :html html-footer
-               :embeddable-html embeddable-html-fragment-footer
-               :verify-only "")))
+  (iprintf "%s" (case (:fmt fmt)
+                  :latex latex-footer
+                  :html html-footer
+                  :embeddable-html embeddable-html-fragment-footer
+                  :verify-only "")))
 
 
 (defn hash-from-pairs [pairs]
@@ -1439,26 +1459,19 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
 ;; from text with no links, there should be no difference in the
 ;; appearance of the output files compared to the choices above.
 
-(let [supported-args #{"nolinks" "links-to-clojure" "links-to-clojuredocs"}
+(let [supported-link-targets #{"nolinks" "links-to-clojure" "links-to-clojuredocs"}
       link-target-site (if (< (count *command-line-args*) 1)
                          :links-to-clojure
-                         (let [arg (first *command-line-args*)]
-                           (if (supported-args arg)
-                             (keyword (first *command-line-args*))
-                             (do
-                               (.println *err*
-                                (format "Unrecognized argument: %s\nSupported args are: %s\n"
-                                        arg
-                                        (str/join " " (seq supported-args))))
-                               (. System (exit 1))))))
+                         (let [arg (nth *command-line-args* 0)]
+                           (if (supported-link-targets arg)
+                             (keyword arg)
+                             (die "Unrecognized argument: %s\nSupported args are: %s\n"
+                                  arg
+                                  (str/join " " (seq supported-link-targets))))))
       symbol-name-to-url (hash-from-pairs (symbol-url-pairs link-target-site))]
   (binding [*symbol-name-to-url* symbol-name-to-url]
-    (binding [*out* (java.io.OutputStreamWriter.
-                     (java.io.BufferedOutputStream.
-                      (java.io.FileOutputStream. "cheatsheet-full.html")))
-              *err* (java.io.PrintWriter.
-                     (java.io.BufferedOutputStream.
-                      (java.io.FileOutputStream. "warnings.log")))
+    (binding [*out* (io/writer "cheatsheet-full.html")
+              *err* (io/writer "warnings.log")
               *warn-about-unknown-symbols* true]
       (output-cheatsheet {:fmt :html} cheatsheet-structure)
       ;; Print out a list of all symbols in our symbol-name-to-url
@@ -1466,14 +1479,14 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
       (let [never-used (set/difference
                         (set (keys symbol-name-to-url))
                         @symbols-looked-up)]
-        (.println *err* (format "\n\nSorted list of %d symbols in lookup table that were never used:\n"
-                                (count never-used)))
-        (.println *err* (str/join "\n" (sort (seq never-used))))
-        (.println *err* "\n\nSorted list of links to documentation for symbols that were never used:\n\n")
-        (.println *err* (str/join "<br>"
-                                  (map #(format "<a href=\"%s\">%s</a>\n"
-                                                (symbol-name-to-url %) %)
-                                       (sort (seq never-used))))))
+        (iprintf *err* "\n\nSorted list of %d symbols in lookup table that were never used:\n\n"
+                 (count never-used))
+        (iprintf *err* "%s\n" (str/join "\n" (sort (seq never-used))))
+        (iprintf *err* "\n\nSorted list of links to documentation for symbols that were never used:\n\n\n")
+        (iprintf *err* "%s\n" (str/join "<br>"
+                                        (map #(format "<a href=\"%s\">%s</a>\n"
+                                                      (symbol-name-to-url %) %)
+                                             (sort (seq never-used))))))
       (.close *out*)
       (.close *err*))
     (doseq [x [ {:filename "cheatsheet-embeddable.html",
@@ -1491,8 +1504,6 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
                 {:filename "cheatsheet-usletter-bw.tex",
                  :format {:fmt :latex, :paper :usletter, :colors :bw}}
                 ]]
-      (binding [*out* (java.io.OutputStreamWriter.
-                       (java.io.BufferedOutputStream.
-                        (java.io.FileOutputStream. (:filename x))))]
+      (binding [*out* (io/writer (:filename x))]
         (output-cheatsheet (:format x) cheatsheet-structure)
         (.close *out*)))))
