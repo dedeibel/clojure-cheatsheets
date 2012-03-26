@@ -10,13 +10,17 @@ CLASSPATH="${JAR_DIR}/clojure-1.3.0.jar"
 #LINK_TARGET=links-to-clojure
 LINK_TARGET=links-to-clojuredocs
 
+#TOOLTIPS=no-tooltips
+#TOOLTIPS=use-title-attribute
+TOOLTIPS=tiptip
+
 # Optionally produce PDF files by running LaTeX.  See README.markdown
 # for notes on what parts of LaTeX are enough for this to work.
 
 #PRODUCE_PDF="no"
 PRODUCE_PDF="yes"
 
-java -cp ${CLASSPATH} clojure.main clojure-cheatsheet-generator.clj ${LINK_TARGET}
+java -cp ${CLASSPATH} clojure.main clojure-cheatsheet-generator.clj ${LINK_TARGET} ${TOOLTIPS}
 EXIT_STATUS=$?
 
 if [ ${EXIT_STATUS} != 0 ]

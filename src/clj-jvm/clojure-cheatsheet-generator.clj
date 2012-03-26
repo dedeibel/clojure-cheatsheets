@@ -1104,6 +1104,14 @@
   <style type=\"text/css\">
   @media screen {      .page {        width: 600px; display: inline;      }  .gap {clear: both;}    }    code {      font-family: monospace;    }    .page {      clear: both;      page-break-after: always;      page-break-inside: avoid;    }    .column {      float: left;      width: 50%;    }    .header {      text-align: center;    }    .header h2 {      font-style: italic;    }    h1 {      font-size: 1.8em;    }    h2 {      font-size: 1.4em;    }    h3 {      font-size: 1.2em;    }    .section {      margin: 0.5em;      padding: 0.5em;      padding-top: 0;      background-color: #ebebeb;    }    table {      width: 100%;      }    td, .single_row {      padding: 0 0.5em;      vertical-align: top;    }    tr.odd, .single_row {      background-color: #f5f5f5;    }    tr.even {      background-color: #fafafa;    }    .footer {      float: right;      text-align: right;      border-top: 1px solid gray;    } #foot {clear: both;}  
   </style>
+  <link href=\"cheatsheet_files/tipTip.css\" rel=\"stylesheet\">
+  <script src=\"cheatsheet_files/jquery.js\"></script>
+  <script src=\"cheatsheet_files/jquery.tipTip.js\"></script>
+  <script>
+  $(function(){
+      $(\".tooltip\").tipTip();
+  });
+  </script>
 </head>
 
 <body id=\"cheatsheet\">
@@ -1163,6 +1171,7 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
 
 
 (def ^:dynamic *symbol-name-to-url*)
+(def ^:dynamic *tooltips*)
 (def ^:dynamic *warn-about-unknown-symbols* false)
 
 (def symbols-looked-up (ref #{}))
@@ -1217,19 +1226,66 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
         :else s))
 
 
+(defn cleanup-doc-str-tooltip
+  "Get rid of the first line of the doc string, which is always a line
+of dashes, and keep at most the first 15 lines of the doc string, to
+keep the tooltip from being too large.  Also replace double quote
+characters (\") with &quot;"
+  [s]
+  (let [lines (-> s (str/escape {\" "&quot;"}) (str/split-lines) (rest))
+        max-to-keep 15]
+    (if (> (count lines) max-to-keep)
+      (str (str/join "\n" (take max-to-keep lines))
+           "\n[ documentation truncated.  Click link for the rest. ]")
+      (str/join "\n" lines))))
+
+
+(defn doc-for-symbol-str [s]
+  (let [sym (symbol s)]
+    (if-let [special-sym ('{& fn catch try finally try} sym)]
+      (with-out-str
+        (#'clojure.repl/print-doc (#'clojure.repl/special-doc special-sym)))
+      (if (#'clojure.repl/special-doc-map sym)
+        (with-out-str
+          (#'clojure.repl/print-doc (#'clojure.repl/special-doc sym)))
+        (if-let [v (try
+                     (resolve sym)
+                     (catch Exception e nil))]
+          (with-out-str (#'clojure.repl/print-doc (meta v))))))))
+
+
 (defn table-one-cmd-to-str [fmt cmd prefix suffix]
   (let [cmd-str (cond-str fmt cmd)
         whole-cmd (str prefix cmd-str suffix)
         url-str (url-for-cmd-doc whole-cmd)
         ;; cmd-str-to-show has < converted to HTML &lt; among other
         ;; things, if (:fmt fmt) is :html
-        cmd-str-to-show (remove-common-ns-prefix (cond-str fmt cmd fmt))]
+        cmd-str-to-show (remove-common-ns-prefix (cond-str fmt cmd fmt))
+;;        _ (iprintf *err* "andy-debug: cmd='%s' prefix='%s' suffix='%s' (class whole-cmd)='%s' whole-cmd='%s'\n"
+;;                   cmd prefix suffix (class whole-cmd) whole-cmd)
+        orig-doc-str (doc-for-symbol-str whole-cmd)
+        cleaned-doc-str (if orig-doc-str
+                          (cleanup-doc-str-tooltip orig-doc-str))]
     (if url-str
       (case (:fmt fmt)
-            :latex (str "\\href{" (escape-latex-hyperref-url url-str)
-                        "}{" (escape-latex-hyperref-target cmd-str-to-show) "}")
-            :html (str "<a href=\"" url-str "\">" cmd-str-to-show "</a>")
-            :verify-only "")
+        :latex (str "\\href{" (escape-latex-hyperref-url url-str)
+                    "}{" (escape-latex-hyperref-target cmd-str-to-show) "}")
+        :html (str "<a href=\"" url-str "\""
+                   (case *tooltips*
+                     :no-tooltips ""
+
+                     :tiptip
+                     (if cleaned-doc-str
+                       (str " class=\"tooltip\" title=\"<pre>"
+                            cleaned-doc-str "</pre>\"")
+                       "")
+
+                     :use-title-attribute
+                     (if cleaned-doc-str
+                       (str " title=\"" cleaned-doc-str "\"")
+                       ""))
+                   ">" cmd-str-to-show "</a>")
+        :verify-only "")
       cmd-str-to-show)))
 
 
@@ -1460,6 +1516,7 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
 ;; appearance of the output files compared to the choices above.
 
 (let [supported-link-targets #{"nolinks" "links-to-clojure" "links-to-clojuredocs"}
+      supported-tooltips #{"no-tooltips" "use-title-attribute" "tiptip"}
       link-target-site (if (< (count *command-line-args*) 1)
                          :links-to-clojure
                          (let [arg (nth *command-line-args* 0)]
@@ -1468,8 +1525,17 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
                              (die "Unrecognized argument: %s\nSupported args are: %s\n"
                                   arg
                                   (str/join " " (seq supported-link-targets))))))
+      tooltips (if (< (count *command-line-args*) 2)
+                 :no-tooltips
+                 (let [arg (nth *command-line-args* 1)]
+                   (if (supported-tooltips arg)
+                     (keyword arg)
+                     (die "Unrecognized argument: %s\nSupported args are: %s\n"
+                          arg
+                          (str/join " " (seq supported-tooltips))))))
       symbol-name-to-url (hash-from-pairs (symbol-url-pairs link-target-site))]
-  (binding [*symbol-name-to-url* symbol-name-to-url]
+  (binding [*symbol-name-to-url* symbol-name-to-url
+            *tooltips* tooltips]
     (binding [*out* (io/writer "cheatsheet-full.html")
               *err* (io/writer "warnings.log")
               *warn-about-unknown-symbols* true]
@@ -1479,6 +1545,8 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
       (let [never-used (set/difference
                         (set (keys symbol-name-to-url))
                         @symbols-looked-up)]
+        (iprintf *err* "\n\n%d symbols successfully looked up.\n\n"
+                 (count @symbols-looked-up))
         (iprintf *err* "\n\nSorted list of %d symbols in lookup table that were never used:\n\n"
                  (count never-used))
         (iprintf *err* "%s\n" (str/join "\n" (sort (seq never-used))))
