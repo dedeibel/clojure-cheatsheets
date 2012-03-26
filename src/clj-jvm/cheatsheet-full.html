@@ -49,7 +49,8 @@ Macro
 
   Example: (source filter)</pre>">source</a> <a href="http://clojuredocs.org/clojure_core/clojure.repl/pst" class="tooltip" title="<pre>clojure.repl/pst
 ([] [e-or-depth] [e depth])
-  Prints a stack trace of the exception, to the depth requested. If none supplied, uses the root cause of the
+  Prints a stack trace of the exception, to the depth requested. If none
+supplied, uses the root cause of the
   most recent repl exception (*e), and a depth of 12.</pre>">pst</a> <a href="http://clojuredocs.org/clojure_core/clojure.java.javadoc/javadoc" class="tooltip" title="<pre>clojure.java.javadoc/javadoc
 ([class-or-object])
   Opens a browser window displaying the javadoc for the argument.
@@ -106,7 +107,8 @@ Macro
 ([x] [x y] [x y & more])
   Equality. Returns true if x equals y, false if not. Same as
   Java x.equals(y) except it also works for nil, and compares
-  numbers and collections in a type-independent manner.  Clojure's immutable data
+  numbers and collections in a type-independent manner.  Clojure's immutable
+data
   structures define equals() (and thus =) as a value, not an identity,
   comparison.</pre>">=</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/==" class="tooltip" title="<pre>clojure.core/==
 ([x] [x y] [x y & more])
@@ -266,7 +268,8 @@ Macro
   x.toString().  (str nil) returns the empty string. With more than
   one arg, returns the concatenation of the str values of the args.</pre>">str</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/format" class="tooltip" title="<pre>clojure.core/format
 ([fmt & args])
-  Formats a string using java.lang.String.format, see java.util.Formatter for format
+  Formats a string using java.lang.String.format, see java.util.Formatter for
+format
   string syntax</pre>">format</a> See also IO/to string</code></td>
               </tr>
               <tr class="even">
@@ -292,7 +295,7 @@ Macro
 ([s cmap])
   Return a new string, using cmap to escape each character ch
    from s as follows:
-   
+
    If (cmap ch) is nil, append ch to the new string.
    If (cmap ch) is non-nil, append (str (cmap ch)) instead.</pre>">escape</a> <a href="http://clojuredocs.org/clojure_core/clojure.string/split" class="tooltip" title="<pre>clojure.string/split
 ([s re] [s re limit])
@@ -704,7 +707,8 @@ Macro
 ([map kmap])
   Returns the map with the keys in kmap renamed to the vals in kmap</pre>">rename-keys</a> <a href="http://clojuredocs.org/clojure_core/clojure.set/rename" class="tooltip" title="<pre>clojure.set/rename
 ([xrel kmap])
-  Returns a rel of the maps in xrel with the keys in kmap renamed to the vals in kmap</pre>">rename</a> <a href="http://clojuredocs.org/clojure_core/clojure.set/map-invert" class="tooltip" title="<pre>clojure.set/map-invert
+  Returns a rel of the maps in xrel with the keys in kmap renamed to the vals in
+kmap</pre>">rename</a> <a href="http://clojuredocs.org/clojure_core/clojure.set/map-invert" class="tooltip" title="<pre>clojure.set/map-invert
 ([m])
   Returns the map with the vals mapped to the keys.</pre>">map-invert</a></code></td>
               </tr>
@@ -736,7 +740,8 @@ Macro
   Returns a new sorted map with supplied mappings.</pre>">sorted-map</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/sorted-map-by" class="tooltip" title="<pre>clojure.core/sorted-map-by
 ([comparator & keyvals])
   keyval => key val
-  Returns a new sorted map with supplied mappings, using the supplied comparator.</pre>">sorted-map-by</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/bean" class="tooltip" title="<pre>clojure.core/bean
+  Returns a new sorted map with supplied mappings, using the supplied
+comparator.</pre>">sorted-map-by</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/bean" class="tooltip" title="<pre>clojure.core/bean
 ([x])
   Takes a Java object and returns a read-only implementation of the
   map abstraction based upon its JavaBean properties.</pre>">bean</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/frequencies" class="tooltip" title="<pre>clojure.core/frequencies
@@ -882,7 +887,8 @@ Macro
 ([x] [x y] [x y & more])
   Equality. Returns true if x equals y, false if not. Same as
   Java x.equals(y) except it also works for nil, and compares
-  numbers and collections in a type-independent manner.  Clojure's immutable data
+  numbers and collections in a type-independent manner.  Clojure's immutable
+data
   structures define equals() (and thus =) as a value, not an identity,
   comparison.</pre>">=</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/==" class="tooltip" title="<pre>clojure.core/==
 ([x] [x y] [x y & more])
@@ -972,7 +978,8 @@ Macro
   returns an infinite (or length n if supplied) lazy sequence of calls
   to it</pre>">repeatedly</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/iterate" class="tooltip" title="<pre>clojure.core/iterate
 ([f x])
-  Returns a lazy sequence of x, (f x), (f (f x)) etc. f must be free of side-effects</pre>">iterate</a></code></td>
+  Returns a lazy sequence of x, (f x), (f (f x)) etc. f must be free of
+side-effects</pre>">iterate</a></code></td>
               </tr>
               <tr class="odd">
                 <td>From constant</td>
@@ -1065,12 +1072,13 @@ Macro
     'added'. (conj nil item) returns (item).  The 'addition' may
     happen at different 'places' depending on the concrete type.</pre>">conj</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/concat" class="tooltip" title="<pre>clojure.core/concat
 ([] [x] [x y] [x y & zs])
-  Returns a lazy seq representing the concatenation of the elements in the supplied colls.</pre>">concat</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/lazy-cat" class="tooltip" title="<pre>clojure.core/lazy-cat
+  Returns a lazy seq representing the concatenation of the elements in the
+supplied colls.</pre>">concat</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/lazy-cat" class="tooltip" title="<pre>clojure.core/lazy-cat
 ([& colls])
 Macro
   Expands to code which yields a lazy sequence of the concatenation
   of the supplied colls.  Each coll expr is not evaluated until it is
-  needed. 
+  needed.
 
   (lazy-cat xs ys zs) === (concat (lazy-seq xs) (lazy-seq ys) (lazy-seq zs))</pre>">lazy-cat</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/mapcat" class="tooltip" title="<pre>clojure.core/mapcat
 ([f & colls])
@@ -1150,7 +1158,8 @@ Macro
     'added'. (conj nil item) returns (item).  The 'addition' may
     happen at different 'places' depending on the concrete type.</pre>">conj</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/concat" class="tooltip" title="<pre>clojure.core/concat
 ([] [x] [x y] [x y & zs])
-  Returns a lazy seq representing the concatenation of the elements in the supplied colls.</pre>">concat</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/distinct" class="tooltip" title="<pre>clojure.core/distinct
+  Returns a lazy seq representing the concatenation of the elements in the
+supplied colls.</pre>">concat</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/distinct" class="tooltip" title="<pre>clojure.core/distinct
 ([coll])
   Returns a lazy sequence of the elements of coll with duplicates removed</pre>">distinct</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/flatten" class="tooltip" title="<pre>clojure.core/flatten
 ([x])
@@ -1347,7 +1356,8 @@ Macro
                 <td>Pass to fn</td>
                 <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/apply" class="tooltip" title="<pre>clojure.core/apply
 ([f args] [f x args] [f x y args] [f x y z args] [f a b c d & args])
-  Applies fn f to the argument list formed by prepending intervening arguments to args.</pre>">apply</a></code></td>
+  Applies fn f to the argument list formed by prepending intervening arguments
+to args.</pre>">apply</a></code></td>
               </tr>
               <tr class="even">
                 <td>Search</td>
@@ -1387,7 +1397,8 @@ Macro
                 <td>Check for forced</td>
                 <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/realized_q" class="tooltip" title="<pre>clojure.core/realized?
 ([x])
-  Returns true if a value has been produced for a promise, delay, future or lazy sequence.</pre>">realized?</a></code></td>
+  Returns true if a value has been produced for a promise, delay, future or lazy
+sequence.</pre>">realized?</a></code></td>
               </tr>
             </tbody>
           </table>
@@ -1400,7 +1411,7 @@ Macro
                 <td>Create</td>
                 <td><code><a href="http://clojuredocs.org/clojure_core/clojure.zip/zipper" class="tooltip" title="<pre>clojure.zip/zipper
 ([branch? children make-node root])
-  Creates a new zipper structure. 
+  Creates a new zipper structure.
 
   branch? is a fn that, given a node, returns true if can have
   children, even if it currently doesn't.
@@ -1545,29 +1556,31 @@ Macro
                 <td>to writer</td>
                 <td><code>(clojure.pprint/) <a href="http://clojuredocs.org/clojure_core/clojure.pprint/pprint" class="tooltip" title="<pre>clojure.pprint/pprint
 ([object] [object writer])
-  Pretty print object to the optional output writer. If the writer is not provided, 
+  Pretty print object to the optional output writer. If the writer is not
+provided,
 print the object to the currently bound value of *out*.</pre>">pprint</a> <a href="http://clojuredocs.org/clojure_core/clojure.pprint/cl-format" class="tooltip" title="<pre>clojure.pprint/cl-format
 ([writer format-in & args])
-  An implementation of a Common Lisp compatible format function. cl-format formats its
-arguments to an output stream or string based on the format control string given. It 
+  An implementation of a Common Lisp compatible format function. cl-format
+formats its
+arguments to an output stream or string based on the format control string
+given. It
 supports sophisticated formatting of structured data.
 
-Writer is an instance of java.io.Writer, true to output to *out* or nil to output 
-to a string, format-in is the format control string and the remaining arguments 
+Writer is an instance of java.io.Writer, true to output to *out* or nil to
+output
+to a string, format-in is the format control string and the remaining arguments
 are the data to be formatted.
 
-The format control string is a string to be output with embedded 'format directives' 
-describing how to format the various arguments passed in.
-
-If writer is nil, cl-format returns the formatted result string. Otherwise, cl-format 
-returns nil.
+The format control string is a string to be output with embedded 'format
+directives'
 [ documentation truncated.  Click link for the rest. ]</pre>">cl-format</a> also: (binding [*out* writer] ...)</code></td>
               </tr>
               <tr class="even">
                 <td>to string</td>
                 <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/format" class="tooltip" title="<pre>clojure.core/format
 ([fmt & args])
-  Formats a string using java.lang.String.format, see java.util.Formatter for format
+  Formats a string using java.lang.String.format, see java.util.Formatter for
+format
   string syntax</pre>">format</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/with-out-str" class="tooltip" title="<pre>clojure.core/with-out-str
 ([& body])
 Macro
@@ -1588,7 +1601,8 @@ Macro
                 <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/read-line" class="tooltip" title="<pre>clojure.core/read-line
 ([])
   Reads the next line from stream that is the current value of *in* .</pre>">read-line</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/read" class="tooltip" title="<pre>clojure.core/read
-([] [stream] [stream eof-error? eof-value] [stream eof-error? eof-value recursive?])
+([] [stream] [stream eof-error? eof-value] [stream eof-error? eof-value
+recursive?])
   Reads the next object from stream, which must be an instance of
   java.io.PushbackReader or some derivee.  stream defaults to the
   current value of *in* .</pre>">read</a></code></td>
@@ -1599,7 +1613,8 @@ Macro
 ([rdr])
   Returns the lines of text from rdr as a lazy sequence of strings.
   rdr must implement java.io.BufferedReader.</pre>">line-seq</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/read" class="tooltip" title="<pre>clojure.core/read
-([] [stream] [stream eof-error? eof-value] [stream eof-error? eof-value recursive?])
+([] [stream] [stream eof-error? eof-value] [stream eof-error? eof-value
+recursive?])
   Reads the next object from stream, which must be an instance of
   java.io.PushbackReader or some derivee.  stream defaults to the
   current value of *in* .</pre>">read</a> also: (binding [*in* reader] ...) <a href="http://java.sun.com/javase/6/docs/api/java/io/Reader.html">java.io.Reader</a></code></td>
@@ -1712,9 +1727,9 @@ Macro
 
     :buffer-size  buffer size to use, default is 1024.
     :encoding     encoding to use if converting between
-                  byte and char streams.   
+                  byte and char streams.
 
-  Does not close any streams except those it opens itself 
+  Does not close any streams except those it opens itself
   (on a File).</pre>">copy</a> GitHub: <a href="http://github.com/Raynes/fs">fs</a></code></td>
               </tr>
             </tbody>
@@ -1742,7 +1757,8 @@ Special Form
   Defines a function
 
   Please see http://clojure.org/special_forms#fn</pre>">fn</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/defn" class="tooltip" title="<pre>clojure.core/defn
-([name doc-string? attr-map? [params*] body] [name doc-string? attr-map? ([params*] body) + attr-map?])
+([name doc-string? attr-map? [params*] body] [name doc-string? attr-map?
+([params*] body) + attr-map?])
 Macro
   Same as (def name (fn [params* ] exprs*)) or (def
     name (fn ([params* ] exprs*)+)) with any doc-string or attrs added
@@ -1795,14 +1811,20 @@ Macro
   positions (y, z). Note that the function f can take any number of
   arguments, not just the one(s) being nil-patched.</pre>">fnil</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/every-pred" class="tooltip" title="<pre>clojure.core/every-pred
 ([p] [p1 p2] [p1 p2 p3] [p1 p2 p3 & ps])
-  Takes a set of predicates and returns a function f that returns true if all of its
-  composing predicates return a logical true value against all of its arguments, else it returns
-  false. Note that f is short-circuiting in that it will stop execution on the first
+  Takes a set of predicates and returns a function f that returns true if all of
+its
+  composing predicates return a logical true value against all of its arguments,
+else it returns
+  false. Note that f is short-circuiting in that it will stop execution on the
+first
   argument that triggers a logical false result against the original predicates.</pre>">every-pred</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/some-fn" class="tooltip" title="<pre>clojure.core/some-fn
 ([p] [p1 p2] [p1 p2 p3] [p1 p2 p3 & ps])
-  Takes a set of predicates and returns a function f that returns the first logical true value
-  returned by one of its composing predicates against any of its arguments, else it returns
-  logical false. Note that f is short-circuiting in that it will stop execution on the first
+  Takes a set of predicates and returns a function f that returns the first
+logical true value
+  returned by one of its composing predicates against any of its arguments, else
+it returns
+  logical false. Note that f is short-circuiting in that it will stop execution
+on the first
   argument that triggers a logical true result against the original predicates.</pre>">some-fn</a></code></td>
               </tr>
               <tr class="even">
@@ -1821,7 +1843,8 @@ Macro
   list already. If there are more forms, inserts the first form as the
   last item in second form, etc.</pre>">-&gt;&gt;</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/apply" class="tooltip" title="<pre>clojure.core/apply
 ([f args] [f x args] [f x y args] [f x y z args] [f a b c d & args])
-  Applies fn f to the argument list formed by prepending intervening arguments to args.</pre>">apply</a></code></td>
+  Applies fn f to the argument list formed by prepending intervening arguments
+to args.</pre>">apply</a></code></td>
               </tr>
               <tr class="odd">
                 <td>Test</td>
@@ -1869,7 +1892,7 @@ Macro
   automatically creates the maps required by extend.  Propagates the
   class as a type hint on the first argument of all fns.
 
-  (extend-type MyType 
+  (extend-type MyType
     Countable
       (cnt [c] ...)
     Foo
@@ -1888,7 +1911,7 @@ Macro
   automatically creates the maps required by extend.  Propagates the
   class as a type hint on the first argument of all fns.
 
-  (extend-type MyType 
+  (extend-type MyType
     Countable
       (cnt [c] ...)
     Foo
@@ -1905,7 +1928,7 @@ Macro
   reify is a macro with the following structure:
 
  (reify options* specs*)
-  
+
   Currently there are no options.
 
   Each spec consists of the protocol or interface name followed by zero
@@ -1927,9 +1950,9 @@ Macro
 ([name [& fields] & opts+specs])
 Macro
   Alpha - subject to change
-  
+
   (defrecord name [fields*]  options* specs*)
-  
+
   Currently there are no options.
 
   Each spec consists of a protocol or interface name followed by zero
@@ -1959,9 +1982,9 @@ Macro
 ([name [& fields] & opts+specs])
 Macro
   Alpha - subject to change
-  
+
   (deftype name [fields*]  options* specs*)
-  
+
   Currently there are no options.
 
   Each spec consists of a protocol or interface name followed by zero
@@ -1986,9 +2009,9 @@ Macro
 ([name [& fields] & opts+specs])
 Macro
   Alpha - subject to change
-  
+
   (deftype name [fields*]  options* specs*)
-  
+
   Currently there are no options.
 
   Each spec consists of a protocol or interface name followed by zero
@@ -2022,7 +2045,8 @@ Macro
                 <td><code><code>(</code> <a href="http://clojuredocs.org/clojure_core/clojure.core/defmethod" class="tooltip" title="<pre>clojure.core/defmethod
 ([multifn dispatch-val & fn-tail])
 Macro
-  Creates and installs a new method of multimethod associated with dispatch-value. </pre>">defmethod</a> <code>my-mm :dispatch-value [args] ...)</code></code></td>
+  Creates and installs a new method of multimethod associated with
+dispatch-value.</pre>">defmethod</a> <code>my-mm :dispatch-value [args] ...)</code></code></td>
               </tr>
               <tr class="odd">
                 <td>Dispatch</td>
@@ -2045,7 +2069,7 @@ Macro
                 <td>Prefer</td>
                 <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/prefer-method" class="tooltip" title="<pre>clojure.core/prefer-method
 ([multifn dispatch-val-x dispatch-val-y])
-  Causes the multimethod to prefer matches of dispatch-val-x over dispatch-val-y 
+  Causes the multimethod to prefer matches of dispatch-val-x over dispatch-val-y
    when there is a conflict</pre>">prefer-method</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/prefers" class="tooltip" title="<pre>clojure.core/prefers
 ([multifn])
   Given a multimethod, returns a map of preferred value -> set of other values</pre>">prefers</a></code></td>
@@ -2060,7 +2084,8 @@ Macro
   class. h must be a hierarchy obtained from make-hierarchy, if not
   supplied defaults to, and modifies, the global hierarchy.</pre>">derive</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/isa_q" class="tooltip" title="<pre>clojure.core/isa?
 ([child parent] [h child parent])
-  Returns true if (= child parent), or child is directly or indirectly derived from
+  Returns true if (= child parent), or child is directly or indirectly derived
+from
   parent, either via a Java type inheritance relationship or a
   relationship established via derive. h must be a hierarchy obtained
   from make-hierarchy, if not supplied defaults to the global
@@ -2094,7 +2119,8 @@ Macro
               <tr class="odd">
                 <td>Create</td>
                 <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/defmacro" class="tooltip" title="<pre>clojure.core/defmacro
-([name doc-string? attr-map? [params*] body] [name doc-string? attr-map? ([params*] body) + attr-map?])
+([name doc-string? attr-map? [params*] body] [name doc-string? attr-map?
+([params*] body) + attr-map?])
 Macro
   Like defn, but the resulting function name is declared as a
   macro and will be used as a macro by the compiler when it is
@@ -2145,13 +2171,13 @@ Macro
   Same as (when (seq xs) (let [x (first xs)] body))</pre>">when-first</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/if-not" class="tooltip" title="<pre>clojure.core/if-not
 ([test then] [test then else])
 Macro
-  Evaluates test. If logical false, evaluates and returns then expr, 
+  Evaluates test. If logical false, evaluates and returns then expr,
   otherwise else expr, if supplied, else nil.</pre>">if-not</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/if-let" class="tooltip" title="<pre>clojure.core/if-let
 ([bindings then] [bindings then else & oldform])
 Macro
   bindings => binding-form test
 
-  If test is true, evaluates then with binding-form bound to the value of 
+  If test is true, evaluates then with binding-form bound to the value of
   test, if not, yields else</pre>">if-let</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/cond" class="tooltip" title="<pre>clojure.core/cond
 ([& clauses])
 Macro
@@ -2330,7 +2356,7 @@ Macro
 Macro
   Expands to code which yields a lazy sequence of the concatenation
   of the supplied colls.  Each coll expr is not evaluated until it is
-  needed. 
+  needed.
 
   (lazy-cat xs ys zs) === (concat (lazy-seq xs) (lazy-seq ys) (lazy-seq zs))</pre>">lazy-cat</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/lazy-seq" class="tooltip" title="<pre>clojure.core/lazy-seq
 ([& body])
@@ -2596,12 +2622,14 @@ Special Form
   Defines a function
 
   Please see http://clojure.org/special_forms#fn</pre>">fn</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/defn" class="tooltip" title="<pre>clojure.core/defn
-([name doc-string? attr-map? [params*] body] [name doc-string? attr-map? ([params*] body) + attr-map?])
+([name doc-string? attr-map? [params*] body] [name doc-string? attr-map?
+([params*] body) + attr-map?])
 Macro
   Same as (def name (fn [params* ] exprs*)) or (def
     name (fn ([params* ] exprs*)+)) with any doc-string or attrs added
     to the var metadata</pre>">defn</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/defmacro" class="tooltip" title="<pre>clojure.core/defmacro
-([name doc-string? attr-map? [params*] body] [name doc-string? attr-map? ([params*] body) + attr-map?])
+([name doc-string? attr-map? [params*] body] [name doc-string? attr-map?
+([params*] body) + attr-map?])
 Macro
   Like defn, but the resulting function name is declared as a
   macro and will be used as a macro by the compiler when it is
@@ -2633,7 +2661,7 @@ Macro
 Macro
   bindings => binding-form test
 
-  If test is true, evaluates then with binding-form bound to the value of 
+  If test is true, evaluates then with binding-form bound to the value of
   test, if not, yields else</pre>">if-let</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/when-let" class="tooltip" title="<pre>clojure.core/when-let
 ([bindings & body])
 Macro
@@ -2660,7 +2688,8 @@ Special Form
   not supplied, the root binding of the var is unaffected.
 
   Please see http://clojure.org/special_forms#def</pre>">def</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/defn" class="tooltip" title="<pre>clojure.core/defn
-([name doc-string? attr-map? [params*] body] [name doc-string? attr-map? ([params*] body) + attr-map?])
+([name doc-string? attr-map? [params*] body] [name doc-string? attr-map?
+([params*] body) + attr-map?])
 Macro
   Same as (def name (fn [params* ] exprs*)) or (def
     name (fn ([params* ] exprs*)+)) with any doc-string or attrs added
@@ -2673,14 +2702,16 @@ Macro
   Experimental - like defmacro, except defines a named function whose
   body is the expansion, calls to which may be expanded inline as if
   it were a macro. Cannot be used with variadic (&) args.</pre>">definline</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/defmacro" class="tooltip" title="<pre>clojure.core/defmacro
-([name doc-string? attr-map? [params*] body] [name doc-string? attr-map? ([params*] body) + attr-map?])
+([name doc-string? attr-map? [params*] body] [name doc-string? attr-map?
+([params*] body) + attr-map?])
 Macro
   Like defn, but the resulting function name is declared as a
   macro and will be used as a macro by the compiler when it is
   called.</pre>">defmacro</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/defmethod" class="tooltip" title="<pre>clojure.core/defmethod
 ([multifn dispatch-val & fn-tail])
 Macro
-  Creates and installs a new method of multimethod associated with dispatch-value. </pre>">defmethod</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/defmulti" class="tooltip" title="<pre>clojure.core/defmulti
+  Creates and installs a new method of multimethod associated with
+dispatch-value.</pre>">defmethod</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/defmulti" class="tooltip" title="<pre>clojure.core/defmulti
 ([name docstring? attr-map? dispatch-fn & options])
 Macro
   Creates a new multimethod with the associated dispatch function.
@@ -2692,14 +2723,15 @@ Macro
                 defaults to the global hierarchy</pre>">defmulti</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/defonce" class="tooltip" title="<pre>clojure.core/defonce
 ([name expr])
 Macro
-  defs name to have the root value of the expr iff the named var has no root value,
+  defs name to have the root value of the expr iff the named var has no root
+value,
   else expr is unevaluated</pre>">defonce</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/defrecord" class="tooltip" title="<pre>clojure.core/defrecord
 ([name [& fields] & opts+specs])
 Macro
   Alpha - subject to change
-  
+
   (defrecord name [fields*]  options* specs*)
-  
+
   Currently there are no options.
 
   Each spec consists of a protocol or interface name followed by zero
@@ -2715,7 +2747,8 @@ Macro
                 <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/declare" class="tooltip" title="<pre>clojure.core/declare
 ([& names])
 Macro
-  defs the supplied var names with no bindings, useful for making forward declarations.</pre>">declare</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/intern" class="tooltip" title="<pre>clojure.core/intern
+  defs the supplied var names with no bindings, useful for making forward
+declarations.</pre>">declare</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/intern" class="tooltip" title="<pre>clojure.core/intern
 ([ns name] [ns name val])
   Finds or creates a var named by the symbol name in the namespace
   ns (which can be a symbol or a namespace), setting its root binding
@@ -2769,7 +2802,8 @@ Macro
   Sets the validator-fn for a var/ref/agent/atom. validator-fn must be nil or a
   side-effect-free fn of one argument, which will be passed the intended
   new state on any state change. If the new state is unacceptable, the
-  validator-fn should return false or throw an exception. If the current state (root
+  validator-fn should return false or throw an exception. If the current state
+(root
   value if var) is not acceptable to the new validator, an exception
   will be thrown and the validator will not be changed.</pre>">set-validator!</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/get-validator" class="tooltip" title="<pre>clojure.core/get-validator
 ([iref])
@@ -2818,7 +2852,8 @@ Macro
 ([alias namespace-sym])
   Add an alias in the current namespace to another
   namespace. Arguments are two symbols: the alias to be used, and
-  the symbolic name of the target namespace. Use :as in the ns macro in preference
+  the symbolic name of the target namespace. Use :as in the ns macro in
+preference
   to calling this directly.</pre>">alias</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/def" class="tooltip" title="<pre>def
   (def symbol doc-string? init?)
 Special Form
@@ -3070,7 +3105,7 @@ Macro
   Takes a map of Var/value pairs. Binds each Var to the associated value for
   the current thread. Each call *MUST* be accompanied by a matching call to
   pop-thread-bindings wrapped in a try-finally!
-  
+
       (push-thread-bindings bindings)
       (try
         ...
@@ -3080,8 +3115,10 @@ Macro
   Pop one set of bindings pushed with push-binding before. It is an error to
   pop bindings without pushing before.</pre>">pop</a>}-thread-bindings <a href="http://clojuredocs.org/clojure_core/clojure.core/thread-bound_q" class="tooltip" title="<pre>clojure.core/thread-bound?
 ([& vars])
-  Returns true if all of the vars provided as arguments have thread-local bindings.
-   Implies that set!'ing the provided vars will succeed.  Returns true if no vars are provided.</pre>">thread-bound?</a></code></td>
+  Returns true if all of the vars provided as arguments have thread-local
+bindings.
+   Implies that set!'ing the provided vars will succeed.  Returns true if no
+vars are provided.</pre>">thread-bound?</a></code></td>
               </tr>
               <tr class="even">
                 <td>Misc</td>
@@ -3150,7 +3187,8 @@ Macro
                 <td>Examine</td>
                 <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/deref" class="tooltip" title="<pre>clojure.core/deref
 ([ref] [ref timeout-ms timeout-val])
-  Also reader macro: @ref/@agent/@var/@atom/@delay/@future/@promise. Within a transaction,
+  Also reader macro: @ref/@agent/@var/@atom/@delay/@future/@promise. Within a
+transaction,
   returns the in-transaction-value of ref, else returns the
   most-recently-committed value of ref. When applied to a var, agent
   or atom, returns its current state. When applied to a delay, forces
@@ -3227,7 +3265,8 @@ Macro
   Sets the validator-fn for a var/ref/agent/atom. validator-fn must be nil or a
   side-effect-free fn of one argument, which will be passed the intended
   new state on any state change. If the new state is unacceptable, the
-  validator-fn should return false or throw an exception. If the current state (root
+  validator-fn should return false or throw an exception. If the current state
+(root
   value if var) is not acceptable to the new validator, an exception
   will be thrown and the validator will not be changed.</pre>">set-validator!</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/get-validator" class="tooltip" title="<pre>clojure.core/get-validator
 ([iref])
@@ -3322,7 +3361,8 @@ Macro
   Sets the validator-fn for a var/ref/agent/atom. validator-fn must be nil or a
   side-effect-free fn of one argument, which will be passed the intended
   new state on any state change. If the new state is unacceptable, the
-  validator-fn should return false or throw an exception. If the current state (root
+  validator-fn should return false or throw an exception. If the current state
+(root
   value if var) is not acceptable to the new validator, an exception
   will be thrown and the validator will not be changed.</pre>">set-validator!</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/get-validator" class="tooltip" title="<pre>clojure.core/get-validator
 ([iref])
@@ -3378,7 +3418,7 @@ Macro
   error-handler may be called (see set-error-handler!), after which,
   if the mode is :continue, the agent will continue as if neither the
   action that caused the error nor the error itself ever happened.
-  
+
   If the mode is :fail, the agent will become failed and will stop
   accepting new 'send' and 'send-off' actions, and any previously
   queued actions will be held until a 'restart-agent'.  Deref will
@@ -3532,7 +3572,8 @@ Special Form
 
   Please see http://clojure.org/special_forms#try</pre>">finally</a> <a href="http://clojuredocs.org/clojure_core/clojure.repl/pst" class="tooltip" title="<pre>clojure.repl/pst
 ([] [e-or-depth] [e depth])
-  Prints a stack trace of the exception, to the depth requested. If none supplied, uses the root cause of the
+  Prints a stack trace of the exception, to the depth requested. If none
+supplied, uses the root cause of the
   most recent repl exception (*e), and a depth of 12.</pre>">pst</a></code></td>
               </tr>
             </tbody>
@@ -3615,13 +3656,13 @@ Special Form
 ([a idx ret expr])
 Macro
   Maps an expression across an array a, using an index named idx, and
-  return value named ret, initialized to a clone of a, then setting 
-  each element of ret to the evaluation of expr, returning the new 
+  return value named ret, initialized to a clone of a, then setting
+  each element of ret to the evaluation of expr, returning the new
   array ret.</pre>">amap</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/areduce" class="tooltip" title="<pre>clojure.core/areduce
 ([a idx ret init expr])
 Macro
   Reduces an expression across an array a, using an index named idx,
-  and return value named ret, initialized to init, setting ret to the 
+  and return value named ret, initialized to init, setting ret to the
   evaluation of expr at each step, returning ret.</pre>">areduce</a></code></td>
               </tr>
               <tr class="odd">
@@ -3690,7 +3731,7 @@ Macro
   Takes a proxy instance and returns the proxy's fn map.</pre>">proxy-mappings</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/proxy-super" class="tooltip" title="<pre>clojure.core/proxy-super
 ([meth & args])
 Macro
-  Use to call a superclass method in the body of a proxy method. 
+  Use to call a superclass method in the body of a proxy method.
   Note, expansion captures 'this</pre>">proxy-super</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/update-proxy" class="tooltip" title="<pre>clojure.core/update-proxy
 ([proxy mappings])
   Takes a proxy instance and a map of strings (which must
@@ -3790,7 +3831,7 @@ Macro
   implementation will be dynamically sought by the generated class in
   functions in an implementing Clojure namespace. Given a generated
   class org.mydomain.MyClass with a method named mymethod, gen-class
-  will generate an implementation that looks for a function named by 
+  will generate an implementation that looks for a function named by
   (str prefix mymethod) (default prefix: &quot;-&quot;) in a
   Clojure namespace specified by :impl-ns
   (defaults to the current namespace). All inherited methods,
@@ -3801,12 +3842,12 @@ Macro
   the given package-qualified :name (which, as all names in these
   parameters, can be a string or symbol), and writes the .class file
   to the *compile-path* directory.  When not compiling, does nothing.
- 
+
   In all subsequent sections taking types, the primitive types can be
   referred to by their Java names (int, float etc), and classes in the
   java.lang package can be used without a package qualifier. All other
   classes must be fully qualified.
- 
+
   Options should be a set of key/value pairs, all except for :name are
   optional:
 [ documentation truncated.  Click link for the rest. ]</pre>">gen-interface</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/loaded-libs" class="tooltip" title="<pre>clojure.core/loaded-libs
@@ -3822,14 +3863,15 @@ Macro
 ([form])
   Evaluates the form data structure (not text!) and returns the result.</pre>">eval</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/force" class="tooltip" title="<pre>clojure.core/force
 ([x])
-  If x is a Delay, returns the (possibly cached) value of its expression, else returns x</pre>">force</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/hash" class="tooltip" title="<pre>clojure.core/hash
+  If x is a Delay, returns the (possibly cached) value of its expression, else
+returns x</pre>">force</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/hash" class="tooltip" title="<pre>clojure.core/hash
 ([x])
   Returns the hash code of its argument</pre>">hash</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/name" class="tooltip" title="<pre>clojure.core/name
 ([x])
   Returns the name String of a string, symbol or keyword.</pre>">name</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/*clojure-version*" class="tooltip" title="<pre>clojure.core/*clojure-version*
-  The version info for Clojure core, as a map containing :major :minor 
-  :incremental and :qualifier keys. Feature releases may increment 
-  :minor and/or :major, bugfix releases will increment :incremental. 
+  The version info for Clojure core, as a map containing :major :minor
+  :incremental and :qualifier keys. Feature releases may increment
+  :minor and/or :major, bugfix releases will increment :incremental.
   Possible values of :qualifier include &quot;GA&quot;, &quot;SNAPSHOT&quot;, &quot;RC-x&quot; &quot;BETA-x&quot;</pre>">*clojure-version*</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/clojure-version" class="tooltip" title="<pre>clojure.core/clojure-version
 ([])
   Returns clojure version as a printable string.</pre>">clojure-version</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/*command-line-args*" class="tooltip" title="<pre>clojure.core/*command-line-args*

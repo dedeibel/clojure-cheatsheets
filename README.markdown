@@ -4,7 +4,7 @@ Clojure cheatsheets in PDFs and Tex formats.
 
 ## License
 
-Copyright (C) 2012 Fogus
+Copyright (C) 2012 Fogus, Andy Fingerhut
 
 Distributed under the Eclipse Public License, the same as Clojure,
 except for the following parts.

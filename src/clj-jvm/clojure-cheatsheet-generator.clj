@@ -1141,6 +1141,47 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
      (throw (Exception.))))
 
 
+(defn wrap-line
+  "Given a string 'line' that is assumed not contain line separators,
+  but may contain spaces and tabs, return a sequence of strings where
+  each is at most width characters long, and all 'words' (consecutive
+  sequences of non-whitespace characters) are kept together in the
+  same line.  The only exception to the maximum width are if a single
+  word is longer than width, in which case it is kept together on one
+  line.  Whitespace in the original string is kept except it is
+  removed from the end and where lines are broken.  As a special case,
+  any whitespace before the first word is preserved.  The second and
+  all later lines will always begin with a non-whitespace character."
+  [line width]
+  (let [space-plus-words (map first (re-seq #"(\s*\S+)|(\s+)"
+                                            (str/trimr line)))]
+    (loop [finished-lines []
+           partial-line []
+           len 0
+           remaining-words (seq space-plus-words)]
+      (if-let [word (first remaining-words)]
+        (if (zero? len)
+          ;; Special case for first word of first line.  Keep it as
+          ;; is, including any leading whitespace it may have.
+          (recur finished-lines [ word ] (count word) (rest remaining-words))
+          (let [word-len (count word)
+                len-if-append (+ len word-len)]
+            (if (<= len-if-append width)
+              (recur finished-lines (conj partial-line word) len-if-append
+                     (rest remaining-words))
+              ;; else we're done with current partial-line and need to
+              ;; start a new one.  Trim leading whitespace from word,
+              ;; which will be the first word of the next line.
+              (let [trimmed-word (str/triml word)]
+                (recur (conj finished-lines (apply str partial-line))
+                       [ trimmed-word ]
+                       (count trimmed-word)
+                       (rest remaining-words))))))
+        (if (zero? len)
+          [ "" ]
+          (conj finished-lines (apply str partial-line)))))))
+
+
 (defn output-title [fmt t]
   (iprintf "%s" (case (:fmt fmt)
                   :latex (format "{\\Large{\\textbf{%s}}}\n\n" t)
@@ -1232,12 +1273,16 @@ of dashes, and keep at most the first 15 lines of the doc string, to
 keep the tooltip from being too large.  Also replace double quote
 characters (\") with &quot;"
   [s]
-  (let [lines (-> s (str/escape {\" "&quot;"}) (str/split-lines) (rest))
-        max-to-keep 15]
-    (if (> (count lines) max-to-keep)
-      (str (str/join "\n" (take max-to-keep lines))
-           "\n[ documentation truncated.  Click link for the rest. ]")
-      (str/join "\n" lines))))
+  (let [max-line-width 80
+        lines (-> s (str/split-lines) (rest))
+        lines (mapcat #(wrap-line % max-line-width) lines)
+        max-to-keep 15
+        combined-lines
+        (if (> (count lines) max-to-keep)
+          (str (str/join "\n" (take max-to-keep lines))
+               "\n[ documentation truncated.  Click link for the rest. ]")
+          (str/join "\n" lines))]
+    (str/escape combined-lines {\" "&quot;"})))
 
 
 (defn doc-for-symbol-str [s]
