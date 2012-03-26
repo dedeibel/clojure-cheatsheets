@@ -398,8 +398,8 @@
                                              {:latex "\\textmd{\\textsf{also:}}",
                                               :html "also:"}
                                              "(binding [*in* reader] ...)"
-                                             {:latex "\\href{http://java.sun.com/javase/6/docs/api/java/io/Reader.html}{java.io.Reader}"
-                                              :html "<a href=\"http://java.sun.com/javase/6/docs/api/java/io/Reader.html\">java.io.Reader</a>"}
+                                             {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/io/Reader.html}{java.io.Reader}"
+                                              :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/io/Reader.html\">java.io.Reader</a>"}
                                              ]]
                       ["from string" :cmds '[read-string with-in-str]]
                       ["Open" :cmds '[with-open
@@ -418,11 +418,11 @@
                       ["Binary" :cmds '["(.write ostream byte-arr)"
                                         "(.read istream byte-arr)"
 ;                                        "(javadoc java.io.OutputStream)"
-                                        {:latex "\\href{http://java.sun.com/javase/6/docs/api/java/io/OutputStream.html}{java.io.OutputStream}"
-                                         :html "<a href=\"http://java.sun.com/javase/6/docs/api/java/io/OutputStream.html\">java.io.OutputStream</a>"}
+                                        {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/io/OutputStream.html}{java.io.OutputStream}"
+                                         :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/io/OutputStream.html\">java.io.OutputStream</a>"}
 ;                                        "java.io.InputStream"
-                                        {:latex "\\href{http://java.sun.com/javase/6/docs/api/java/io/InputStream.html}{java.io.InputStream}"
-                                         :html "<a href=\"http://java.sun.com/javase/6/docs/api/java/io/InputStream.html\">java.io.InputStream</a>"}
+                                        {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html}{java.io.InputStream}"
+                                         :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html\">java.io.InputStream</a>"}
                                         {:latex "\\textmd{\\textsf{GitHub:}}",
                                          :html "GitHub:"}
                                         {:latex "\\href{http://github.com/ztellman/gloss}{gloss}"
