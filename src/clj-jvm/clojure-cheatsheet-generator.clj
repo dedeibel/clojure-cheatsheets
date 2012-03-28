@@ -1316,19 +1316,15 @@ characters (\") with &quot;"
         :latex (str "\\href{" (escape-latex-hyperref-url url-str)
                     "}{" (escape-latex-hyperref-target cmd-str-to-show) "}")
         :html (str "<a href=\"" url-str "\""
-                   (case *tooltips*
-                     :no-tooltips ""
-
-                     :tiptip
-                     (if cleaned-doc-str
-                       (str " class=\"tooltip\" title=\"<pre>"
-                            cleaned-doc-str "</pre>\"")
-                       "")
-
-                     :use-title-attribute
-                     (if cleaned-doc-str
-                       (str " title=\"" cleaned-doc-str "\"")
-                       ""))
+                   (if cleaned-doc-str
+                     (case *tooltips*
+                       :no-tooltips ""
+                       :tiptip (str " class=\"tooltip\" title=\"<pre>"
+                                    cleaned-doc-str "</pre>\"")
+                       :use-title-attribute (str " title=\""
+                                                 cleaned-doc-str "\""))
+                     ;; else no tooltip available to show
+                     "")
                    ">" cmd-str-to-show "</a>")
         :verify-only "")
       cmd-str-to-show)))
