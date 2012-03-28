@@ -858,6 +858,12 @@
   (System/exit 1))
 
 
+(defn read-safely [x & opts]
+  (with-open [r (java.io.PushbackReader. (apply io/reader x opts))]
+    (binding [*read-eval* false]
+      (read r))))
+
+
 (defn clojuredocs-url-fixup [s]
   (let [s (str/replace s "?" "_q")
         s (str/replace s "/" "_")
@@ -1213,6 +1219,7 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
 
 (def ^:dynamic *symbol-name-to-url*)
 (def ^:dynamic *tooltips*)
+(def ^:dynamic *clojuredocs-snapshot*)
 (def ^:dynamic *warn-about-unknown-symbols* false)
 
 (def symbols-looked-up (ref #{}))
@@ -1299,6 +1306,34 @@ characters (\") with &quot;"
           (with-out-str (#'clojure.repl/print-doc (meta v))))))))
 
 
+(defn clojuredocs-content-summary [snap-time sym-info]
+  (let [num-examples (count (:examples sym-info))
+        ;; remove lines containing nothing but <pre> or </pre> before
+        ;; counting them, since clojuredocs.org doesn't show those as
+        ;; separate lines.
+        total-example-lines (count
+                             (remove #(re-find #"(?i)^\s*<\s*/?\s*pre\s*>\s*$" %)
+                                     (mapcat str/split-lines
+                                             (map :body (:examples sym-info)))))
+        num-see-alsos (count (:see-alsos sym-info))
+        num-comments (count (:comments sym-info))]
+    (str (case num-examples
+           0 "0 examples"
+           1 (format "1 example with %d lines"
+                     total-example-lines)
+           (format "%d examples totaling %d lines"
+                   num-examples total-example-lines))
+         (if (zero? num-see-alsos)
+           ""
+           (format ", %d see also%s" num-see-alsos
+                   (if (== num-see-alsos 1) "" "s")))
+         (if (zero? num-comments)
+           ""
+           (format ", %d comment%s" num-comments
+                   (if (== num-comments 1) "" "s")))
+         " on " snap-time)))
+
+
 (defn table-one-cmd-to-str [fmt cmd prefix suffix]
   (let [cmd-str (cond-str fmt cmd)
         whole-cmd (str prefix cmd-str suffix)
@@ -1310,7 +1345,25 @@ characters (\") with &quot;"
 ;;                   cmd prefix suffix (class whole-cmd) whole-cmd)
         orig-doc-str (doc-for-symbol-str whole-cmd)
         cleaned-doc-str (if orig-doc-str
-                          (cleanup-doc-str-tooltip orig-doc-str))]
+                          (cleanup-doc-str-tooltip orig-doc-str))
+        cleaned-doc-str (if cleaned-doc-str
+                          (do
+;;                            (iprintf *err* "whole-cmd='%s' sym-info='%s'\n"
+;;                                     whole-cmd
+;;                                     (get-in *clojuredocs-snapshot*
+;;                                             [:snapshot-info whole-cmd]))
+                            (if-let [sym-info
+                                     (or (get-in *clojuredocs-snapshot*
+                                                 [:snapshot-info whole-cmd])
+                                         (get-in *clojuredocs-snapshot*
+                                                 [:snapshot-info
+                                                  (str "clojure.core/"
+                                                       whole-cmd)]))]
+                              (str cleaned-doc-str "\n"
+                                   (clojuredocs-content-summary
+                                    (get *clojuredocs-snapshot* :snapshot-time)
+                                    sym-info))
+                              cleaned-doc-str)))]
     (if url-str
       (case (:fmt fmt)
         :latex (str "\\href{" (escape-latex-hyperref-url url-str)
@@ -1542,6 +1595,17 @@ characters (\") with &quot;"
   (zipmap (map first pairs) (map second pairs)))
 
 
+(defn simplify-snapshot-time [clojuredocs-snapshot]
+  (if-let [snap-time (:snapshot-time clojuredocs-snapshot)]
+    (merge clojuredocs-snapshot
+           {:snapshot-time (if-let [[_ day-month-date year]
+                                    (re-find #"^(\S+ \S+ \d+)\s+.*\s+(\d+)$"
+                                             snap-time)]
+                             (str day-month-date " " year)
+                             snap-time)})
+    clojuredocs-snapshot))
+
+
 ;; Supported command line args:
 
 ;; links-to-clojure (default if nothing specified on command line):
@@ -1574,9 +1638,21 @@ characters (\") with &quot;"
                      (die "Unrecognized argument: %s\nSupported args are: %s\n"
                           arg
                           (str/join " " (seq supported-tooltips))))))
+      clojuredocs-snapshot (if (< (count *command-line-args*) 3)
+                             {}
+                             (let [snapshot-fname (nth *command-line-args* 2)]
+                               (simplify-snapshot-time
+                                (read-safely snapshot-fname))))
+      _ (if (not= clojuredocs-snapshot {})
+          (iprintf *err* "Read info for %d symbols from file '%s' with time %s\n"
+                   (count (get clojuredocs-snapshot :snapshot-info))
+                   (nth *command-line-args* 2)
+                   (:snapshot-time clojuredocs-snapshot))
+          (iprintf *err* "No clojuredocs snapshot file specified.\n"))
       symbol-name-to-url (hash-from-pairs (symbol-url-pairs link-target-site))]
   (binding [*symbol-name-to-url* symbol-name-to-url
-            *tooltips* tooltips]
+            *tooltips* tooltips
+            *clojuredocs-snapshot* clojuredocs-snapshot]
     (binding [*out* (io/writer "cheatsheet-full.html")
               *err* (io/writer "warnings.log")
               *warn-about-unknown-symbols* true]

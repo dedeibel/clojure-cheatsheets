@@ -14,13 +14,16 @@ LINK_TARGET=links-to-clojuredocs
 #TOOLTIPS=use-title-attribute
 TOOLTIPS=tiptip
 
+CLOJUREDOCS_SNAPSHOT=""
+#CLOJUREDOCS_SNAPSHOT="${HOME}/clj/cd-client/clojuredocs-snapshot-2012-03-27.txt"
+
 # Optionally produce PDF files by running LaTeX.  See README.markdown
 # for notes on what parts of LaTeX are enough for this to work.
 
 #PRODUCE_PDF="no"
 PRODUCE_PDF="yes"
 
-java -cp ${CLASSPATH} clojure.main clojure-cheatsheet-generator.clj ${LINK_TARGET} ${TOOLTIPS}
+java -cp ${CLASSPATH} clojure.main clojure-cheatsheet-generator.clj ${LINK_TARGET} ${TOOLTIPS} ${CLOJUREDOCS_SNAPSHOT}
 EXIT_STATUS=$?
 
 if [ ${EXIT_STATUS} != 0 ]
