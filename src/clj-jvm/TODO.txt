@@ -1,9 +1,15 @@
 Links to tutorial-style articles for these topics:
-    http://www.elangocheran.com/blog/2012/03/the-newbies-guide-learning-clojure/
     zippers
     parsing/generating XML
     Leiningen
     Java classpaths, JARs, etc.
+
+    Maybe this would be a good quick start to Leiningen and Java classpaths?
+    http://www.unexpected-vortices.com/clojure/brief-beginners-guide/
+
+    This briefly describes several resources for those wanting to
+    learn the Clojure language:
+    http://www.elangocheran.com/blog/2012/03/the-newbies-guide-learning-clojure/
 
 Add example literals: octal 017 hex 0xff scientific notation -1.1e-1
 any base up to 36: 2r1010
