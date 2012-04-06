@@ -11,6 +11,12 @@ Links to tutorial-style articles for these topics:
     learn the Clojure language:
     http://www.elangocheran.com/blog/2012/03/the-newbies-guide-learning-clojure/
 
+Introductory material on Lisp family languages, but not Clojure in particular:
+    http://www.lisperati.com/clojure-spels/casting.html
+
+Advanced material on Common Lisp macros:
+    "On Lisp", Paul Graham, TBD: find link to free copy
+
 Add example literals: octal 017 hex 0xff scientific notation -1.1e-1
 any base up to 36: 2r1010
 
@@ -73,6 +79,14 @@ TBD clojure.test
 TBDhi clojure.walk    (TBD: at least walk, prewalk, postwalk.  Anything else?)
 yes clojure.xml (only parse so far.  TBD: Anything else worth adding?)
 yes clojure.zip
+
+Pages listing other Clojure libraries:
+    http://www.clojure-toolbox.com/
+    http://cnlojure.org/open.html
+    http://clojure-libraries.appspot.com/
+
+TBD: Is there any chance of merging the above efforts into 1 site
+maintained at least as well as any of the existing ones?
 ----------------------------------------
 
 
