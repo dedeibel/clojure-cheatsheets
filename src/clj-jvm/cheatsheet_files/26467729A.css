@@ -1,4 +1,7 @@
 
+body {margin: 0;padding:0;}
+#content_view {max-width: 70em; min-width: 400px;}
+
 .wiki ol.includeWikiList { list-style: none; margin-left: 6px; padding: 0; text-indent: -6px; }
 /* Wiki Rendered Styles */
 .wiki { line-height: 150%; font-family: arial, helvetica, sans-serif; font-size: small; }
