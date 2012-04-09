@@ -1,11 +1,18 @@
 Links to tutorial-style articles for these topics:
-    zippers
     parsing/generating XML
+
+    zippers - I found these nice blog articles linked to from the
+    Clojure 1.2 version of clojure.zip/zipper on clojuredocs.org.  I
+    added the URLs to the Clojure 1.3 version, too.
+        Brian Marick: "Editing" trees in Clojure with clojure.zip
+        http://www.exampler.com/blog/2010/09/01/editing-trees-in-clojure-with-clojurezip/
+        Alex Miller: Zippers with records in Clojure
+        http://tech.puredanger.com/2010/10/22/zippers-with-records-in-clojure/
+
     Leiningen
     Java classpaths, JARs, etc.
-
-    Maybe this would be a good quick start to Leiningen and Java classpaths?
-    http://www.unexpected-vortices.com/clojure/brief-beginners-guide/
+        Maybe this would be a good quick start to Leiningen and Java classpaths?
+        http://www.unexpected-vortices.com/clojure/brief-beginners-guide/
 
     This briefly describes several resources for those wanting to
     learn the Clojure language:
@@ -14,7 +21,7 @@ Links to tutorial-style articles for these topics:
 Introductory material on Lisp family languages, but not Clojure in particular:
     http://www.lisperati.com/clojure-spels/casting.html
 
-Advanced material on Common Lisp macros:
+Intermediate to advanced material on Common Lisp macros:
     "On Lisp", Paul Graham, TBD: find link to free copy
 
 Add example literals: octal 017 hex 0xff scientific notation -1.1e-1
@@ -99,7 +106,7 @@ classes, with the link below for details:
 
     http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html#getName%28%29
 
-Example in abstractions section of extend-protocol
+Example in Abstractions section for extend-protocol
 
 Consider adding (def f ns/g) and (def f #'ns/g) distinction, and what
 it will do differently.  Any good article or docs to link to for that?
