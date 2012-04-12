@@ -1,6 +1,9 @@
 # clojure-cheatsheets
 
-Clojure cheatsheets in PDFs and Tex formats.
+Clojure cheatsheets in HTML, PDF, and TeX formats.
+
+See [http://jafingerhut.github.com](http://jafingerhut.github.com) for
+several variants of the HTML cheatsheet for Clojure on the JVM.
 
 ## License
 
