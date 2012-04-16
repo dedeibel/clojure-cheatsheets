@@ -1286,9 +1286,9 @@ characters (\") with &quot;"
         max-to-keep 15
         combined-lines
         (if (> (count lines) max-to-keep)
-          (str (str/join "\n" (take max-to-keep lines))
-               "\n[ documentation truncated.  Click link for the rest. ]")
-          (str/join "\n" lines))]
+          (str (str/trim-newline (str/join "\n" (take max-to-keep lines)))
+               "\n\n[ documentation truncated.  Click link for the rest. ]")
+          (str/trim-newline (str/join "\n" lines)))]
     (str/escape combined-lines {\" "&quot;"})))
 
 
@@ -1359,7 +1359,7 @@ characters (\") with &quot;"
                                                  [:snapshot-info
                                                   (str "clojure.core/"
                                                        whole-cmd)]))]
-                              (str cleaned-doc-str "\n"
+                              (str cleaned-doc-str "\n\n"
                                    (clojuredocs-content-summary
                                     (get *clojuredocs-snapshot* :snapshot-time)
                                     sym-info))
