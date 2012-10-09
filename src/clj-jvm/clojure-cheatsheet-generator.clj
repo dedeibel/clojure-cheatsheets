@@ -115,7 +115,8 @@
 
 
 (def cheatsheet-structure
-     [:title "Clojure Cheat Sheet (Clojure 1.3 & 1.4, sheet v1.6)"
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 \\& 1.4, sheet v1.6)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 & 1.4, sheet v1.6)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -1211,10 +1212,13 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
 
 
 (defn output-title [fmt t]
-  (iprintf "%s" (case (:fmt fmt)
-                  :latex (format "{\\Large{\\textbf{%s}}}\n\n" t)
-                  :html (format "  <title>%s</title>\n" t)
-                  :verify-only "")))
+  (let [t (if (map? t)
+            (get t (:fmt fmt))
+            t)]
+    (iprintf "%s" (case (:fmt fmt)
+                    :latex (format "{\\Large{\\textbf{%s}}}\n\n" t)
+                    :html (format "  <title>%s</title>\n" t)
+                    :verify-only ""))))
 
 
 (defn htmlize-str [str]
