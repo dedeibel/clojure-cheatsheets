@@ -115,7 +115,7 @@
 
 
 (def cheatsheet-structure
-     [:title "Clojure Cheat Sheet (Clojure 1.3, sheet v1.5)"
+     [:title "Clojure Cheat Sheet (Clojure 1.3 & 1.4, sheet v1.6)"
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -211,7 +211,10 @@
               :table [["Characters" :cmds '[char char-name-string
                                             char-escape-string]]
                       ["Keywords" :cmds '[keyword keyword? find-keyword]]
-                      ["Symbols" :cmds '[symbol symbol? gensym]]]
+                      ["Symbols" :cmds '[symbol symbol? gensym]]
+                      ["Data readers" :cmds '["(1.4)" *data-readers*
+                                              default-data-readers]]
+                      ]
               ]
              [:box "yellow"
               :section "Collections"
@@ -248,7 +251,8 @@
                                           :html "<a href=\"http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Vector.html#lastIndexOf%28java.lang.Object%29\">.lastIndexOf</a>"}
                                          ]]
                       [{:html "'Change'", :latex "`Change'"}
-                       :cmds '[assoc pop subvec replace conj rseq]]]
+                       :cmds '[assoc pop subvec replace conj rseq]]
+                      ["Ops" :cmds '["(1.4)" mapv filterv reduce-kv]]]
               :subsection "Sets"
               :table [["Create" :cmds '[{:latex "\\#\\{\\}", :html "#{}"}
                                         set hash-set sorted-set sorted-set-by]]
@@ -794,7 +798,8 @@
                                       float double bigdec bigint num cast
                                       biginteger]]
                       ["Exceptions" :cmds '[throw try catch finally
-                                            clojure.repl/pst]]]
+                                            clojure.repl/pst
+                                            "(1.4)" ex-info ex-data]]]
               :subsection "Arrays"
               :table [["Create" :cmds '[make-array
                                         [:common-suffix -array object
@@ -974,7 +979,23 @@
          :links-to-clojuredocs
          ;; I don't have a good idea where on clojuredocs.org these
          ;; should link to, if anywhere.
-         [])))
+         [])
+
+   ;; Manually specify links to clojure.org API documentation for
+   ;; symbols that are new in Clojure 1.3, because ClojureDocs.org
+   ;; doesn't have Clojure 1.4 symbols.
+   (map (fn [sym-str]
+          [sym-str
+           (str "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/"
+                sym-str)])
+        [ "*data-readers*"
+          "default-data-readers"
+          "mapv"
+          "filterv"
+          "reduce-kv"
+          "ex-info"
+          "ex-data" ])
+    ))
 
 
 (defn symbol-url-pairs [link-target-site]
