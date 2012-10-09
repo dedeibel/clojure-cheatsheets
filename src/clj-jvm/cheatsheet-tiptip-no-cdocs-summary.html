@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
-  <title>Clojure Cheat Sheet (Clojure 1.3, sheet v1.4)</title>
+  <title>Clojure Cheat Sheet (Clojure 1.3, sheet v1.5)</title>
   <link rel="stylesheet" href="cheatsheet_files/26467729A.css" type="text/css" />
 
   <style type="text/css">
@@ -229,7 +229,9 @@ Macro
               </tr>
               <tr class="odd">
                 <td>Unchecked</td>
-                <td><code>unchecked-{<a href="http://clojuredocs.org/clojure_core/clojure.core/unchecked-add-int" class="tooltip" title="<pre>clojure.core/unchecked-add-int
+                <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/*unchecked-math*" class="tooltip" title="<pre>clojure.core/*unchecked-math*
+  While bound to true, compilations of +, -, *, inc, dec and the
+  coercions will be done without overflow checks. Default: false.</pre>">*unchecked-math*</a> unchecked-{<a href="http://clojuredocs.org/clojure_core/clojure.core/unchecked-add-int" class="tooltip" title="<pre>clojure.core/unchecked-add-int
 ([x y])
   Returns the sum of x and y, both int.
   Note - uses a primitive operator subject to overflow.</pre>">add</a>, <a href="http://clojuredocs.org/clojure_core/clojure.core/unchecked-dec-int" class="tooltip" title="<pre>clojure.core/unchecked-dec-int

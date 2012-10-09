@@ -115,7 +115,7 @@
 
 
 (def cheatsheet-structure
-     [:title "Clojure Cheat Sheet (Clojure 1.3, sheet v1.4)"
+     [:title "Clojure Cheat Sheet (Clojure 1.3, sheet v1.5)"
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -154,7 +154,8 @@
                                                          pos? neg? even? odd?]]
                       ["Random" :cmds '[rand rand-int]]
                       ["BigInt" :cmds '[with-precision]]
-                      ["Unchecked" :cmds '[[:common-prefix-suffix
+                      ["Unchecked" :cmds '[*unchecked-math*
+                                           [:common-prefix-suffix
                                             unchecked- -int
                                             add dec divide inc multiply negate
                                             remainder subtract]]]]
