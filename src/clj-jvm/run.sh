@@ -2,6 +2,8 @@
 
 JAR_DIR="$HOME/lein/clj-1.4.0/lib"
 CLASSPATH="${JAR_DIR}/clojure-1.4.0.jar"
+#JAR_DIR="$HOME/lein/clj-1.5.0-alpha6/lib"
+#CLASSPATH="${JAR_DIR}/clojure-1.5.0-alpha6.jar"
 
 # 3 choices for links: none, to clojure.github.org, or to
 # clojuredocs.org:
@@ -35,7 +37,7 @@ then
     echo "Exit status ${EXIT_STATUS} from java"
     exit ${EXIT_STATUS}
 fi
-/bin/mv cheatsheet-embeddable.html cheatsheet-embeddable-for-alex.html
+/bin/mv cheatsheet-embeddable.html cheatsheet-embeddable-for-clojure.org.html
 
 ######################################################################
 # Make multiple full versions for those who prefer something else,
