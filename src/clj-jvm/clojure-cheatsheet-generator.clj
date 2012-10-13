@@ -1594,21 +1594,41 @@ characters (\") with &quot;"
                   :html html-header-before-title
                   :embeddable-html embeddable-html-fragment-header-before-title
                   :verify-only ""))
-  (let [[k title & pages] cs]
+  (let [[k title & pages] cs
+        [show-title fmt-passed-down]
+        (if (= (:fmt fmt) :embeddable-html)
+          [false (assoc fmt :fmt :html)]
+          [true fmt])]
     (verify (= k :title))
-    (let [[show-title fmt-passed-down]
-          (if (= (:fmt fmt) :embeddable-html)
-            [false (assoc fmt :fmt :html)]
-            [true fmt])]
-      (when show-title
-        (output-title fmt-passed-down title))
-      (iprintf "%s" (case (:fmt fmt)
-                      :latex latex-header-after-title
-                      :html html-header-after-title
-                      :embeddable-html embeddable-html-fragment-header-after-title
-                      :verify-only ""))
+    (when show-title
+      (output-title fmt-passed-down title))
+    (iprintf "%s" (case (:fmt fmt)
+                    :latex latex-header-after-title
+                    :html html-header-after-title
+                    :embeddable-html embeddable-html-fragment-header-after-title
+                    :verify-only ""))
+    ;; I don't know why, but if the right column on the first page is
+    ;; enough shorter than the left column on the first page, then the
+    ;; first column on the second page is displayed on the right half
+    ;; instead of the left, and the second column on the second page
+    ;; is displayed on the left instead of the right.  As a
+    ;; workaround, force the second column on the first page to be a
+    ;; bit longer by adding some vertical whitespace, in the form of
+    ;; paragraphs containing nothing but a non-blocking space.  I'm
+    ;; sure a real HTML guru would laugh (or cry) at this, and know a
+    ;; better way.
+    (with-local-vars [first-pg true
+                      spacing-hack-between-pgs
+                      (apply str (repeat 2 "    <p>&nbsp;\n"))]
       (doseq [[k pg] (partition 2 pages)]
         (verify (= k :page))
+        (if @first-pg
+          (var-set first-pg false)
+          (iprintf "%s" (case (:fmt fmt)
+                          :latex ""
+                          :html @spacing-hack-between-pgs
+                          :embeddable-html @spacing-hack-between-pgs
+                          :verify-only "")))
         (output-page fmt-passed-down pg))))
   (iprintf "%s" (case (:fmt fmt)
                   :latex latex-footer
