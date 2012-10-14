@@ -24,9 +24,6 @@ Introductory material on Lisp family languages, but not Clojure in particular:
 Intermediate to advanced material on Common Lisp macros:
     "On Lisp", Paul Graham, TBD: find link to free copy
 
-Add example literals: octal 017 hex 0xff scientific notation -1.1e-1
-any base up to 36: 2r1010
-
 Add tooltips for links that do not go to clojuredocs.org.  They don't
 have to be anything fancy -- just something that makes it obvious they
 are not doc strings, and the web page isn't 'broken'.
@@ -65,27 +62,27 @@ Add links to entire namespaces on clojuredocs.org, e.g.:
 http://clojuredocs.org/clojure_core/clojure.java.io
 
 
-yes clojure.core
-no  clojure.core.protocols (and keep it no?)
-yes clojure.data
+therenow  clojure.core
+notthere  clojure.core.protocols (and keep it notthere?)
+therenow  clojure.data
 TBD clojure.inspector
-TBDhi clojure.java.browse  (only clojure.java.browse/browse-url)
-no  clojure.java.browse-ui (and keep it no?)
-yes clojure.java.io
-yes clojure.java.javadoc
-TBD clojure.java.shell     (only sh, with-sh-env, with-sh-dir)
+therenow  clojure.java.browse  (only clojure.java.browse/browse-url)
+notthere  clojure.java.browse-ui (and keep it notthere?)
+therenow  clojure.java.io
+therenow  clojure.java.javadoc
+therenow  clojure.java.shell   (only sh, with-sh-env, with-sh-dir)
 TBD clojure.main           (TBD: What is worth adding to cheatsheet, if any?)
-yes clojure.pprint
+therenow  clojure.pprint
 TBD clojure.reflect        (only reflect)
-yes clojure.repl
-yes clojure.set
+therenow  clojure.repl
+therenow  clojure.set
 TBD clojure.stacktrace     (TBD: What is worth adding to cheatsheet, if any?  Is anything here more useful in any way than clojure.repl/pst ?)
-yes clojure.string
+therenow  clojure.string
 TBDlo clojure.template
 TBD clojure.test
-TBDhi clojure.walk    (TBD: at least walk, prewalk, postwalk.  Anything else?)
-yes clojure.xml (only parse so far.  TBD: Anything else worth adding?)
-yes clojure.zip
+therenow  clojure.walk
+therenow  clojure.xml (only parse so far.  TBD: Anything else worth adding?)
+therenow  clojure.zip
 
 Pages listing other Clojure libraries:
     http://www.clojure-toolbox.com/

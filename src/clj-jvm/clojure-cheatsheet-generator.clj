@@ -115,8 +115,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 \\& 1.4, sheet v1.6)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 & 1.4, sheet v1.6)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 \\& 1.4, sheet v7)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 & 1.4, sheet v7)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -131,7 +131,11 @@
               :subsection "Numbers"
               :table [["Literals" :cmds '[{:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/lang/Long.html}{Long}:"
                                            :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/Long.html\">Long</a>:"}
-                                          "7"
+                                          "7,"
+                                          "hex" "0xff,"
+                                          "oct" "017,"
+                                          "base 2" "2r1011,"
+                                          "base 36" "36rCRAZY"
                                           "BigInt:"
                                           "7N"
                                           "Ratio:"
@@ -139,6 +143,7 @@
                                           {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/lang/Double.html}{Double}:"
                                            :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/Double.html\">Double</a>:"}
                                           "2.78"
+                                          "-1.2e-5"
                                           {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/math/BigDecimal.html}{BigDecimal}:"
                                            :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/math/BigDecimal.html\">BigDecimal</a>:"}
                                           "4.2M"
@@ -154,7 +159,7 @@
                       ["Test" :cmds-with-frenchspacing '[nil? identical? zero?
                                                          pos? neg? even? odd?]]
                       ["Random" :cmds '[rand rand-int]]
-                      ["BigInt" :cmds '[with-precision]]
+                      ["BigDecimal" :cmds '[with-precision]]
                       ["Unchecked" :cmds '[*unchecked-math*
                                            [:common-prefix-suffix
                                             unchecked- -int
@@ -220,7 +225,17 @@
              [:box "yellow"
               :section "Collections"
               :subsection "Collections"
-              :table [["Generic ops" :cmds '[count empty not-empty into conj]]
+              :table [["Generic ops" :cmds '[count empty not-empty into conj
+                                             {:latex "\\textmd{\\textsf{(clojure.walk/)}}",
+                                              :html "(clojure.walk/)"}
+                                             clojure.walk/walk
+                                             clojure.walk/prewalk
+                                             clojure.walk/prewalk-demo
+                                             clojure.walk/prewalk-replace
+                                             clojure.walk/postwalk
+                                             clojure.walk/postwalk-demo
+                                             clojure.walk/postwalk-replace
+                                             ]]
                       ["Content tests" :cmds '[distinct? empty?
                                                every? not-every? some not-any?]]
                       ["Capabilities" :cmds '[sequential? associative? sorted?
@@ -442,6 +457,11 @@
                                        :html "(clojure.java.io/)"}
                                       clojure.java.io/file
                                       clojure.java.io/copy
+                                      clojure.java.io/delete-file
+                                      clojure.java.io/resource
+                                      clojure.java.io/as-file
+                                      clojure.java.io/as-url
+                                      clojure.java.io/as-relative-path
                                       {:latex "\\textmd{\\textsf{GitHub:}}",
                                        :html "GitHub:"}
                                       {:latex "\\href{http://github.com/Raynes/fs}{fs}"
@@ -561,8 +581,11 @@
               ]
              [:box "green"
               :section "Macros"
-              :table [["Create" :cmds '[defmacro definline
-                                        macroexpand-1 macroexpand]]
+              :table [["Create" :cmds '[defmacro definline]]
+                      ["Debug" :cmds '[macroexpand-1 macroexpand
+                                       {:latex "\\textmd{\\textsf{(clojure.walk/)}}",
+                                        :html "(clojure.walk/)"}
+                                       clojure.walk/macroexpand-all]]
                       ["Branch" :cmds '[and or when when-not when-let
                                         when-first if-not if-let cond condp
                                         case]]
@@ -834,7 +857,17 @@
                                       *warn-on-reflection* compile gen-class
                                       gen-interface loaded-libs test]]
                       ["Misc" :cmds '[eval force hash name *clojure-version*
-                                      clojure-version *command-line-args*]]]
+                                      clojure-version *command-line-args*]]
+                      [{:latex "\\begin{tabular}[t]{@{}l@{}} Browser \\\\ / Shell \\end{tabular}"
+                        :html "Browser / Shell"}
+                       :cmds '[{:latex "\\textmd{\\textsf{(clojure.java.browse/)}}",
+                                :html "(clojure.java.browse/)"}
+                               clojure.java.browse/browse-url
+                               {:latex "\\textmd{\\textsf{(clojure.java.shell/)}}",
+                                :html "(clojure.java.shell/)"}
+                               clojure.java.shell/sh
+                               clojure.java.shell/with-sh-dir
+                               clojure.java.shell/with-sh-env]]]
               ]
 ;             [:footer
 ;               tbd
@@ -919,10 +952,18 @@
        :symbol-list (keys (ns-publics 'clojure.java.io)),
        :clojure-base-url "http://clojure.github.com/clojure/clojure.java.io-api.html#clojure.java.io/",
        :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.io/"}
+      {:namespace-str "clojure.java.browse"
+       :symbol-list (keys (ns-publics 'clojure.java.browse)),
+       :clojure-base-url "http://clojure.github.com/clojure/clojure.java.browse-api.html#clojure.java.browse/",
+       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.browse/"}
       {:namespace-str "clojure.java.javadoc"
        :symbol-list (keys (ns-publics 'clojure.java.javadoc)),
        :clojure-base-url "http://clojure.github.com/clojure/clojure.java.javadoc-api.html#clojure.java.javadoc/",
        :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.javadoc/"}
+      {:namespace-str "clojure.java.shell"
+       :symbol-list (keys (ns-publics 'clojure.java.shell)),
+       :clojure-base-url "http://clojure.github.com/clojure/clojure.java.shell-api.html#clojure.java.shell/",
+       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.java.shell/"}
       {:namespace-str "clojure.pprint"
        :symbol-list (keys (ns-publics 'clojure.pprint)),
        :clojure-base-url "http://clojure.github.com/clojure/clojure.pprint-api.html#clojure.pprint/",
@@ -939,6 +980,10 @@
        :symbol-list (keys (ns-publics 'clojure.string)),
        :clojure-base-url "http://clojure.github.com/clojure/clojure.string-api.html#clojure.string/",
        :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.string/"}
+      {:namespace-str "clojure.walk"
+       :symbol-list (keys (ns-publics 'clojure.walk)),
+       :clojure-base-url "http://clojure.github.com/clojure/clojure.walk-api.html#clojure.walk/",
+       :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.walk/"}
       {:namespace-str "clojure.xml"
        :symbol-list (keys (ns-publics 'clojure.xml)),
        :clojure-base-url "http://clojure.github.com/clojure/clojure.xml-api.html#clojure.xml/",
@@ -1290,12 +1335,15 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
 ;; it seems best to leave the namespace in there explicitly.
 
 (defn remove-common-ns-prefix [s]
-  (cond (has-prefix? s "clojure.java.io/") (subs s (count "clojure.java.io/"))
+  (cond (has-prefix? s "clojure.java.browse/") (subs s (count "clojure.java.browse/"))
+        (has-prefix? s "clojure.java.io/") (subs s (count "clojure.java.io/"))
         (has-prefix? s "clojure.java.javadoc/") (subs s (count "clojure.java.javadoc/"))
+        (has-prefix? s "clojure.java.shell/") (subs s (count "clojure.java.shell/"))
         (has-prefix? s "clojure.pprint/") (subs s (count "clojure.pprint/"))
         (has-prefix? s "clojure.repl/") (subs s (count "clojure.repl/"))
         (has-prefix? s "clojure.set/") (subs s (count "clojure.set/"))
         (has-prefix? s "clojure.string/") (subs s (count "clojure.string/"))
+        (has-prefix? s "clojure.walk/") (subs s (count "clojure.walk/"))
         (has-prefix? s "clojure.zip/") (subs s (count "clojure.zip/"))
         :else s))
 
@@ -1619,7 +1667,7 @@ characters (\") with &quot;"
     ;; better way.
     (with-local-vars [first-pg true
                       spacing-hack-between-pgs
-                      (apply str (repeat 2 "    <p>&nbsp;\n"))]
+                      (apply str (repeat 4 "    <p>&nbsp;\n"))]
       (doseq [[k pg] (partition 2 pages)]
         (verify (= k :page))
         (if @first-pg
