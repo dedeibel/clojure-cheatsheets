@@ -1,4 +1,22 @@
 ----------------------------------------------------------------------
+Oct 8, 2012 - Clojure 1.3 & 1.4, sheet v1.6
+
+Added *unchecked-math* and the following symbols from Clojure 1.4, all
+marked with (1.4) on the sheet:
+
+Extensible data literals in reader: 
+*data-readers*, default-data-readers 
+
+New operations on vectors: 
+mapv, filterv, reduce-kv 
+
+Data-conveying exceptions: 
+ex-data, ex-info 
+
+Since ClojureDocs.org has no symbols new to Clojure 1.4 yet, all links
+for those symbols always go instead to the Clojure API documentation
+on Github.
+----------------------------------------------------------------------
 March 22, 2012 - Clojure 1.3.0, sheet v1.4
 
 Added (tutorial) entries in Namespace/Create and Loading/Load Libs

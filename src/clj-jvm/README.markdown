@@ -13,10 +13,11 @@ clickable links to the documentation on either
 [clojure github]: http://clojure.github.com
 [clojuredocs]: http://clojuredocs.org
 
-The cheat sheet generated is currently specific to Clojure 1.3.  It is
-easier to simply change this program as desired for later versions of
-Clojure, rather than try to have the same program able to generate
-cheatsheets for multiple Clojure versions.
+The cheat sheet generated is currently specific to Clojure 1.3 and
+1.4.  At some point it will likely be easier to simply change this
+program as desired for later versions of Clojure, rather than try to
+have the same program able to generate cheatsheets for too many
+Clojure versions.
 
 # Generating cheat sheet files
 
