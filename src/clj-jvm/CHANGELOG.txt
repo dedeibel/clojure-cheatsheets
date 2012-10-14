@@ -12,7 +12,7 @@ Changed category of with-decimal from BigInt to BigDecimal
 
 Added most clojure.walk functions to Collections/Generic ops section.
 
-Added more clojuare.java.io functions to IO/Misc section.
+Added more clojure.java.io functions to IO/Misc section.
 
 Created new section Macros/Debug for all macroexpand functions
 (formerly in Macros/Create).
