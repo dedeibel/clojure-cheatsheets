@@ -1,8 +1,9 @@
 #! /bin/bash
 
-JAR_DIR="$HOME/lein/clj-1.4.0/lib"
+set -x
+JAR_DIR="$HOME/lein/clojure-1.4.0/lib"
 CLASSPATH="${JAR_DIR}/clojure-1.4.0.jar"
-#JAR_DIR="$HOME/lein/clj-1.5.0-alpha6/lib"
+#JAR_DIR="$HOME/lein/clojure-1.5.0-alpha6/lib"
 #CLASSPATH="${JAR_DIR}/clojure-1.5.0-alpha6.jar"
 
 # 3 choices for links: none, to clojure.github.org, or to
