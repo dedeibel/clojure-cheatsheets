@@ -158,6 +158,20 @@ underive
 with-bindings
 
 
+Next, a short list of deprecated things that definitely should not be
+in the cheat sheet:
+
+add-classpath :deprecated "1.1" (no documented replacement)
+agent-errors :deprecated "1.2" (use agent-error, which is in sheet)
+clear-agent-errors :deprecated "1.2" (use restart-agent, which is in sheet)
+replicate :deprecated "1.3" (use repeat, which is in sheet)
+
+There are a few other things in clojure.test, clojure.parallel (the
+whole namespace), and contrib lib tools.namespace, but that appears to
+be all of the Vars that are deprecated.
+
+
+
 
 Now the complete list:
 
