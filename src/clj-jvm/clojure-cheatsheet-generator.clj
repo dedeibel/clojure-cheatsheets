@@ -341,13 +341,14 @@
                                             iterator-seq enumeration-seq]]
                       ["From seq" :cmds '[keep keep-indexed]]]
               :subsection "Seq in, Seq out"
-              :table [["Get shorter" :cmds '[distinct filter remove for]]
+              :table [["Get shorter" :cmds '[distinct filter remove
+                                             take-nth for]]
                       ["Get longer" :cmds '[cons conj concat lazy-cat mapcat
                                             cycle interleave interpose]]
                       ["Tail-items" :cmds '[rest nthrest fnext nnext
                                             drop drop-while take-last for]]
-                      ["Head-items" :cmds '[take take-nth take-while
-                                            butlast drop-last for]]
+                      ["Head-items" :cmds '[take take-while butlast
+                                            drop-last for]]
                       [{:html "'Change'", :latex "`Change'"}
                        :cmds '[conj concat distinct flatten group-by
                                partition partition-all partition-by
