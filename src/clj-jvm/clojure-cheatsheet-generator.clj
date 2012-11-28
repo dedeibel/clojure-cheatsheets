@@ -726,8 +726,8 @@
               :table [[{:latex "\\begin{tabular}[t]{@{}l@{}} Binding Forms / \\\\ Destructuring \\end{tabular}"
                         :html "Binding Forms / Destructuring"}
                        :cmds '[
-                               {:latex "(\\href{http://clojure.org/special\\_forms\\#let}{examples})"
-                                :html "(<a href=\"http://clojure.org/special_forms#let\">examples</a>)"}
+                               {:latex "(\\href{http://clojure.org/special\\_forms\\#binding-forms}{examples})"
+                                :html "(<a href=\"http://clojure.org/special_forms#binding-forms\">examples</a>)"}
                                let fn defn defmacro
                                loop for doseq if-let when-let]]
                       ]
