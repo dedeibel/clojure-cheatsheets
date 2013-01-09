@@ -666,20 +666,20 @@
                       ["Common" :cmds [{:latex (str
                                                 "\\cmd{\\^{}:dynamic} "
                                                 "\\cmd{\\^{}:private} "
-                                                "\\cmd{\\^{}:static} "
+                                                "\\cmd{\\^{}:doc} "
                                                 "\\cmd{\\^{}:const}"
                                                 )
                                         :html (str
                                                "<code>"
                                                "^:dynamic "
                                                "^:private "
-                                               "^:static "
+                                               "^:doc "
                                                "^:const"
                                                "</code>")}
                                         ]]
                       ["Examples" :cmds '[
-                                         {:latex "\\cmd{(defn \\^{}:private \\^{}:static \\^{}String my-fn ...)}"
-                                          :html "<code>(defn ^:private ^:static ^String my-fn ...)</code>"}
+                                         {:latex "\\cmd{(defn \\^{}:private \\^{}String my-fn ...)}"
+                                          :html "<code>(defn ^:private ^String my-fn ...)</code>"}
                                          {:latex " \\ \\ \\ " ; fragile hack to get 2nd example to start on next line
                                           :html " <br>"}
                                          {:latex "\\cmd{(def \\^{}:dynamic *dyn-var* val)}"
