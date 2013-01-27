@@ -1391,22 +1391,29 @@ characters (\") with &quot;"
                                      (mapcat str/split-lines
                                              (map :body (:examples sym-info)))))
         num-see-alsos (count (:see-alsos sym-info))
-        num-comments (count (:comments sym-info))]
+        num-comments (count (:comments sym-info))
+        see-also-style :list-see-alsos]
     (str (case num-examples
            0 "0 examples"
            1 (format "1 example with %d lines"
                      total-example-lines)
            (format "%d examples totaling %d lines"
                    num-examples total-example-lines))
-         (if (zero? num-see-alsos)
-           ""
+         (if (and (= see-also-style :number-of-see-alsos)
+                  (> num-see-alsos 0))
            (format ", %d see also%s" num-see-alsos
-                   (if (== num-see-alsos 1) "" "s")))
+                   (if (== num-see-alsos 1) "" "s"))
+           "")
          (if (zero? num-comments)
            ""
            (format ", %d comment%s" num-comments
                    (if (== num-comments 1) "" "s")))
-         " on " snap-time)))
+         " on " snap-time
+         (if (and (= see-also-style :list-see-alsos)
+                  (> num-see-alsos 0))
+           (str "\nSee also: "
+                (str/join ", " (map :name (:see-alsos sym-info))))
+           ""))))
 
 
 (defn table-one-cmd-to-str [fmt cmd prefix suffix]
