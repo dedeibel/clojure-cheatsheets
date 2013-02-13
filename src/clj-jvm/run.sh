@@ -5,7 +5,9 @@ JAR_DIR="$HOME/lein/clojure-1.4.0/lib"
 # TBD: This is a hack, depending on a particular version of
 # tools.reader to have already been downloaded and copied into your
 # local Maven repository.  Should use Leiningen instead.
-CLASSPATH="${JAR_DIR}/clojure-1.4.0.jar:${HOME}/.m2/repository/org/clojure/tools.reader/0.6.5/tools.reader-0.6.5.jar"
+#TOOLS_READER_JAR="${HOME}/.m2/repository/org/clojure/tools.reader/0.6.5/tools.reader-0.6.5.jar"
+TOOLS_READER_JAR="${HOME}/clj/contrib-libs/tools.reader/target/tools.reader-0.6.6-SNAPSHOT.jar"
+CLASSPATH="${JAR_DIR}/clojure-1.4.0.jar:${TOOLS_READER_JAR}"
 #JAR_DIR="$HOME/lein/clojure-1.5.0-alpha6/lib"
 #CLASSPATH="${JAR_DIR}/clojure-1.5.0-alpha6.jar"
 

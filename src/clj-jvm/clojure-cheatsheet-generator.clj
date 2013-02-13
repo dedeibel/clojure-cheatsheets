@@ -425,11 +425,6 @@
                                              {:latex "\\textmd{\\textsf{(clojure.tools.reader.edn/)}}",
                                               :html "(clojure.tools.reader.edn/)"}
                                              clojure.tools.reader.edn/read
-                                             {:latex "\\textmd{\\textsf{(clojure.core/)}}",
-                                              :html "(clojure.core/)"}
-                                             read
-                                             {:latex "\\textmd{\\textsf{(WARNING! side effects include arbitrary code execution)}}",
-                                              :html "(WARNING! side effects include arbitrary code execution)"}
                                              {:latex "\\textmd{\\textsf{also:}}",
                                               :html "also:"}
                                              "(binding [*in* reader] ...)"
@@ -441,11 +436,6 @@
                                              {:latex "\\textmd{\\textsf{(clojure.tools.reader.edn/)}}",
                                               :html "(clojure.tools.reader.edn/)"}
                                              clojure.tools.reader.edn/read-string
-                                             {:latex "\\textmd{\\textsf{(clojure.core/)}}",
-                                              :html "(clojure.core/)"}
-                                             read-string
-                                             {:latex "\\textmd{\\textsf{(WARNING! side effects include arbitrary code execution)}}",
-                                              :html "(WARNING! side effects include arbitrary code execution)"}
                                              ]]
                       ["Open" :cmds '[with-open
 ;                                      {:latex "\\textmd{\\textsf{string:}}",
@@ -1390,14 +1380,14 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
 
 (defn cleanup-doc-str-tooltip
   "Get rid of the first line of the doc string, which is always a line
-of dashes, and keep at most the first 15 lines of the doc string, to
+of dashes, and keep at most the first 25 lines of the doc string, to
 keep the tooltip from being too large.  Also replace double quote
 characters (\") with &quot;"
   [s]
   (let [max-line-width 80
         lines (-> s (str/split-lines) (rest))
         lines (mapcat #(wrap-line % max-line-width) lines)
-        max-to-keep 15
+        max-to-keep 25
         combined-lines
         (if (> (count lines) max-to-keep)
           (str (str/trim-newline (str/join "\n" (take max-to-keep lines)))
