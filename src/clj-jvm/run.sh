@@ -2,7 +2,10 @@
 
 set -x
 JAR_DIR="$HOME/lein/clojure-1.4.0/lib"
-CLASSPATH="${JAR_DIR}/clojure-1.4.0.jar"
+# TBD: This is a hack, depending on a particular version of
+# tools.reader to have already been downloaded and copied into your
+# local Maven repository.  Should use Leiningen instead.
+CLASSPATH="${JAR_DIR}/clojure-1.4.0.jar:${HOME}/.m2/repository/org/clojure/tools.reader/0.6.5/tools.reader-0.6.5.jar"
 #JAR_DIR="$HOME/lein/clojure-1.5.0-alpha6/lib"
 #CLASSPATH="${JAR_DIR}/clojure-1.5.0-alpha6.jar"
 
@@ -44,9 +47,9 @@ fi
 # Make multiple full versions for those who prefer something else,
 # e.g. no tooltips.
 ######################################################################
-for TOOLTIPS in no-tooltips use-title-attribute tiptip
+for TOOLTIPS in tiptip use-title-attribute no-tooltips
 do
-    for CDOCS_SUMMARY in no-cdocs-summary cdocs-summary
+    for CDOCS_SUMMARY in cdocs-summary no-cdocs-summary
     do
 	case "${CDOCS_SUMMARY}" in
 	no-cdocs-summary) CLOJUREDOCS_SNAPSHOT=""
@@ -65,6 +68,9 @@ do
 	    exit ${EXIT_STATUS}
 	fi
 	/bin/mv cheatsheet-full.html cheatsheet-${TOOLTIPS}-${CDOCS_SUMMARY}.html
+	# Uncomment following line if you want to test new changes
+	# with generating only the first variant of the cheatsheet.
+	#exit 0
     done
 done
 

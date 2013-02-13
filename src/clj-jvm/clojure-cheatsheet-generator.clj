@@ -3,6 +3,7 @@
   (:require [clojure.set :as set])
   (:require [clojure.java.javadoc])
   (:require [clojure.java.io :as io])
+  (:require [clojure.tools.reader.edn])
   (:require [clojure data pprint repl set string xml zip]))
 
 ;; Andy Fingerhut
@@ -115,8 +116,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 \\& 1.4, sheet v7)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 & 1.4, sheet v7)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 \\& 1.4, sheet v8)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 & 1.4, sheet v8)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -415,15 +416,37 @@
                                            "(binding [*out* writer] ...)"]]
                       ["to string" :cmds '[format with-out-str pr-str
                                            prn-str print-str println-str]]
-                      ["from *in*" :cmds '[read-line read]]
-                      ["from reader" :cmds '[line-seq read
+                      ["from *in*" :cmds '[read-line
+                                           {:latex "\\textmd{\\textsf{(clojure.tools.reader.edn/)}}",
+                                            :html "(clojure.tools.reader.edn/)"}
+                                           clojure.tools.reader.edn/read
+                                           ]]
+                      ["from reader" :cmds '[line-seq
+                                             {:latex "\\textmd{\\textsf{(clojure.tools.reader.edn/)}}",
+                                              :html "(clojure.tools.reader.edn/)"}
+                                             clojure.tools.reader.edn/read
+                                             {:latex "\\textmd{\\textsf{(clojure.core/)}}",
+                                              :html "(clojure.core/)"}
+                                             read
+                                             {:latex "\\textmd{\\textsf{(WARNING! side effects include arbitrary code execution)}}",
+                                              :html "(WARNING! side effects include arbitrary code execution)"}
                                              {:latex "\\textmd{\\textsf{also:}}",
                                               :html "also:"}
                                              "(binding [*in* reader] ...)"
                                              {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/io/Reader.html}{java.io.Reader}"
                                               :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/io/Reader.html\">java.io.Reader</a>"}
                                              ]]
-                      ["from string" :cmds '[read-string with-in-str]]
+                      ["from string" :cmds '[
+                                             with-in-str
+                                             {:latex "\\textmd{\\textsf{(clojure.tools.reader.edn/)}}",
+                                              :html "(clojure.tools.reader.edn/)"}
+                                             clojure.tools.reader.edn/read-string
+                                             {:latex "\\textmd{\\textsf{(clojure.core/)}}",
+                                              :html "(clojure.core/)"}
+                                             read-string
+                                             {:latex "\\textmd{\\textsf{(WARNING! side effects include arbitrary code execution)}}",
+                                              :html "(WARNING! side effects include arbitrary code execution)"}
+                                             ]]
                       ["Open" :cmds '[with-open
 ;                                      {:latex "\\textmd{\\textsf{string:}}",
 ;                                       :html "string:"}
@@ -902,6 +925,8 @@
 (defn read-safely [x & opts]
   (with-open [r (java.io.PushbackReader. (apply io/reader x opts))]
     (binding [*read-eval* false]
+      ;; TBD: Change read to clojure.tools.reader.edn after it is
+      ;; updated to work with java.io.PushbackReader instances.
       (read r))))
 
 
@@ -1029,7 +1054,7 @@
          [])
 
    ;; Manually specify links to clojure.org API documentation for
-   ;; symbols that are new in Clojure 1.3, because ClojureDocs.org
+   ;; symbols that are new in Clojure 1.4, because ClojureDocs.org
    ;; doesn't have Clojure 1.4 symbols.
    (map (fn [sym-str]
           [sym-str
@@ -1042,7 +1067,14 @@
           "reduce-kv"
           "ex-info"
           "ex-data" ])
-    ))
+
+   ;; These symbols do not have API docs anywhere that I can find,
+   ;; yet.  Point at the github page for tools.reader for now.
+   (map (fn [sym-str]
+          [sym-str "http://github.com/clojure/tools.reader" ])
+        [ "clojure.tools.reader.edn/read"
+          "clojure.tools.reader.edn/read-string" ])
+   ))
 
 
 (defn symbol-url-pairs [link-target-site]
@@ -1335,18 +1367,25 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
 ;; cheatsheet.  For the ones that only have one or a few symbol there,
 ;; it seems best to leave the namespace in there explicitly.
 
+(def +common-namespaces-to-remove-from-shown-symbols+
+  ["clojure.java.browse/"
+   "clojure.java.io/"
+   "clojure.java.javadoc/"
+   "clojure.java.shell/"
+   "clojure.pprint/"
+   "clojure.repl/"
+   "clojure.set/"
+   "clojure.string/"
+   "clojure.tools.reader.edn/"
+   "clojure.walk/"
+   "clojure.zip/"
+   ])
+
 (defn remove-common-ns-prefix [s]
-  (cond (has-prefix? s "clojure.java.browse/") (subs s (count "clojure.java.browse/"))
-        (has-prefix? s "clojure.java.io/") (subs s (count "clojure.java.io/"))
-        (has-prefix? s "clojure.java.javadoc/") (subs s (count "clojure.java.javadoc/"))
-        (has-prefix? s "clojure.java.shell/") (subs s (count "clojure.java.shell/"))
-        (has-prefix? s "clojure.pprint/") (subs s (count "clojure.pprint/"))
-        (has-prefix? s "clojure.repl/") (subs s (count "clojure.repl/"))
-        (has-prefix? s "clojure.set/") (subs s (count "clojure.set/"))
-        (has-prefix? s "clojure.string/") (subs s (count "clojure.string/"))
-        (has-prefix? s "clojure.walk/") (subs s (count "clojure.walk/"))
-        (has-prefix? s "clojure.zip/") (subs s (count "clojure.zip/"))
-        :else s))
+  (if-let [pre (first (filter #(has-prefix? s %)
+                              +common-namespaces-to-remove-from-shown-symbols+))]
+    (subs s (count pre))
+    s))
 
 
 (defn cleanup-doc-str-tooltip
