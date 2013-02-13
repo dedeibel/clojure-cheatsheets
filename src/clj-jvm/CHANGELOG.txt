@@ -1,4 +1,27 @@
 ----------------------------------------------------------------------
+Feb 13, 2013 - Clojure 1.3 & 1.4, sheet v8
+
+Moved take-nth function from "Head-items" under "Seq in, Seq out" to
+"Get shorter", which is a more accurate category for it.
+
+Update link for binding forms / destructuring examples on clojure.org.
+
+Removed :static keyword from examples in Metadata section.  It appears
+frequently in Clojure code, but it has no effect in the compiler any
+more, and is thus obsolete.
+
+For those variants of the cheatsheet that include tooltips with the
+ClojureDocs.org contents summary line, now also explicitly show the
+list of symbols that are "see also" on the ClojureDocs.org site, right
+in the tooltip.  Before it only included the number of such symbols in
+the tooltip.
+
+Add clojure.tools.reader.edn/read and read-string to the IO section.
+clojure.core/read and read-string are still there, but have a big
+warning after them right on the cheatsheet.
+
+
+----------------------------------------------------------------------
 Oct 14, 2012 - Clojure 1.3 & 1.4, sheet v7
 
 Removed "1." from cheat sheet version number, in hopes of avoiding
