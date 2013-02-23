@@ -1239,7 +1239,7 @@ document.write('<style type=\"text/css\">  @media screen {      .page { width: 6
 
 
 (defn wrap-line
-  "Given a string 'line' that is assumed not contain line separators,
+  "Given a string 'line' that is assumed not to contain line separators,
   but may contain spaces and tabs, return a sequence of strings where
   each is at most width characters long, and all 'words' (consecutive
   sequences of non-whitespace characters) are kept together in the
@@ -1440,8 +1440,11 @@ characters (\") with &quot;"
          " on " snap-time
          (if (and (= see-also-style :list-see-alsos)
                   (> num-see-alsos 0))
-           (str "\nSee also: "
-                (str/join ", " (map :name (:see-alsos sym-info))))
+           (str/join "\n"
+                     (wrap-line (str "\nSee also: "
+                                     (str/join ", " (map :name
+                                                         (:see-alsos sym-info))))
+                                72))
            ""))))
 
 
