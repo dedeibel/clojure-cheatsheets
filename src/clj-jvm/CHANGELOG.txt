@@ -1,4 +1,20 @@
 ----------------------------------------------------------------------
+Mar 1, 2013 - Clojure 1.3 - 1.5, sheet v9
+
+Added these new symbols added in Clojure 1.5:
+
+re-quote-replacement
+*default-data-reader-fn*
+as-> cond-> cond->> some-> some->>
+send-via set-agent-send-executor! set-agent-send-off-executor!
+
+Also the "Data Reader" subsection was moved from Primitives/Other
+section to IO section, where it belongs much better.
+
+Still to add: Several of the new functions in the
+clojure.core.reducers namespace.
+
+----------------------------------------------------------------------
 Feb 13, 2013 - Clojure 1.3 & 1.4, sheet v8
 
 Moved take-nth function from "Head-items" under "Seq in, Seq out" to

@@ -64,6 +64,7 @@ http://clojuredocs.org/clojure_core/clojure.java.io
 
 therenow  clojure.core
 notthere  clojure.core.protocols (and keep it notthere?)
+TBD clojure.core.reducers
 therenow  clojure.data
 TBD clojure.inspector
 therenow  clojure.java.browse  (only clojure.java.browse/browse-url)

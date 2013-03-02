@@ -4,7 +4,8 @@
   (:require [clojure.java.javadoc])
   (:require [clojure.java.io :as io])
   (:require [clojure.tools.reader.edn])
-  (:require [clojure data pprint repl set string xml zip]))
+  (:require [clojure data pprint repl set string xml zip])
+  (:require [clojure.core.reducers]))
 
 ;; Andy Fingerhut
 ;; andy_fingerhut@alum.wustl.edu
@@ -116,8 +117,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 \\& 1.4, sheet v8)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 & 1.4, sheet v8)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.5, sheet v9)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.5, sheet v9)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -184,6 +185,7 @@
                                       :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/String.html#indexOf%28java.lang.String%29\">.indexOf</a>"}
                                      {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/lang/String.html\\#lastIndexOf\\%28java.lang.String\\%29}{.lastIndexOf}"
                                       :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/String.html#lastIndexOf%28java.lang.String%29\">.lastIndexOf</a>"}
+                                     "(1.5)" clojure.string/re-quote-replacement
                                      ]]
                       [
 ;;                       "Regex"
@@ -199,7 +201,9 @@
                                        {:latex "\\textmd{\\textsf{(clojure.string/)}}",
                                         :html "(clojure.string/)"}
                                        clojure.string/replace
-                                       clojure.string/replace-first]]
+                                       clojure.string/replace-first
+                                       "(1.5)"
+                                       clojure.string/re-quote-replacement]]
                       ["Letters" :cmds '[{:latex "\\textmd{\\textsf{(clojure.string/)}}",
                                           :html "(clojure.string/)"}
                                          clojure.string/capitalize
@@ -219,8 +223,6 @@
                                             char-escape-string]]
                       ["Keywords" :cmds '[keyword keyword? find-keyword]]
                       ["Symbols" :cmds '[symbol symbol? gensym]]
-                      ["Data readers" :cmds '["(1.4)" *data-readers*
-                                              default-data-readers]]
                       ]
               ]
              [:box "yellow"
@@ -481,6 +483,9 @@
                                       {:latex "\\href{http://github.com/Raynes/fs}{fs}"
                                        :html "<a href=\"http://github.com/Raynes/fs\">fs</a>"}
                                       ]]
+                      ["Data readers" :cmds '["(1.4)" *data-readers*
+                                              default-data-readers
+                                              "(1.5)" *default-data-reader-fn*]]
                       ]
               ]
              ]
@@ -491,7 +496,9 @@
                                         constantly memfn comp complement
                                         partial juxt memoize fnil every-pred
                                         some-fn]]
-                      ["Call" :cmds '[-> ->> apply]]
+                      ["Call" :cmds '[apply -> ->>
+                                      "(1.5)" as-> cond-> cond->>
+                                      some-> some->>]]
                       ["Test" :cmds '[fn? ifn?]]]
               ]
              [:box "orange"
@@ -604,7 +611,9 @@
                                         when-first if-not if-let cond condp
                                         case]]
                       ["Loop" :cmds '[for doseq dotimes while]]
-                      ["Arrange" :cmds '[.. doto ->]]
+                      ["Arrange" :cmds '[.. doto -> ->>
+                                         "(1.5)" as-> cond-> cond->>
+                                         some-> some->>]]
                       ["Scope" :cmds '[binding locking time
                                        [:common-prefix with-
                                        in-str local-vars open out-str
@@ -817,7 +826,10 @@
                            :html "Agents and Asynchronous Actions (<a href=\"http://clojure.org/agents\">clojure.org/agents</a>)"}
               :table [["Create" :cmds '[agent]]
                       ["Examine" :cmds '[agent-error]]
-                      ["Change state" :cmds '[send send-off restart-agent]]
+                      ["Change state" :cmds '[send send-off restart-agent
+                                              "(1.5)"
+                                              send-via set-agent-send-executor!
+                                              set-agent-send-off-executor!]]
                       ["Block waiting" :cmds '[await await-for]]
                       ["Ref validators" :cmds '[set-validator! get-validator]]
                       ["Watchers" :cmds '[add-watch remove-watch]]
@@ -1008,6 +1020,13 @@
        :symbol-list (keys (ns-publics 'clojure.zip)),
        :clojure-base-url "http://clojure.github.com/clojure/clojure.zip-api.html#clojure.zip/",
        :clojuredocs-base-url "http://clojuredocs.org/clojure_core/clojure.zip/"}
+      {:namespace-str "clojure.core.reducers"
+       :symbol-list (keys (ns-publics 'clojure.core.reducers)),
+       :clojure-base-url "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core.reducers/",
+       ;; There is no documentation for clojure.core.reducers
+       ;; namespace on ClojureDocs.org as of March 2013, so just use
+       ;; the same URL as above for now.
+       :clojuredocs-base-url "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core.reducers/"}
       ])))
 
 
@@ -1044,19 +1063,42 @@
          [])
 
    ;; Manually specify links to clojure.org API documentation for
-   ;; symbols that are new in Clojure 1.4, because ClojureDocs.org
-   ;; doesn't have Clojure 1.4 symbols.
+   ;; symbols that are new in Clojure 1.4 and 1.5, because
+   ;; ClojureDocs.org doesn't have those symbols yet.
    (map (fn [sym-str]
           [sym-str
            (str "http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/"
                 sym-str)])
-        [ "*data-readers*"
-          "default-data-readers"
-          "mapv"
-          "filterv"
-          "reduce-kv"
-          "ex-info"
-          "ex-data" ])
+        [
+         ;; New in Clojure 1.4
+         "*data-readers*"
+         "default-data-readers"
+         "mapv"
+         "filterv"
+         "reduce-kv"
+         "ex-info"
+         "ex-data"
+
+         ;; New in Clojure 1.5
+         "*default-data-reader-fn*"
+         "as->"
+         "cond->"
+         "cond->>"
+         "some->"
+         "some->>"
+         "send-via"
+         "set-agent-send-executor!"
+         "set-agent-send-off-executor!"
+         ])
+
+   (map (fn [sym-str]
+          [sym-str
+           (str "http://clojure.github.com/clojure/clojure.string-api.html#"
+                sym-str)])
+        [
+         ;; New in Clojure 1.5
+         "clojure.string/re-quote-replacement"
+         ])
 
    ;; These symbols do not have API docs anywhere that I can find,
    ;; yet.  Point at the github page for tools.reader for now.
@@ -1176,13 +1218,13 @@
 
 
 (def latex-a4-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=8.0pt]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.8pt]{scrreprt}\n"
           latex-header-except-documentclass))
 
 ;; US letter is a little shorter, so formatting gets completely messed
 ;; up unless we use a slightly smaller font size.
 (def latex-usletter-header-before-title
-     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.7pt,letterpaper]{scrreprt}\n"
+     (str "\\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.6pt,letterpaper]{scrreprt}\n"
           latex-header-except-documentclass))
 
 
