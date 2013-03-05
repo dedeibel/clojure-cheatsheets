@@ -4,7 +4,7 @@ set -x
 # TBD: This is a hack, depending on a particular version of
 # tools.reader to have already been downloaded and copied into your
 # local Maven repository.  Should use Leiningen instead.
-TOOLS_READER_JAR="${HOME}/.m2/repository/org/clojure/tools.reader/0.7.0/tools.reader-0.7.0.jar"
+TOOLS_READER_JAR="${HOME}/.m2/repository/org/clojure/tools.reader/0.7.2/tools.reader-0.7.2.jar"
 JSR166Y_JAR="${HOME}/.m2/repository/org/codehaus/jsr166-mirror/jsr166y/1.7.0/jsr166y-1.7.0.jar"
 #JAR_DIR="$HOME/lein/clojure-1.4.0/lib"
 #CLASSPATH="${JAR_DIR}/clojure-1.4.0.jar:${TOOLS_READER_JAR}"
