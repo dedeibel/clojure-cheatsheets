@@ -179,13 +179,13 @@
                                      clojure.string/replace
                                      clojure.string/replace-first
                                      clojure.string/reverse
+                                     "(1.5)" clojure.string/re-quote-replacement
                                      {:latex "(\\href{http://docs.oracle.com/javase/6/docs/api/java/lang/String.html}{String})"
                                       :html "(<a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/String.html\">java.lang.String</a>)"}
                                      {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/lang/String.html\\#indexOf\\%28java.lang.String\\%29}{.indexOf}"
                                       :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/String.html#indexOf%28java.lang.String%29\">.indexOf</a>"}
                                      {:latex "\\href{http://docs.oracle.com/javase/6/docs/api/java/lang/String.html\\#lastIndexOf\\%28java.lang.String\\%29}{.lastIndexOf}"
                                       :html "<a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/String.html#lastIndexOf%28java.lang.String%29\">.lastIndexOf</a>"}
-                                     "(1.5)" clojure.string/re-quote-replacement
                                      ]]
                       [
 ;;                       "Regex"
