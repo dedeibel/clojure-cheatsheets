@@ -117,8 +117,8 @@
 
 
 (def cheatsheet-structure
-     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.5, sheet v9)"
-              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.5, sheet v9)"}
+     [:title {:latex "Clojure Cheat Sheet (Clojure 1.3 - 1.5, sheet v10)"
+              :html "Clojure Cheat Sheet (Clojure 1.3 - 1.5, sheet v10)"}
       :page [:column
              [:box "green"
               :section "Documentation"
@@ -743,7 +743,7 @@
              [:box "red"
               :section {:latex "Special Forms (\\href{http://clojure.org/special\\_forms}{clojure.org/special\\_forms})"
                         :html "Special Forms (<a href=\"http://clojure.org/special_forms\">clojure.org/special_forms</a>)"}
-              :cmds-one-line '[def if do let quote var fn loop
+              :cmds-one-line '[def if do let letfn quote var fn loop
                                recur throw try monitor-enter monitor-exit]
               :table [[{:latex "\\begin{tabular}[t]{@{}l@{}} Binding Forms / \\\\ Destructuring \\end{tabular}"
                         :html "Binding Forms / Destructuring"}
