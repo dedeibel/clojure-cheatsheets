@@ -13,11 +13,12 @@ clickable links to the documentation on either
 [clojure github]: http://clojure.github.com
 [clojuredocs]: http://clojuredocs.org
 
-The cheat sheet generated is currently specific to Clojure 1.3 and
-1.4.  At some point it will likely be easier to simply change this
-program as desired for later versions of Clojure, rather than try to
-have the same program able to generate cheatsheets for too many
-Clojure versions.
+The cheat sheet generated is currently specific to Clojure versions
+1.3 through 1.5.1, with new symbols added in Clojure 1.4 and 1.5
+marked with "(1.4)" or "(1.5)".  At some point it will likely be
+easier to simply change this program as desired for later versions of
+Clojure, rather than try to have the same program able to generate
+cheatsheets for too many Clojure versions.
 
 # Generating cheat sheet files
 
@@ -33,12 +34,31 @@ Run this command:
 
 Output files are:
 
-* `cheatsheet-full.html`
-* `cheatsheet-embeddable.html`
+* `cheatsheet-no-tooltips-no-cdocs-summary.html`
+* `cheatsheet-tiptip-cdocs-summary.html`
+* `cheatsheet-tiptip-no-cdocs-summary.html`
+* `cheatsheet-use-title-attribute-cdocs-summary.html`
+* `cheatsheet-use-title-attribute-no-cdocs-summary.html`
 
-    The full version is a standalone HTML file that is useful for
-    viewing locally with a web browser while testing changes to the
-    program.  The embeddable version is almost the same, except only
+    Five different full versions of the standalone HTML files are
+    generated, plus one "embeddable" version (see below).  The full
+    versions are standalone HTML files that are useful for viewing
+    locally with a web browser while testing changes to the program,
+    or for publishing on the web.  Several contain links to files in
+    the cheatsheet_files subdirectory, and those must also be
+    published.
+
+    They differ only in whether they have tooltip text on the Clojure
+    symbols or not, and if so, whether those use HTML-standard title
+    attribute text or a JavaScript-based method using TipTip and
+    jQuery.  Another variation between tooltip-enhanced versions are
+    whether the tooltip text includes only the doc string for the
+    symbol, or in addition a 1- or 2-line summary of how many examples
+    and comments exist for the symbol on ClojureDocs.org.
+
+* `cheatsheet-embeddable-for-clojure.org.html`
+
+    The embeddable version is almost the same, except only
     includes those things needed for publishing easily at
     [http://clojure.org/cheatsheet][cheatsheet].
 
@@ -98,6 +118,6 @@ installing the following packages:
 
 ## License
 
-Copyright (C) 2012 Andy Fingerhut
+Copyright (C) 2012-2013 Andy Fingerhut
 
 Distributed under the Eclipse Public License, the same as Clojure.
