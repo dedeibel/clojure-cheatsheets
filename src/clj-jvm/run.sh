@@ -9,7 +9,9 @@ JSR166Y_JAR="${HOME}/.m2/repository/org/codehaus/jsr166-mirror/jsr166y/1.7.0/jsr
 #JAR_DIR="$HOME/lein/clojure-1.4.0/lib"
 #CLASSPATH="${JAR_DIR}/clojure-1.4.0.jar:${TOOLS_READER_JAR}"
 JAR_DIR="$HOME/lein/clojure-1.5.1/lib"
-CLASSPATH="${JAR_DIR}/clojure-1.5.1.jar:${TOOLS_READER_JAR}:${JSR166Y_JAR}"
+#CLASSPATH="${JAR_DIR}/clojure-1.5.1.jar:${TOOLS_READER_JAR}:${JSR166Y_JAR}"
+lein deps
+CLASSPATH=`lein classpath`
 
 # 3 choices for links: none, to clojure.github.org, or to
 # clojuredocs.org:
@@ -51,7 +53,7 @@ fi
 ######################################################################
 for TOOLTIPS in tiptip use-title-attribute no-tooltips
 do
-    for CDOCS_SUMMARY in cdocs-summary no-cdocs-summary
+    for CDOCS_SUMMARY in no-cdocs-summary
     do
 	case "${CDOCS_SUMMARY}" in
 	no-cdocs-summary) CLOJUREDOCS_SNAPSHOT=""

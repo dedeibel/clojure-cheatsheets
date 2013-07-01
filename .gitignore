@@ -2,4 +2,5 @@ src/*.aux
 src/*.log
 src/*.pdf
 src/*.gz
-
+*.swp
+target
