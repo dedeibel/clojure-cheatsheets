@@ -126,7 +126,7 @@
               :subsection "Basics"
               :table [
                       ["goals"
-                       :cmds '[clojure.core.logic/s# clojure.core.logic/u#]]
+                       :cmds '[clojure.core.logic/s# clojure.core.logic/succeed clojure.core.logic/u# clojure.core.logic/fail]]
                       ["lvars"
                        :cmds '[clojure.core.logic/fresh clojure.core.logic/lcons]]
                       ]
@@ -296,7 +296,19 @@
                      :links-to-clojure
                      "http://clojure.org/special_forms#try"
                      :links-to-clojuredocs
-                     "http://clojuredocs.org/clojure_core/clojure.core/finally")]]
+                     "http://clojuredocs.org/clojure_core/clojure.core/finally")]
+    ["clojure.core.logic/s#" (case link-target-site
+                 :links-to-clojure
+                 "http://example.com"
+                 :links-to-clojuredocs
+                 "http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/s%23")]
+    ["clojure.core.logic/u#" (case link-target-site
+                 :links-to-clojure
+                 "http://example.com"
+                 :links-to-clojuredocs
+                 "http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/u%23")]
+    ]
+
    (case link-target-site
          :links-to-clojure
          [["Classname." "http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form-%28new%20Classname%20args*%29"]

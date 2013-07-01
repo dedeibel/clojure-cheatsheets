@@ -4,3 +4,6 @@ src/*.pdf
 src/*.gz
 *.swp
 target
+src/clj-jvm/*.tex
+src/clj-jvm/warnings.log
+src/clj-jvm/cheatsheet-embeddable.html
