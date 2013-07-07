@@ -1071,23 +1071,24 @@ characters (\") with &quot;"
                      (die "Unrecognized argument: %s\nSupported args are: %s\n"
                           arg
                           (str/join " " (seq supported-tooltips))))))
-      clojuredocs-snapshot (if (< (count *command-line-args*) 3)
+      output-directory (if (== (count *command-line-args*) 3) (nth *command-line-args* 2) ".")
+      clojuredocs-snapshot (if (< (count *command-line-args*) 4)
                              {}
-                             (let [snapshot-fname (nth *command-line-args* 2)]
+                             (let [snapshot-fname (nth *command-line-args* 3)]
                                (simplify-snapshot-time
                                 (read-safely snapshot-fname))))
       _ (if (not= clojuredocs-snapshot {})
           (iprintf *err* "Read info for %d symbols from file '%s' with time %s\n"
                    (count (get clojuredocs-snapshot :snapshot-info))
-                   (nth *command-line-args* 2)
+                   (nth *command-line-args* 3)
                    (:snapshot-time clojuredocs-snapshot))
           (iprintf *err* "No clojuredocs snapshot file specified.\n"))
       symbol-name-to-url (hash-from-pairs (symbol-url-pairs link-target-site))]
   (binding [*symbol-name-to-url* symbol-name-to-url
             *tooltips* tooltips
             *clojuredocs-snapshot* clojuredocs-snapshot]
-    (binding [*out* (io/writer "cheatsheet-full.html")
-              *err* (io/writer "warnings.log")
+    (binding [*out* (io/writer (str output-directory "/" "cheatsheet-full.html"))
+              *err* (io/writer (str output-directory "/" "warnings.log"))
               *warn-about-unknown-symbols* true]
       (output-cheatsheet {:fmt :html} cheatsheet-structure)
       ;; Print out a list of all symbols in our symbol-name-to-url
@@ -1122,6 +1123,6 @@ characters (\") with &quot;"
                 {:filename "cheatsheet-usletter-bw.tex",
                  :format {:fmt :latex, :paper :usletter, :colors :bw}}
                 ]]
-      (binding [*out* (io/writer (:filename x))]
+      (binding [*out* (io/writer (str output-directory "/" (:filename x)))]
         (output-cheatsheet (:format x) cheatsheet-structure)
         (.close *out*)))))

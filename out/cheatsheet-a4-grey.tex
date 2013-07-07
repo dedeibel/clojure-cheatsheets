@@ -1,0 +1,102 @@
+\documentclass[footinclude=false,twocolumn,DIV40,fontsize=7.8pt]{scrreprt}
+
+% Author: Steve Tayon
+% Comments, errors, suggestions: steve.tayon(at)googlemail.com
+
+% Most of the content is based on the clojure wiki, api and source code by Rich Hickey on http://clojure.org/.
+
+% License
+% Eclipse Public License v1.0
+% http://opensource.org/licenses/eclipse-1.0.php
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage[colorlinks=false,breaklinks=true,pdfborder={0 0 0},dvipdfm]{hyperref}
+\usepackage{lmodern}
+\renewcommand*\familydefault{\sfdefault} 
+
+
+\usepackage[table]{xcolor}
+
+% Set column space
+\setlength{\columnsep}{0.25em}
+
+% Define colours
+\definecolorset{hsb}{}{}{red,0,.4,0.95;orange,.1,.4,0.95;green,.25,.4,0.95;yellow,.15,.4,0.95}
+
+\definecolorset{hsb}{}{}{blue,.55,.4,0.95;purple,.7,.4,0.95;pink,.8,.4,0.95;blue2,.58,.4,0.95}
+
+\definecolorset{hsb}{}{}
+{magenta,.9,.4,0.95;green2,.29,.4,0.95}
+
+\definecolor{grey}{hsb}{0.25,0,0.85}
+
+\definecolor{white}{hsb}{0,0,1}
+
+% Redefine sections
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}
+	{-1.7ex}{0.7ex}{\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}
+	{-1.7ex}{0.5ex}{\normalfont\normalsize\bfseries}}
+\makeatother
+
+% No section numbers
+\setcounter{secnumdepth}{0}
+
+% No indentation
+\setlength{\parindent}{0em}
+
+% No header and footer
+\pagestyle{empty}
+
+
+% A few shortcuts
+\newcommand{\cmd}[1] {\frenchspacing\texttt{\textbf{{#1}}}}
+\newcommand{\cmdline}[1] {
+	\begin{tabularx}{\hsize}{X}
+			\texttt{\textbf{{#1}}}
+	\end{tabularx}
+}
+
+\newcommand{\colouredbox}[2] {
+	\colorbox{#1!40}{
+		\begin{minipage}{0.95\linewidth}
+			{
+			\rowcolors[]{1}{#1!20}{#1!10}
+			#2
+			}
+		\end{minipage}
+	}
+}
+
+\begin{document}
+
+{\Large{\textbf{Clojure Core Logic Cheat Sheet (sheet v1)}}}
+
+\colouredbox{grey}{
+\section{Operators}
+\subsection{Basics}
+\begin{tabularx}{\hsize}{lX}
+goals & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/s\%23}{s#} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/succeed}{succeed} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/u\%23}{u#} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/fail}{fail}} \\
+lvars & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/fresh}{fresh} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lcons}{lcons}}
+\end{tabularx}
+}
+
+
+
+\colouredbox{grey}{
+\section{Conditions}
+\begin{tabularx}{\hsize}{lX}
+cond & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/conde}{conde} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/conda}{conda} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/condu}{condu}}
+\end{tabularx}
+}
+
+
+
+ 
+\end{document}
