@@ -1044,6 +1044,9 @@ characters (\") with &quot;"
     clojuredocs-snapshot))
 
 
+(defn basepath [filepath]
+  (apply str (interpose "/" (butlast (clojure.string/split filepath #"/")))))
+
 ;; Supported command line args:
 
 ;; links-to-clojure (default if nothing specified on command line):
@@ -1076,7 +1079,7 @@ characters (\") with &quot;"
                      (die "Unrecognized argument: %s\nSupported args are: %s\n"
                           arg
                           (str/join " " (seq supported-tooltips))))))
-      output-directory (if (== (count *command-line-args*) 3) (nth *command-line-args* 2) ".")
+      output-filepath (if (== (count *command-line-args*) 3) (nth *command-line-args* 2) ".")
       clojuredocs-snapshot (if (< (count *command-line-args*) 4)
                              {}
                              (let [snapshot-fname (nth *command-line-args* 3)]
@@ -1092,8 +1095,8 @@ characters (\") with &quot;"
   (binding [*symbol-name-to-url* symbol-name-to-url
             *tooltips* tooltips
             *clojuredocs-snapshot* clojuredocs-snapshot]
-    (binding [*out* (io/writer (str output-directory "/" "cheatsheet-full.html"))
-              *err* (io/writer (str output-directory "/" "warnings.log"))
+    (binding [*out* (io/writer output-filepath)
+              *err* (io/writer (str output-filepath ".log"))
               *warn-about-unknown-symbols* true]
       (output-cheatsheet {:fmt :html} cheatsheet-structure)
       ;; Print out a list of all symbols in our symbol-name-to-url
@@ -1128,6 +1131,6 @@ characters (\") with &quot;"
                 {:filename "cheatsheet-usletter-bw.tex",
                  :format {:fmt :latex, :paper :usletter, :colors :bw}}
                 ]]
-      (binding [*out* (io/writer (str output-directory "/" (:filename x)))]
+      (binding [*out* (io/writer (str (basepath output-filepath) "/" (:filename x)))]
         (output-cheatsheet (:format x) cheatsheet-structure)
         (.close *out*)))))

@@ -1,6 +1,6 @@
 #! /bin/bash
 
-set -x
+#set -x
 # TBD: This is a hack, depending on a particular version of
 # tools.reader to have already been downloaded and copied into your
 # local Maven repository.  Should use Leiningen instead.
@@ -41,7 +41,7 @@ cp -r cheatsheet_files ${OUT_DIRECTORY}
 # Make embeddable version for clojure.org/cheatsheet
 ######################################################################
 echo "Generating embeddable version for clojure.org/cheatsheet ..."
-java -cp ${CLASSPATH} clojure.main clojure-cheatsheet-generator.clj ${LINK_TARGET} ${TOOLTIPS} ${OUT_DIRECTORY} ${CLOJUREDOCS_SNAPSHOT}
+java -cp ${CLASSPATH} clojure.main clojure-cheatsheet-generator.clj ${LINK_TARGET} ${TOOLTIPS} ${OUT_DIRECTORY}/dummy.html ${CLOJUREDOCS_SNAPSHOT}
 EXIT_STATUS=$?
 
 if [ ${EXIT_STATUS} != 0 ]; then
@@ -54,7 +54,7 @@ fi
 # Make multiple full versions for those who prefer something else,
 # e.g. no tooltips.
 ######################################################################
-for TOOLTIPS in tiptip use-title-attribute no-tooltips; do
+for TOOLTIP_TYPE in tiptip use-title-attribute no-tooltips; do
   for CDOCS_SUMMARY in no-cdocs-summary; do
 	  case "${CDOCS_SUMMARY}" in
 	    no-cdocs-summary) CLOJUREDOCS_SNAPSHOT=""
@@ -62,21 +62,27 @@ for TOOLTIPS in tiptip use-title-attribute no-tooltips; do
 	    cdocs-summary) CLOJUREDOCS_SNAPSHOT="${HOME}/.clojuredocs-snapshot.txt"
 	                      ;;
 	  esac
-	  TARGET="cheatsheet-${TOOLTIPS}-${CDOCS_SUMMARY}.html"
-	  echo "Generating ${TARGET} ..."
-	  java -cp ${CLASSPATH} clojure.main clojure-cheatsheet-generator.clj ${LINK_TARGET} ${TOOLTIPS} ${OUT_DIRECTORY} ${CLOJUREDOCS_SNAPSHOT} 
-	  EXIT_STATUS=$?
+    # Do the following block in parallel
+    (
+      MY_TOOLTIP_TYPE=${TOOLTIP_TYPE}
+	    TARGET="${OUT_DIRECTORY}/cheatsheet-${MY_TOOLTIP_TYPE}-${CDOCS_SUMMARY}.html"
+	    echo "Generating ${TARGET} ..."
+	    java -cp ${CLASSPATH} clojure.main clojure-cheatsheet-generator.clj ${LINK_TARGET} ${MY_TOOLTIP_TYPE} ${TARGET} ${CLOJUREDOCS_SNAPSHOT} 
+	    EXIT_STATUS=$?
 
-	  if [ ${EXIT_STATUS} != 0 ]; then
-	      echo "Exit status ${EXIT_STATUS} from java"
-	      exit ${EXIT_STATUS}
-	  fi
-	  /bin/mv ${OUT_DIRECTORY}/cheatsheet-full.html ${OUT_DIRECTORY}/cheatsheet-${TOOLTIPS}-${CDOCS_SUMMARY}.html
-	  # Uncomment following line if you want to test new changes
-	  # with generating only the first variant of the cheatsheet.
-	  #exit 0
+	    if [ ${EXIT_STATUS} != 0 ]; then
+	        echo "Exit status ${EXIT_STATUS} from java"
+	        exit ${EXIT_STATUS}
+	    fi
+    ) &
   done
 done
+
+wait
+
+# delete the embeddable html it is outputted as waste every time and depends on the execution order
+# don't blame me please -- bpeter
+rm ${OUT_DIRECTORY}/cheatsheet-embeddable.html
 
 # The command above will produce some warnings in a file called
 # warnings.log about "No URL known for symbol with name: ''()'", etc.
