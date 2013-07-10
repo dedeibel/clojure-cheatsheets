@@ -9,3 +9,4 @@ src/clj-jvm/warnings.log
 src/clj-jvm/cheatsheet-embeddable.html
 src/clj-jvm/.lein-repl-history
 *.html.log
+out/dummy.html

@@ -6,17 +6,98 @@ document.write('<style type="text/css">  @media screen {      .page { width: 600
     <div class="page">
       <div class="column">
         <div class="section">
-          <h2>Operators</h2>
-          <h3>Basics</h3>
+          <h2>Logic</h2>
+          <h3>Syntax</h3>
           <table>
             <tbody>
               <tr class="odd">
-                <td>goals</td>
-                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/s%23">s#</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/succeed">succeed</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/u%23">u#</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/fail">fail</a></code></td>
+                <td>Basics</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/s%23">s#</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/succeed">succeed</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/u%23">u#</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/fail">fail</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/==">==</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/conde">conde</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/fresh">fresh</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/all">all</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/run">run</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/run*">run*</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/run*">run*</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/run-nc">run-nc</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/run-nc*">run-nc*</a></code></td>
               </tr>
               <tr class="even">
-                <td>lvars</td>
-                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/fresh">fresh</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lcons">lcons</a></code></td>
+                <td>Logic Variables</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lvar">lvar</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lvar%3F">lvar?</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lvars">lvars</a></code></td>
+              </tr>
+              <tr class="odd">
+                <td>LCons</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lcons">lcons</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lcons%3F">lcons?</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/llist">llist</a></code></td>
+              </tr>
+              <tr class="even">
+                <td>Goals and Goal Constructors</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/composeg">composeg</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/composeg*">composeg*</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/bind*">bind*</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/mplus*">mplus*</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/choice">choice</a></code></td>
+              </tr>
+              <tr class="odd">
+                <td>Debugging</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/log">log</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/trace-s">trace-s</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/trace-lvars">trace-lvars</a></code></td>
+              </tr>
+              <tr class="even">
+                <td>Non-relational goals</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/project">project</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/pred">pred</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/is">is</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/conda">conda</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/condu">condu</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/onceo">onceo</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/copy-term">copy-term</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lvaro">lvaro</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/nonlvaro">nonlvaro</a></code></td>
+              </tr>
+              <tr class="odd">
+                <td>Useful goals</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/nilo">nilo</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/emptyo">emptyo</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/conso">conso</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/firsto">firsto</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/resto">resto</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/everyg">everyg</a></code></td>
+              </tr>
+              <tr class="even">
+                <td>Goal sugar syntax</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/defne">defne</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/matche">matche</a></code></td>
+              </tr>
+              <tr class="odd">
+                <td>fnu, fna, ..., matchu</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/defna">defna</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/defnu">defnu</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/matcha">matcha</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/matchu">matchu</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/tabled">tabled</a></code></td>
+              </tr>
+              <tr class="even">
+                <td>More convenient goals</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/membero">membero</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/appendo">appendo</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/permuteo">permuteo</a></code></td>
+              </tr>
+              <tr class="odd">
+                <td>Relations</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/facts">facts</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/fact">fact</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/defrel">defrel</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/difference-with">difference-with</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/retractions">retractions</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/retraction">retraction</a></code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /section -->
+        <div class="section">
+          <h2>Misc</h2>
+          <table>
+            <tbody>
+              <tr class="odd">
+                <td>Partial Maps</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/partial-map">partial-map</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/partial-map%3F">partial-map?</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/featurec">featurec</a></code></td>
+              </tr>
+              <tr class="even">
+                <td>defnc</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/fnc">fnc</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/defnc">defnc</a></code></td>
+              </tr>
+              <tr class="odd">
+                <td>Predicate Constraing</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/predc">predc</a></code></td>
+              </tr>
+              <tr class="even">
+                <td>Deep Constraint</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/seqc">seqc</a></code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /section -->
+        <div class="section">
+          <h2>Easy Unification</h2>
+          <table>
+            <tbody>
+              <tr class="odd">
+                <td>Unification</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.unifier/prep">clojure.core.logic.unifier/prep</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.unifier/unify*">clojure.core.logic.unifier/unify*</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.unifier/unifier*">clojure.core.logic.unifier/unifier*</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.unifier/unify">clojure.core.logic.unifier/unify</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.unifier/unifier">clojure.core.logic.unifier/unifier</a></code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /section -->
+        <div class="section">
+          <h2>Helpfull clojure.core functions</h2>
+          <table>
+            <tbody>
+              <tr class="odd">
+                <td>clojure.core functions</td>
+                <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/seq">seq</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/list">list</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/coll%3F">coll?</a></code></td>
               </tr>
             </tbody>
           </table>
@@ -24,12 +105,61 @@ document.write('<style type="text/css">  @media screen {      .page { width: 600
       </div><!-- /column -->
       <div class="column">
         <div class="section">
-          <h2>Conditions</h2>
+          <h2>Constraint Logic Programming</h2>
+          <h3>CLP (Tree)</h3>
           <table>
             <tbody>
               <tr class="odd">
-                <td>cond</td>
-                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/conde">conde</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/conda">conda</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/condu">condu</a></code></td>
+                <td>Basics</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/!=">!=</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/distincto">distincto</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/rembero">rembero</a></code></td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>CLP (FD)</h3>
+          <table>
+            <tbody>
+              <tr class="odd">
+                <td>Domains</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/domain">clojure.core.logic.fd/domain</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/dom">clojure.core.logic.fd/dom</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/domc">clojure.core.logic.fd/domc</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/in">clojure.core.logic.fd/in</a></code></td>
+              </tr>
+              <tr class="even">
+                <td>Interval</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/interval">clojure.core.logic.fd/interval</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/interval%3F">clojure.core.logic.fd/interval?</a></code></td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>CLP Operators</h3>
+          <table>
+            <tbody>
+              <tr class="odd">
+                <td>Operators</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/==">clojure.core.logic.fd/==</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/!=">clojure.core.logic.fd/!=</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/<=">clojure.core.logic.fd/&lt;=</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/<">clojure.core.logic.fd/&lt;</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/>=">clojure.core.logic.fd/&gt;=</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/>">clojure.core.logic.fd/&gt;</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/-">clojure.core.logic.fd/-</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/+">clojure.core.logic.fd/+</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/*">clojure.core.logic.fd/*</a></code></td>
+              </tr>
+              <tr class="even">
+                <td>Misc</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/distinct">clojure.core.logic.fd/distinct</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/bounded-listo">clojure.core.logic.fd/bounded-listo</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/eq">clojure.core.logic.fd/eq</a></code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /section -->
+        <div class="section">
+          <h2>Nominal unification</h2>
+          <table>
+            <tbody>
+              <tr class="odd">
+                <td>Nominal unification</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.nominal/nom">clojure.core.logic.nominal/nom</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.nominal/nom%3F">clojure.core.logic.nominal/nom?</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.nominal/fresh">clojure.core.logic.nominal/fresh</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.nominal/hash">clojure.core.logic.nominal/hash</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.nominal/tie">clojure.core.logic.nominal/tie</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.nominal/tie%3F">clojure.core.logic.nominal/tie?</a></code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /section -->
+        <div class="section">
+          <h2>Arithmetic</h2>
+          <table>
+            <tbody>
+              <tr class="odd">
+                <td>Operators</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.arithmetic/=">clojure.core.logic.arithmetic/=</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.arithmetic/>">clojure.core.logic.arithmetic/&gt;</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.arithmetic/>=">clojure.core.logic.arithmetic/&gt;=</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.arithmetic/<">clojure.core.logic.arithmetic/&lt;</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.arithmetic/<=">clojure.core.logic.arithmetic/&lt;=</a></code></td>
               </tr>
             </tbody>
           </table>

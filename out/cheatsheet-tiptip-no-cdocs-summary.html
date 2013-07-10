@@ -25,47 +25,115 @@
     <div class="page">
       <div class="column">
         <div class="section">
-          <h2>Operators</h2>
-          <h3>Basics</h3>
+          <h2>Logic</h2>
+          <h3>Syntax</h3>
           <table>
             <tbody>
               <tr class="odd">
-                <td>goals</td>
+                <td>Basics</td>
                 <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/s%23" class="tooltip" title="<pre>clojure.core.logic/s#
   nil</pre>">s#</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/succeed" class="tooltip" title="<pre>clojure.core.logic/succeed
 ([a])
   A goal that always succeeds.</pre>">succeed</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/u%23" class="tooltip" title="<pre>clojure.core.logic/u#
   nil</pre>">u#</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/fail" class="tooltip" title="<pre>clojure.core.logic/fail
 ([a])
-  A goal that always fails.</pre>">fail</a></code></td>
-              </tr>
-              <tr class="even">
-                <td>lvars</td>
-                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/fresh" class="tooltip" title="<pre>clojure.core.logic/fresh
-([[& lvars] & goals])
-Macro
-  Creates fresh variables. Goals occuring within form a logical
-  conjunction.</pre>">fresh</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lcons" class="tooltip" title="<pre>clojure.core.logic/lcons
-([a d])
-  Constructs a sequence a with an improper tail d if d is a logic variable.</pre>">lcons</a></code></td>
-              </tr>
-            </tbody>
-          </table>
-        </div><!-- /section -->
-      </div><!-- /column -->
-      <div class="column">
-        <div class="section">
-          <h2>Conditions</h2>
-          <table>
-            <tbody>
-              <tr class="odd">
-                <td>cond</td>
-                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/conde" class="tooltip" title="<pre>clojure.core.logic/conde
+  A goal that always fails.</pre>">fail</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/==" class="tooltip" title="<pre>clojure.core.logic/==
+([u v])
+  A goal that attempts to unify terms u and v.</pre>">==</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/conde" class="tooltip" title="<pre>clojure.core.logic/conde
 ([& clauses])
 Macro
   Logical disjunction of the clauses. The first goal in
   a clause is considered the head of that clause. Interleaves the
-  execution of the clauses.</pre>">conde</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/conda" class="tooltip" title="<pre>clojure.core.logic/conda
+  execution of the clauses.</pre>">conde</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/fresh" class="tooltip" title="<pre>clojure.core.logic/fresh
+([[& lvars] & goals])
+Macro
+  Creates fresh variables. Goals occuring within form a logical
+  conjunction.</pre>">fresh</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/all" class="tooltip" title="<pre>clojure.core.logic/all
+([] [& goals])
+Macro
+  Like fresh but does does not create logic variables.</pre>">all</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/run" class="tooltip" title="<pre>clojure.core.logic/run
+([n bindings & goals])
+Macro
+  Executes goals until a maximum of n results are found.</pre>">run</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/run*" class="tooltip" title="<pre>clojure.core.logic/run*
+([bindings & goals])
+Macro
+  Executes goals until results are exhausted.</pre>">run*</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/run*" class="tooltip" title="<pre>clojure.core.logic/run*
+([bindings & goals])
+Macro
+  Executes goals until results are exhausted.</pre>">run*</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/run-nc" class="tooltip" title="<pre>clojure.core.logic/run-nc
+([n bindings & goals])
+Macro
+  Executes goals until a maximum of n results are found. Does not
+   occurs-check.</pre>">run-nc</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/run-nc*" class="tooltip" title="<pre>clojure.core.logic/run-nc*
+([& goals])
+Macro
+  Executes goals until results are exhausted. Does not occurs-check.</pre>">run-nc*</a></code></td>
+              </tr>
+              <tr class="even">
+                <td>Logic Variables</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lvar" class="tooltip" title="<pre>clojure.core.logic/lvar
+([] [name] [name gensym])
+  nil</pre>">lvar</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lvar%3F" class="tooltip" title="<pre>clojure.core.logic/lvar?
+([x])
+  nil</pre>">lvar?</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lvars" class="tooltip" title="<pre>clojure.core.logic/lvars
+([n])
+  nil</pre>">lvars</a></code></td>
+              </tr>
+              <tr class="odd">
+                <td>LCons</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lcons" class="tooltip" title="<pre>clojure.core.logic/lcons
+([a d])
+  Constructs a sequence a with an improper tail d if d is a logic variable.</pre>">lcons</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lcons%3F" class="tooltip" title="<pre>clojure.core.logic/lcons?
+([x])
+  nil</pre>">lcons?</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/llist" class="tooltip" title="<pre>clojure.core.logic/llist
+([f s] [f s & rest])
+Macro
+  Constructs a sequence from 2 or more arguments, with the last argument as the
+   tail. The tail is improper if the last argument is a logic variable.</pre>">llist</a></code></td>
+              </tr>
+              <tr class="even">
+                <td>Goals and Goal Constructors</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/composeg" class="tooltip" title="<pre>clojure.core.logic/composeg
+([] [g0 g1])
+  nil</pre>">composeg</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/composeg*" class="tooltip" title="<pre>clojure.core.logic/composeg*
+([g0] [g0 & gs])
+Macro
+  nil</pre>">composeg*</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/bind*" class="tooltip" title="<pre>clojure.core.logic/bind*
+([a g] [a g & g-rest])
+Macro
+  nil</pre>">bind*</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/mplus*" class="tooltip" title="<pre>clojure.core.logic/mplus*
+([e] [e & e-rest])
+Macro
+  nil</pre>">mplus*</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/choice" class="tooltip" title="<pre>clojure.core.logic/choice
+([a f])
+  nil</pre>">choice</a></code></td>
+              </tr>
+              <tr class="odd">
+                <td>Debugging</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/log" class="tooltip" title="<pre>clojure.core.logic/log
+([& s])
+Macro
+  nil</pre>">log</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/trace-s" class="tooltip" title="<pre>clojure.core.logic/trace-s
+([])
+Macro
+  nil</pre>">trace-s</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/trace-lvars" class="tooltip" title="<pre>clojure.core.logic/trace-lvars
+([title & lvars])
+Macro
+  Goal for tracing the values of logic variables.</pre>">trace-lvars</a></code></td>
+              </tr>
+              <tr class="even">
+                <td>Non-relational goals</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/project" class="tooltip" title="<pre>clojure.core.logic/project
+([[& vars] & goals])
+Macro
+  Extract the values bound to the specified logic vars. Non-relational.</pre>">project</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/pred" class="tooltip" title="<pre>clojure.core.logic/pred
+([v f])
+Macro
+  Check a predicate against the value logic var. Non-relational.</pre>">pred</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/is" class="tooltip" title="<pre>clojure.core.logic/is
+([u v op])
+Macro
+  Set the value of a var to value of another var with the operation
+   applied. Non-relational.</pre>">is</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/conda" class="tooltip" title="<pre>clojure.core.logic/conda
 ([& clauses])
 Macro
   Soft cut. Once the head of a clause has succeeded
@@ -74,7 +142,358 @@ Macro
 Macro
   Committed choice. Once the head (first goal) of a clause
   has succeeded, remaining goals of the clause will only
-  be run once. Non-relational.</pre>">condu</a></code></td>
+  be run once. Non-relational.</pre>">condu</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/onceo" class="tooltip" title="<pre>clojure.core.logic/onceo
+([g])
+  nil</pre>">onceo</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/copy-term" class="tooltip" title="<pre>clojure.core.logic/copy-term
+([u v])
+  Copies a term u into v. Non-relational.</pre>">copy-term</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lvaro" class="tooltip" title="<pre>clojure.core.logic/lvaro
+([v])
+Macro
+  Goal to test whether a logic var is ground. Non-relational.</pre>">lvaro</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/nonlvaro" class="tooltip" title="<pre>clojure.core.logic/nonlvaro
+([v])
+Macro
+  Goal to test whether a logic var is ground. Non-relational.</pre>">nonlvaro</a></code></td>
+              </tr>
+              <tr class="odd">
+                <td>Useful goals</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/nilo" class="tooltip" title="<pre>clojure.core.logic/nilo
+([a])
+  A relation where a is nil</pre>">nilo</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/emptyo" class="tooltip" title="<pre>clojure.core.logic/emptyo
+([a])
+  A relation where a is the empty list</pre>">emptyo</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/conso" class="tooltip" title="<pre>clojure.core.logic/conso
+([a d l])
+  A relation where l is a collection, such that a is the first of l
+  and d is the rest of l</pre>">conso</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/firsto" class="tooltip" title="<pre>clojure.core.logic/firsto
+([l a])
+  A relation where l is a collection, such that a is the first of l</pre>">firsto</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/resto" class="tooltip" title="<pre>clojure.core.logic/resto
+([l d])
+  A relation where l is a collection, such that d is the rest of l</pre>">resto</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/everyg" class="tooltip" title="<pre>clojure.core.logic/everyg
+([g coll])
+  A pseudo-relation that takes a coll and ensures that the goal g
+   succeeds on every element of the collection.</pre>">everyg</a></code></td>
+              </tr>
+              <tr class="even">
+                <td>Goal sugar syntax</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/defne" class="tooltip" title="<pre>clojure.core.logic/defne
+([& rest])
+Macro
+  Define a goal fn. Supports pattern matching. All
+   patterns will be tried. See conde.</pre>">defne</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/matche" class="tooltip" title="<pre>clojure.core.logic/matche
+([xs & cs])
+Macro
+  Pattern matching macro. All patterns will be tried.
+  See conde.</pre>">matche</a></code></td>
+              </tr>
+              <tr class="odd">
+                <td>fnu, fna, ..., matchu</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/defna" class="tooltip" title="<pre>clojure.core.logic/defna
+([& rest])
+Macro
+  Define a soft cut goal. See conda.</pre>">defna</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/defnu" class="tooltip" title="<pre>clojure.core.logic/defnu
+([& rest])
+Macro
+  Define a committed choice goal. See condu.</pre>">defnu</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/matcha" class="tooltip" title="<pre>clojure.core.logic/matcha
+([xs & cs])
+Macro
+  Define a soft cut pattern match. See conda.</pre>">matcha</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/matchu" class="tooltip" title="<pre>clojure.core.logic/matchu
+([xs & cs])
+Macro
+  Define a committed choice goal. See condu.</pre>">matchu</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/tabled" class="tooltip" title="<pre>clojure.core.logic/tabled
+([args & grest])
+Macro
+  Macro for defining a tabled goal. Prefer ^:tabled with the
+  defne/a/u forms over using this directly.</pre>">tabled</a></code></td>
+              </tr>
+              <tr class="even">
+                <td>More convenient goals</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/membero" class="tooltip" title="<pre>clojure.core.logic/membero
+([x l])
+  A relation where l is a collection, such that l contains x</pre>">membero</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/appendo" class="tooltip" title="<pre>clojure.core.logic/appendo
+([x y z])
+  A relation where x, y, and z are proper collections,
+  such that z is x appended to y</pre>">appendo</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/permuteo" class="tooltip" title="<pre>clojure.core.logic/permuteo
+([xl yl])
+  A relation that will permute xl into the yl. May not
+   terminate if xl is not ground.</pre>">permuteo</a></code></td>
+              </tr>
+              <tr class="odd">
+                <td>Relations</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/facts" class="tooltip" title="<pre>clojure.core.logic/facts
+([rel [f :as tuples]] [rel arity tuples])
+  Define a series of facts. Takes a vector of vectors where each vector
+   represents a fact tuple, all with the same number of elements.</pre>">facts</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/fact" class="tooltip" title="<pre>clojure.core.logic/fact
+([rel & tuple])
+  Add a fact to a relation defined with defrel.</pre>">fact</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/defrel" class="tooltip" title="<pre>clojure.core.logic/defrel
+([name & rest])
+Macro
+  Define a relation for adding facts. Takes a name and some fields.
+         Use fact/facts to add facts and invoke the relation to query it.</pre>">defrel</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/difference-with" class="tooltip" title="<pre>clojure.core.logic/difference-with
+([f & maps])
+  Returns a map that consists of the first map with the rest of the maps
+   removed from it. When a key is found in the first map and a later map,
+   the value from the later map will be combined with the value in the first
+   map by calling (f val-in-first val-in-later). If this function returns nil
+   then the key will be removed completely.</pre>">difference-with</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/retractions" class="tooltip" title="<pre>clojure.core.logic/retractions
+([rel [f :as tuples]] [rel arity tuples])
+  Retract a series of facts. Takes a vector of vectors where each vector
+   represents a fact tuple, all with the same number of elements. It is not
+   an error to retract a fact that isn't true.</pre>">retractions</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/retraction" class="tooltip" title="<pre>clojure.core.logic/retraction
+([rel & tuple])
+  Remove a fact from a relation defined with defrel.</pre>">retraction</a></code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /section -->
+        <div class="section">
+          <h2>Misc</h2>
+          <table>
+            <tbody>
+              <tr class="odd">
+                <td>Partial Maps</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/partial-map" class="tooltip" title="<pre>clojure.core.logic/partial-map
+([m])
+  Given map m, returns partial map that unifies with maps even if it
+   doesn't share all of the keys of that map.</pre>">partial-map</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/partial-map%3F" class="tooltip" title="<pre>clojure.core.logic/partial-map?
+([x])
+  nil</pre>">partial-map?</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/featurec" class="tooltip" title="<pre>clojure.core.logic/featurec
+([x fs])
+  Ensure that a map contains at least the key-value pairs
+  in the map fs. fs must be partially instantiated - that is,
+  it may contain values which are logic variables to support
+  feature extraction.</pre>">featurec</a></code></td>
+              </tr>
+              <tr class="even">
+                <td>defnc</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/fnc" class="tooltip" title="<pre>clojure.core.logic/fnc
+([args & body])
+Macro
+  Define an anonymous constraint that can be used with the unifier:
+
+     (let [oddc (fnc [x] (odd? x))]
+
+       (unifier {:a '?a} {:a 1} :when {'?a oddc})
+         ;;=> {:a 1}
+
+       (unifier {:a '?a} {:a 2} :when {'?a oddc})
+         ;;=> nil
+     )
+
+  Note, the constraint will not run until all arguments are fully ground.
+
+  Use defnc to define a constraint and assign a toplevel var.</pre>">fnc</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/defnc" class="tooltip" title="<pre>clojure.core.logic/defnc
+([name args & body])
+Macro
+  nil</pre>">defnc</a></code></td>
+              </tr>
+              <tr class="odd">
+                <td>Predicate Constraing</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/predc" class="tooltip" title="<pre>clojure.core.logic/predc
+([x p] [x p pform])
+  nil</pre>">predc</a></code></td>
+              </tr>
+              <tr class="even">
+                <td>Deep Constraint</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/seqc" class="tooltip" title="<pre>clojure.core.logic/seqc
+([v])
+  nil</pre>">seqc</a></code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /section -->
+        <div class="section">
+          <h2>Easy Unification</h2>
+          <table>
+            <tbody>
+              <tr class="odd">
+                <td>Unification</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.unifier/prep" class="tooltip" title="<pre>clojure.core.logic.unifier/prep
+([expr])
+  Prep a quoted expression. All symbols preceded by ? will
+  be replaced with logic vars.</pre>">clojure.core.logic.unifier/prep</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.unifier/unify*" class="tooltip" title="<pre>clojure.core.logic.unifier/unify*
+([ts] [opts ts])
+  Unify the terms ts.</pre>">clojure.core.logic.unifier/unify*</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.unifier/unifier*" class="tooltip" title="<pre>clojure.core.logic.unifier/unifier*
+([ts] [opts ts])
+  Return the unifier that unifies terms ts.
+  All terms in ts should prepped terms.</pre>">clojure.core.logic.unifier/unifier*</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.unifier/unify" class="tooltip" title="<pre>clojure.core.logic.unifier/unify
+([ts] [opts ts])
+  Unify the terms ts returning a the value that represents their
+   unificaiton. Will prep the terms.</pre>">clojure.core.logic.unifier/unify</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.unifier/unifier" class="tooltip" title="<pre>clojure.core.logic.unifier/unifier
+([ts] [opts ts])
+  Return the unifier for terms ts. Will prep the terms.</pre>">clojure.core.logic.unifier/unifier</a></code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /section -->
+        <div class="section">
+          <h2>Helpfull clojure.core functions</h2>
+          <table>
+            <tbody>
+              <tr class="odd">
+                <td>clojure.core functions</td>
+                <td><code><a href="http://clojuredocs.org/clojure_core/clojure.core/seq" class="tooltip" title="<pre>clojure.core/seq
+([coll])
+  Returns a seq on the collection. If the collection is
+    empty, returns nil.  (seq nil) returns nil. seq also works on
+    Strings, native Java arrays (of reference types) and any objects
+    that implement Iterable.</pre>">seq</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/list" class="tooltip" title="<pre>clojure.core/list
+([& items])
+  Creates a new list containing the items.</pre>">list</a> <a href="http://clojuredocs.org/clojure_core/clojure.core/coll%3F" class="tooltip" title="<pre>clojure.core/coll?
+([x])
+  Returns true if x implements IPersistentCollection</pre>">coll?</a></code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /section -->
+      </div><!-- /column -->
+      <div class="column">
+        <div class="section">
+          <h2>Constraint Logic Programming</h2>
+          <h3>CLP (Tree)</h3>
+          <table>
+            <tbody>
+              <tr class="odd">
+                <td>Basics</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/!=" class="tooltip" title="<pre>clojure.core.logic/!=
+([u v])
+  Disequality constraint. Ensures that u and v will never
+   unify. u and v can be complex terms.</pre>">!=</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/distincto" class="tooltip" title="<pre>clojure.core.logic/distincto
+([l])
+  A relation which guarantees no element of l will unify
+   with another element of l.</pre>">distincto</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/rembero" class="tooltip" title="<pre>clojure.core.logic/rembero
+([x l o])
+  A relation between l and o where is removed from
+   l exactly one time.</pre>">rembero</a></code></td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>CLP (FD)</h3>
+          <table>
+            <tbody>
+              <tr class="odd">
+                <td>Domains</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/domain" class="tooltip" title="<pre>clojure.core.logic.fd/domain
+([& args])
+  Construct a domain for assignment to a var. Arguments should
+   be integers given in sorted order. domains may be more efficient
+   than intervals when only a few values are possible.</pre>">clojure.core.logic.fd/domain</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/dom" class="tooltip" title="<pre>clojure.core.logic.fd/dom
+([x dom])
+  Assign a var x a domain.</pre>">clojure.core.logic.fd/dom</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/domc" class="tooltip" title="<pre>clojure.core.logic.fd/domc
+([x])
+  nil</pre>">clojure.core.logic.fd/domc</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/in" class="tooltip" title="<pre>clojure.core.logic.fd/in
+([& xs-and-dom])
+Macro
+  Assign vars to domain. The domain must come last.</pre>">clojure.core.logic.fd/in</a></code></td>
+              </tr>
+              <tr class="even">
+                <td>Interval</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/interval" class="tooltip" title="<pre>clojure.core.logic.fd/interval
+([ub] [lb ub])
+  Construct an interval for an assignment to a var. intervals may
+   be more efficient that the domain type when the range of possiblities
+   is large.</pre>">clojure.core.logic.fd/interval</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/interval%3F" class="tooltip" title="<pre>clojure.core.logic.fd/interval?
+([x])
+  nil</pre>">clojure.core.logic.fd/interval?</a></code></td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>CLP Operators</h3>
+          <table>
+            <tbody>
+              <tr class="odd">
+                <td>Operators</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/==" class="tooltip" title="<pre>clojure.core.logic.fd/==
+([u v])
+  A finite domain constraint. u and v must be equal. u and v must
+   eventually be given domains if vars.</pre>">clojure.core.logic.fd/==</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/!=" class="tooltip" title="<pre>clojure.core.logic.fd/!=
+([u v])
+  A finite domain constraint. u and v must not be equal. u and v
+   must eventually be given domains if vars.</pre>">clojure.core.logic.fd/!=</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/<=" class="tooltip" title="<pre>clojure.core.logic.fd/<=
+([u v])
+  A finite domain constraint. u must be less than or equal to v.
+   u and v must eventually be given domains if vars.</pre>">clojure.core.logic.fd/&lt;=</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/<" class="tooltip" title="<pre>clojure.core.logic.fd/<
+([u v])
+  A finite domain constraint. u must be less than v. u and v
+   must eventually be given domains if vars.</pre>">clojure.core.logic.fd/&lt;</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/>=" class="tooltip" title="<pre>clojure.core.logic.fd/>=
+([u v])
+  A finite domain constraint. u must be greater than or equal to v.
+   u and v must eventually be given domains if vars.</pre>">clojure.core.logic.fd/&gt;=</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/>" class="tooltip" title="<pre>clojure.core.logic.fd/>
+([u v])
+  A finite domain constraint. u must be greater than v. u and v
+   must eventually be given domains if vars.</pre>">clojure.core.logic.fd/&gt;</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/-" class="tooltip" title="<pre>clojure.core.logic.fd/-
+([u v w])
+  nil</pre>">clojure.core.logic.fd/-</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/+" class="tooltip" title="<pre>clojure.core.logic.fd/+
+([u v w])
+  A finite domain constraint for addition and subtraction.
+   u, v & w must eventually be given domains if vars.</pre>">clojure.core.logic.fd/+</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/*" class="tooltip" title="<pre>clojure.core.logic.fd/*
+([u v w])
+  A finite domain constraint for multiplication and
+   thus division. u, v & w must be eventually be given
+   domains if vars.</pre>">clojure.core.logic.fd/*</a></code></td>
+              </tr>
+              <tr class="even">
+                <td>Misc</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/distinct" class="tooltip" title="<pre>clojure.core.logic.fd/distinct
+([v*])
+  A finite domain constraint that will guarantee that
+   all vars that occur in v* will be unified with unique
+   values. v* need not be ground. Any vars in v* should
+   eventually be given a domain.</pre>">clojure.core.logic.fd/distinct</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/bounded-listo" class="tooltip" title="<pre>clojure.core.logic.fd/bounded-listo
+([l n])
+  Ensure that the list l never grows beyond bound n.
+   n must have been assigned a domain.</pre>">clojure.core.logic.fd/bounded-listo</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/eq" class="tooltip" title="<pre>clojure.core.logic.fd/eq
+([& forms])
+Macro
+  nil</pre>">clojure.core.logic.fd/eq</a></code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /section -->
+        <div class="section">
+          <h2>Nominal unification</h2>
+          <table>
+            <tbody>
+              <tr class="odd">
+                <td>Nominal unification</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.nominal/nom" class="tooltip" title="<pre>clojure.core.logic.nominal/nom
+([lvar])
+  nil</pre>">clojure.core.logic.nominal/nom</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.nominal/nom%3F" class="tooltip" title="<pre>clojure.core.logic.nominal/nom?
+([x])
+  nil</pre>">clojure.core.logic.nominal/nom?</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.nominal/fresh" class="tooltip" title="<pre>clojure.core.logic.nominal/fresh
+([[& noms] & goals])
+Macro
+  Creates fresh noms. Goals occuring within form a logical conjunction.</pre>">clojure.core.logic.nominal/fresh</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.nominal/hash" class="tooltip" title="<pre>clojure.core.logic.nominal/hash
+([a t])
+  nil</pre>">clojure.core.logic.nominal/hash</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.nominal/tie" class="tooltip" title="<pre>clojure.core.logic.nominal/tie
+([binding-nom body])
+  nil</pre>">clojure.core.logic.nominal/tie</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.nominal/tie%3F" class="tooltip" title="<pre>clojure.core.logic.nominal/tie?
+([x])
+  nil</pre>">clojure.core.logic.nominal/tie?</a></code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /section -->
+        <div class="section">
+          <h2>Arithmetic</h2>
+          <table>
+            <tbody>
+              <tr class="odd">
+                <td>Operators</td>
+                <td><code><a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.arithmetic/=" class="tooltip" title="<pre>clojure.core.logic.arithmetic/=
+([x y])
+Macro
+  nil</pre>">clojure.core.logic.arithmetic/=</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.arithmetic/>" class="tooltip" title="<pre>clojure.core.logic.arithmetic/>
+([x y])
+Macro
+  nil</pre>">clojure.core.logic.arithmetic/&gt;</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.arithmetic/>=" class="tooltip" title="<pre>clojure.core.logic.arithmetic/>=
+([x y])
+Macro
+  nil</pre>">clojure.core.logic.arithmetic/&gt;=</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.arithmetic/<" class="tooltip" title="<pre>clojure.core.logic.arithmetic/<
+([x y])
+Macro
+  nil</pre>">clojure.core.logic.arithmetic/&lt;</a> <a href="http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.arithmetic/<=" class="tooltip" title="<pre>clojure.core.logic.arithmetic/<=
+([x y])
+Macro
+  nil</pre>">clojure.core.logic.arithmetic/&lt;=</a></code></td>
               </tr>
             </tbody>
           </table>

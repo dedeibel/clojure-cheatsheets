@@ -79,20 +79,78 @@
 {\Large{\textbf{Clojure Core Logic Cheat Sheet (sheet v1)}}}
 
 \colouredbox{green}{
-\section{Operators}
-\subsection{Basics}
+\section{Logic}
+\subsection{Syntax}
 \begin{tabularx}{\hsize}{lX}
-goals & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/s\%23}{s#} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/succeed}{succeed} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/u\%23}{u#} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/fail}{fail}} \\
-lvars & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/fresh}{fresh} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lcons}{lcons}}
+Basics & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/s\%23}{s#} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/succeed}{succeed} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/u\%23}{u#} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/fail}{fail} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/\%3D\%3D}{==} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/conde}{conde} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/fresh}{fresh} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/all}{all} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/run}{run} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/run*}{run*} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/run*}{run*} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/run-nc}{run-nc} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/run-nc*}{run-nc*}} \\
+Logic Variables & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lvar}{lvar} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lvar\%3F}{lvar?} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lvars}{lvars}} \\
+LCons & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lcons}{lcons} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lcons\%3F}{lcons?} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/llist}{llist}} \\
+Goals and Goal Constructors & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/composeg}{composeg} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/composeg*}{composeg*} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/bind*}{bind*} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/mplus*}{mplus*} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/choice}{choice}} \\
+Debugging & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/log}{log} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/trace-s}{trace-s} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/trace-lvars}{trace-lvars}} \\
+Non-relational goals & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/project}{project} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/pred}{pred} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/is}{is} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/conda}{conda} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/condu}{condu} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/onceo}{onceo} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/copy-term}{copy-term} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/lvaro}{lvaro} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/nonlvaro}{nonlvaro}} \\
+Useful goals & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/nilo}{nilo} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/emptyo}{emptyo} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/conso}{conso} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/firsto}{firsto} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/resto}{resto} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/everyg}{everyg}} \\
+Goal sugar syntax & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/defne}{defne} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/matche}{matche}} \\
+fnu, fna, ..., matchu & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/defna}{defna} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/defnu}{defnu} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/matcha}{matcha} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/matchu}{matchu} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/tabled}{tabled}} \\
+More convenient goals & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/membero}{membero} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/appendo}{appendo} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/permuteo}{permuteo}} \\
+Relations & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/facts}{facts} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/fact}{fact} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/defrel}{defrel} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/difference-with}{difference-with} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/retractions}{retractions} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/retraction}{retraction}}
+\end{tabularx}
+}
+
+\colouredbox{green}{
+\section{Misc}
+\begin{tabularx}{\hsize}{lX}
+Partial Maps & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/partial-map}{partial-map} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/partial-map\%3F}{partial-map?} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/featurec}{featurec}} \\
+defnc & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/fnc}{fnc} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/defnc}{defnc}} \\
+Predicate Constraing & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/predc}{predc}} \\
+Deep Constraint & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/seqc}{seqc}}
+\end{tabularx}
+}
+
+\colouredbox{blue}{
+\section{Easy Unification}
+\begin{tabularx}{\hsize}{lX}
+Unification & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.unifier/prep}{clojure.core.logic.unifier/prep} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.unifier/unify*}{clojure.core.logic.unifier/unify*} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.unifier/unifier*}{clojure.core.logic.unifier/unifier*} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.unifier/unify}{clojure.core.logic.unifier/unify} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.unifier/unifier}{clojure.core.logic.unifier/unifier}}
+\end{tabularx}
+}
+
+\colouredbox{green}{
+\section{Helpfull clojure.core functions}
+\begin{tabularx}{\hsize}{lX}
+clojure.core functions & \cmd{\href{http://clojuredocs.org/clojure_core/clojure.core/seq}{seq} \href{http://clojuredocs.org/clojure_core/clojure.core/list}{list} \href{http://clojuredocs.org/clojure_core/clojure.core/coll\%3F}{coll?}}
 \end{tabularx}
 }
 
 
 
 \colouredbox{yellow}{
-\section{Conditions}
+\section{Constraint Logic Programming}
+\subsection{CLP (Tree)}
 \begin{tabularx}{\hsize}{lX}
-cond & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/conde}{conde} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/conda}{conda} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/condu}{condu}}
+Basics & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/!\%3D}{!=} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/distincto}{distincto} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/rembero}{rembero}}
+\end{tabularx}
+\subsection{CLP (FD)}
+\begin{tabularx}{\hsize}{lX}
+Domains & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/domain}{clojure.core.logic.fd/domain} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/dom}{clojure.core.logic.fd/dom} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/domc}{clojure.core.logic.fd/domc} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/in}{clojure.core.logic.fd/in}} \\
+Interval & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/interval}{clojure.core.logic.fd/interval} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/interval\%3F}{clojure.core.logic.fd/interval?}}
+\end{tabularx}
+\subsection{CLP Operators}
+\begin{tabularx}{\hsize}{lX}
+Operators & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/\%3D\%3D}{clojure.core.logic.fd/==} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/!\%3D}{clojure.core.logic.fd/!=} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/\%3C\%3D}{clojure.core.logic.fd/<=} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/\%3C}{clojure.core.logic.fd/<} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/\%3E\%3D}{clojure.core.logic.fd/>=} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/\%3E}{clojure.core.logic.fd/>} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/-}{clojure.core.logic.fd/-} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/+}{clojure.core.logic.fd/+} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/*}{clojure.core.logic.fd/*}} \\
+Misc & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/distinct}{clojure.core.logic.fd/distinct} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/bounded-listo}{clojure.core.logic.fd/bounded-listo} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/eq}{clojure.core.logic.fd/eq}}
+\end{tabularx}
+}
+
+\colouredbox{gray}{
+\section{Nominal unification}
+\begin{tabularx}{\hsize}{lX}
+Nominal unification & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.nominal/nom}{clojure.core.logic.nominal/nom} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.nominal/nom\%3F}{clojure.core.logic.nominal/nom?} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.nominal/fresh}{clojure.core.logic.nominal/fresh} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.nominal/hash}{clojure.core.logic.nominal/hash} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.nominal/tie}{clojure.core.logic.nominal/tie} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.nominal/tie\%3F}{clojure.core.logic.nominal/tie?}}
+\end{tabularx}
+}
+
+\colouredbox{mint}{
+\section{Arithmetic}
+\begin{tabularx}{\hsize}{lX}
+Operators & \cmd{\href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.arithmetic/\%3D}{clojure.core.logic.arithmetic/=} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.arithmetic/\%3E}{clojure.core.logic.arithmetic/>} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.arithmetic/\%3E\%3D}{clojure.core.logic.arithmetic/>=} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.arithmetic/\%3C}{clojure.core.logic.arithmetic/<} \href{http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.arithmetic/\%3C\%3D}{clojure.core.logic.arithmetic/<=}}
 \end{tabularx}
 }
 

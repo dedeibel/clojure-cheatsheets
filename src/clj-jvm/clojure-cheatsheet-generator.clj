@@ -6,7 +6,11 @@
   (:require [clojure.tools.reader.edn])
   (:require [clojure data pprint repl set string xml zip])
   (:require [clojure.core.reducers])
-  (:require [clojure.core.logic :as logic]))
+  (:require [clojure.core.logic             :as logic])
+  (:require [clojure.core.logic.fd          :as logic-fd])
+  (:require [clojure.core.logic.unifier     :as logic-unifier])
+  (:require [clojure.core.logic.arithmetic  :as logic-arithmetic])
+  (:require [clojure.core.logic.nominal     :as logic-nomina]))
 
 ;; Andy Fingerhut
 ;; andy_fingerhut@alum.wustl.edu
@@ -122,30 +126,152 @@
 ;; place.  TBD: This has not yet been implemented.
 
 
+; #_ note: uncommented entries are not yet available, only in core logic trunk
+
 (def cheatsheet-structure
-     [:title {:latex "Clojure Core Logic Cheat Sheet (sheet v1)"
-              :html  "Clojure Core Logic Cheat Sheet (sheet v1)"}
-      :page [:column
-             [:box "green"
-              :section "Operators"
-              :subsection "Basics"
-              :table [
-                      ["goals"
-                       :cmds '[clojure.core.logic/s# clojure.core.logic/succeed clojure.core.logic/u# clojure.core.logic/fail]]
-                      ["lvars"
-                       :cmds '[clojure.core.logic/fresh clojure.core.logic/lcons]]
-                      ]
-              ]
-             :column
-             [:box "yellow"
-              :section "Conditions"
-              :table [
-                      ["cond"
-                       :cmds '[clojure.core.logic/conde clojure.core.logic/conda clojure.core.logic/condu]]
-                      ]
-              ]
-             ]
-      ])
+  [:title {:latex "Clojure Core Logic Cheat Sheet (sheet v1)"
+           :html  "Clojure Core Logic Cheat Sheet (sheet v1)"}
+   :page [:column
+          [:box "green"
+           :section "Logic"
+           :subsection "Syntax"
+           :table [
+                   ["Basics"
+                    :cmds '[clojure.core.logic/s#     clojure.core.logic/succeed
+                            clojure.core.logic/u#     clojure.core.logic/fail
+                            clojure.core.logic/==     clojure.core.logic/conde
+                            clojure.core.logic/fresh  clojure.core.logic/all
+                            clojure.core.logic/run    clojure.core.logic/run*
+                            clojure.core.logic/run*   clojure.core.logic/run-nc
+                            clojure.core.logic/run-nc*]]
+                   ["Logic Variables"
+                    :cmds '[clojure.core.logic/lvar   clojure.core.logic/lvar?
+                            clojure.core.logic/lvars]]
+                   ["LCons"
+                    :cmds '[clojure.core.logic/lcons   clojure.core.logic/lcons?
+                            clojure.core.logic/llist]]
+                   ["Goals and Goal Constructors"
+                    :cmds '[clojure.core.logic/composeg   clojure.core.logic/composeg*
+                            clojure.core.logic/bind*      clojure.core.logic/mplus*
+                            clojure.core.logic/choice]]
+                   ["Debugging"
+                    :cmds '[clojure.core.logic/log        clojure.core.logic/trace-s
+                            clojure.core.logic/trace-lvars]]
+                   ["Non-relational goals"
+                    :cmds '[clojure.core.logic/project    clojure.core.logic/pred
+                            clojure.core.logic/is         clojure.core.logic/conda
+                            clojure.core.logic/condu      clojure.core.logic/onceo
+                            clojure.core.logic/copy-term  clojure.core.logic/lvaro
+                            clojure.core.logic/nonlvaro]]
+                   ["Useful goals"
+                    :cmds '[clojure.core.logic/nilo       clojure.core.logic/emptyo
+                            clojure.core.logic/conso      clojure.core.logic/firsto
+                            clojure.core.logic/resto      clojure.core.logic/everyg]]
+                   ["Goal sugar syntax"
+                    :cmds '[#_clojure.core.logic/fne        clojure.core.logic/defne
+                            clojure.core.logic/matche]]
+                   ["fnu, fna, ..., matchu"
+                    :cmds '[#_clojure.core.logic/fna        #_clojure.core.logic/fnu
+                            clojure.core.logic/defna      clojure.core.logic/defnu
+                            clojure.core.logic/matcha     clojure.core.logic/matchu
+                            clojure.core.logic/tabled]]
+                   ["More convenient goals"
+                    :cmds '[clojure.core.logic/membero    #_clojure.core.logic/member1o
+                            clojure.core.logic/appendo    clojure.core.logic/permuteo]]
+                   ["Relations"
+                    :cmds '[clojure.core.logic/facts         clojure.core.logic/fact
+                            clojure.core.logic/defrel        clojure.core.logic/difference-with
+                            clojure.core.logic/retractions   clojure.core.logic/retraction]]
+                   ]
+           ]
+          [:box "green"
+           :section "Misc"
+           ; :subsection "Misc"
+           :table [
+                   ["Partial Maps"
+                    :cmds '[clojure.core.logic/partial-map     clojure.core.logic/partial-map?
+                            clojure.core.logic/featurec]]
+                   ["defnc"
+                    :cmds '[clojure.core.logic/fnc     clojure.core.logic/defnc ]]
+                   ["Predicate Constraing"
+                    :cmds '[clojure.core.logic/predc]]
+                   #_["Negation as failure"
+                    :cmds '[clojure.core.logic/nafc]]
+                   ["Deep Constraint"
+                    :cmds '[clojure.core.logic/seqc]]
+                   ]
+           ]
+          [:box "blue"
+           :section "Easy Unification"
+           ; :subsection "Misc"
+           :table [
+                   ["Unification"
+                    :cmds '[clojure.core.logic.unifier/prep       clojure.core.logic.unifier/unify*
+                            clojure.core.logic.unifier/unifier*   clojure.core.logic.unifier/unify
+                            clojure.core.logic.unifier/unifier]]
+                   ]
+           ]
+          [:box "green"
+           :section "Helpfull clojure.core functions"
+           ; :subsection "Misc"
+           :table [
+                   ["clojure.core functions"
+                    :cmds '[seq    list
+                            coll?]]
+                   ]
+           ]
+          :column
+          [:box "yellow"
+           :section "Constraint Logic Programming"
+           :subsection "CLP (Tree)"
+           :table [
+                   ["Basics"
+                    :cmds '[clojure.core.logic/!=     clojure.core.logic/distincto
+                            clojure.core.logic/rembero]]
+                   ]
+           :subsection "CLP (FD)"
+           :table [
+                   ["Domains"
+                    :cmds '[clojure.core.logic.fd/domain     clojure.core.logic.fd/dom
+                            clojure.core.logic.fd/domc       clojure.core.logic.fd/in]]
+                   ["Interval"
+                    :cmds '[clojure.core.logic.fd/interval     clojure.core.logic.fd/interval?]]
+                   ]
+           :subsection "CLP Operators"
+           :table [
+                   ["Operators"
+                    :cmds '[clojure.core.logic.fd/==              clojure.core.logic.fd/!=
+                            clojure.core.logic.fd/<=              clojure.core.logic.fd/<
+                            clojure.core.logic.fd/>=              clojure.core.logic.fd/>
+                            clojure.core.logic.fd/-               clojure.core.logic.fd/+
+                            clojure.core.logic.fd/*]]
+                   ["Misc"
+                    :cmds '[clojure.core.logic.fd/distinct  clojure.core.logic.fd/bounded-listo
+                            clojure.core.logic.fd/eq]]
+                   ]
+           ]
+          [:box "gray"
+           :section "Nominal unification"
+           ;:subsection "None"
+           :table [
+                   ["Nominal unification"
+                    :cmds '[clojure.core.logic.nominal/nom     clojure.core.logic.nominal/nom?
+                            clojure.core.logic.nominal/fresh   clojure.core.logic.nominal/hash
+                            clojure.core.logic.nominal/tie     clojure.core.logic.nominal/tie?]]
+                   ]
+           ]
+          [:box "mint"
+           :section "Arithmetic"
+           ;:subsection "None"
+           :table [
+                   ["Operators"
+                    :cmds '[clojure.core.logic.arithmetic/=     clojure.core.logic.arithmetic/>
+                            clojure.core.logic.arithmetic/>=    clojure.core.logic.arithmetic/<
+                            clojure.core.logic.arithmetic/<=]]
+                   ]
+           ]
+          ]
+])
 
 
 
@@ -178,7 +304,8 @@
 
 
 (defn clojuredocs-url-fixup [s]
-  (let [s (str/replace s "?" "_q")
+; changed ? to %3F for core logic clojuredocs - _q does not seem to work there
+  (let [s (str/replace s "?" "%3F")
         s (str/replace s "/" "_")
         s (str/replace s "." "_dot")]
     s))
@@ -276,6 +403,22 @@
        :symbol-list (keys (ns-publics 'clojure.core.logic)),
        :clojure-base-url "http://example.com/",
        :clojuredocs-base-url "http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic/"}
+      { :namespace-str "clojure.core.logic.fd"
+       :symbol-list (keys (ns-publics 'clojure.core.logic.fd)),
+       :clojure-base-url "http://example.com/",
+       :clojuredocs-base-url "http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.fd/"}
+      { :namespace-str "clojure.core.logic.nominal"
+       :symbol-list (keys (ns-publics 'clojure.core.logic.nominal)),
+       :clojure-base-url "http://example.com/",
+       :clojuredocs-base-url "http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.nominal/"}
+      { :namespace-str "clojure.core.logic.unifier"
+       :symbol-list (keys (ns-publics 'clojure.core.logic.unifier)),
+       :clojure-base-url "http://example.com/",
+       :clojuredocs-base-url "http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.unifier/"}
+      { :namespace-str "clojure.core.logic.arithmetic"
+       :symbol-list (keys (ns-publics 'clojure.core.logic.arithmetic)),
+       :clojure-base-url "http://example.com/",
+       :clojuredocs-base-url "http://corelogicdocs.herokuapp.com/org.clojure-core.logic/clojure.core.logic.arithmetic/"}
       ])))
 
 
