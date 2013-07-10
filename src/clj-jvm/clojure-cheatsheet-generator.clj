@@ -11,6 +11,11 @@
 ;; Andy Fingerhut
 ;; andy_fingerhut@alum.wustl.edu
 ;; Feb 21, 2011
+;;
+;; Content modified for clojure.core.logic by
+;; Benjamin Peter
+;; BenjaminPeter@arcor.de
+;; 
 
 ;; TBD: Fix the broken link for ->> in the generated PDF files.
 
