@@ -170,7 +170,9 @@
                    ["Goal sugar syntax"
                     :cmds '[#_clojure.core.logic/fne        clojure.core.logic/defne
                             clojure.core.logic/matche]]
-                   ["fnu, fna, ..., matchu"
+                   ; Removed since these goals are currently highly experimental according
+                   ; to David Nolen
+                   #_["fnu, fna, ..., matchu"
                     :cmds '[#_clojure.core.logic/fna        #_clojure.core.logic/fnu
                             clojure.core.logic/defna      clojure.core.logic/defnu
                             clojure.core.logic/matcha     clojure.core.logic/matchu

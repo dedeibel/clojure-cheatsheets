@@ -7,6 +7,8 @@ View directly: [cheatsheet.html](https://rawgithub.com/dedeibel/clojure-core-log
 Thanks to @xavriley who created a cool version of clojuredocs for
 core.logic which is where the cheatsheet entries link to.
 
+Thanks to David Nolen and contributors for core.logic.
+
 ## Original author of the cheatsheet generator
 
 The original cheatsheet was created by Michael Fogus and Andy Fingerhut.
