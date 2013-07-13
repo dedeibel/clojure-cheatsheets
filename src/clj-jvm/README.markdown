@@ -64,7 +64,7 @@ Output files are:
 
 [cheatsheet]: http://clojure.org/cheatsheet
 
-* `warnings.log`
+* `<CHEATSHEETNAME>.log`
 
     Warning messages about any symbols for which no links to
     documentation could be found in the internal map called

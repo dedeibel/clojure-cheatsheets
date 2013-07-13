@@ -1,13 +1,23 @@
-# clojure-cheatsheets
+# clojure-core-logic-cheatsheets
 
-Clojure cheatsheets in HTML, PDF, and TeX formats.
+Clojure core.logic cheatsheets in HTML, PDF, and TeX formats.
 
-See [http://jafingerhut.github.com](http://jafingerhut.github.com) for
+View directly: [cheatsheet.html](https://rawgithub.com/dedeibel/clojure-core-logic-cheatsheets/master/out/cheatsheet-use-title-attribute-no-cdocs-summary.html)
+
+Thanks to @xavriley who created a cool version of clojuredocs for
+core.logic which is where the cheatsheet entries link to.
+
+## Original author of the cheatsheet generator
+
+The original cheatsheet was created by Michael Fogus and Andy Fingerhut.
+
+Please see [https://github.com/jafingerhut/clojure-cheatsheets](https://github.com/jafingerhut/clojure-cheatsheets)
+for the original repository and [http://jafingerhut.github.com](http://jafingerhut.github.com) for
 several variants of the HTML cheatsheet for Clojure on the JVM.
 
 ## License
 
-Copyright (C) 2012-2013 Michael Fogus, Andy Fingerhut
+Copyright (C) 2012-2013 Michael Fogus, Andy Fingerhut, Benjamin Peter
 
 Distributed under the Eclipse Public License, the same as Clojure,
 except for the following parts.
